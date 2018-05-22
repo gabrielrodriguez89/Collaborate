@@ -10,10 +10,15 @@ The form below is used to support the messaging system
 TODO-
 * Create funtion to call for messages sent
 */
-  include "header.php";
-//declarations
+    include "header.php";
+	
+	if(!isset($_SESSION['username']))
+	{
+		Header("Location: ./../index.php");
+	}
+    //declarations
 	$msg_sub = $subErr = $messageErr = $msg_body = "";
-  //GET user intended to receive message from URL
+    //GET user intended to receive message from URL
 	if (isset($_GET['u']))
     {
       try

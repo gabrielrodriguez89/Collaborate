@@ -11,12 +11,16 @@ about the user in order to set up a profile.
 
 */
 
-  include("header.php");
+    include("header.php");
 
-  //declarations
+	if(!isset($_SESSION['username']))
+	{
+		Header("Location: ./../index.php");
+	}
+    //declarations
 	$ageErr = $cityErr = $stateErr = "";
 
-  //strip and check user input
+    //strip and check user input
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		if (empty($_POST["age"]))
@@ -67,73 +71,53 @@ about the user in order to set up a profile.
 		{
 			$bio = test_input($_POST["description"]);
 		}
-		if(empty($_POST["profilePicture"]))
+		try
 		{
-      try
-      {
-        $con = Connect();
+			$con = Connect();
 
-        $description = mysqli_query ($con, "UPDATE users SET bio='$bio',interest='$interests',hobbies='$hobbies',age='$age',city='$city',state='$state' WHERE username='$username'");
-        if($description)
-        {
-          $upload_pic = mysqli_query ($con, "INSERT INTO `collaborate`.`profile_pictures` (`user`) VALUES ('$username')");
-          if($upload_pic)
-          {
-              header("Location: $username");
-          }
-        }
-        else
-        {
-          die("Connection failed: " . mysqli_connect_error());
-        }
-        $con = NULL;
-      }
-      catch (\Exception $e)
-      {
-
-      }
+			$description = mysqli_query ($con, "UPDATE `collaborate`.`users` SET `bio`='$bio',`interest`='$interests',`hobbies`='$hobbies',`age`='$age',`city`='$city',`state`='$state',`profile_pic`='NULL' WHERE username='$username'");
+			if($description)
+			{
+				header("Location: ./home.php");
+			}
+   
+			$con = NULL;
 		}
-		else
+		catch (\Exception $e)
 		{
-			if(getimagesize($_FILES["profilePicture"]["tmp_name"]))
-			{
-        //call to upload images
-				UploadNewImage(2);
-			}
-			else
-			{
-				header("Location: home.php");
-			}
+
 		}
+		
 	}
-?>
-<!--
+	$time = new DateTime('now');
+    $newtime = $time->modify('-13 year')->format('Y-m-d');
+
+echo "<!--
 Form to gather user information for profile
--->
-<br/>
-<div class="bgstyle">
-    <div id="newUser">
-		<div id="newUser2">
-			<h1>Profile Information</h1><br/>
-			<form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' method="POST" enctype="multipart/form-data">
-				<label for='age'><span class="err">*</span> Age</label>
-				<input type='text' name='age' placeholder='Age'><span class="err"><?php echo $ageErr;?></span><br/><br/>
-				<label for='city'><span class="err">*</span> City</label>
-				<input type='text' name='city' placeholder='City'><span class="err"><?php echo $cityErr;?></span><br/><br/>
-				<label for='state'><span class="err">*</span> State</label>
-				<input type='text' name='state' placeholder='State'><span class="err"><?php echo $stateErr;?></span><br/><br/>
-				<label for="profilePicture">Upload Profile Picture</label><br/>
-				<input type="file" name="profilePicture" ><br/><br/>
-				<label for='interests'>Interests</label>
-				<textarea name='interests' placeholder='Tell us about you interests' ></textarea><br /><br />
-				<label for='hobbies'>Hobbies</label>
-				<textarea name='hobbies' placeholder='What are a few of your hobbies' ></textarea><br /><br />
-				<label for='description'>Description</label>
-				<textarea name='description' placeholder='Introduce yourself to the other users' ></textarea><br /><br />
-				<input type='submit' name='about' value='Submit' >
-			</form>
-		</div>
-	</div>
-<?php
+-->";
+	print("<br/>");
+	print("<div class='bgstyle'>");
+    print("<div id='newUser'>");
+	print("<div id='newUser2'>");
+	print("<h1>Profile Information</h1><br/>");
+	print("<form action='new_user_form.php' method='POST' >");
+	print("<span class='err'>*</span> Age<br/>");
+	print("<input type='date' name='age' max='$newtime' title='You must be 13 years of age to register' required><span class='err'><?php echo $ageErr;?></span><br/><br/>");
+	print("<label for='city'><span class='err'>*</span> City</label>");
+	print("<input type='text' name='city' placeholder='City' required><span class='err'><?php echo $cityErr;?></span><br/><br/>");
+	print("<label for='state'><span class='err'>*</span> State</label>");
+	print("<input type='text' name='state' placeholder='State' required><span class='err'><?php echo $stateErr;?></span><br/><br/>");
+	print("<label for='interests'>Interests</label>");
+	print("<textarea name='interests' rows='2' placeholder='Tell us about you interests' ></textarea><br /><br />");
+	print("<label for='hobbies'>Hobbies</label>");
+	print("<textarea name='hobbies' placeholder='What are a few of your hobbies' ></textarea><br /><br />");
+	print("<label for='description'>Description</label>");
+	print("<textarea name='description' placeholder='Introduce yourself to the other users' ></textarea><br /><br />");
+	print("<input type='submit' name='about' value='Submit' >");
+	print("</form>");
+	print("</div>");
+	print("</div>");
+    print("</div>");
+	
 	_html_end();
 ?>

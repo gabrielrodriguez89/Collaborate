@@ -34,8 +34,8 @@ This script is called by AJAX and submits comments to database
 			$added_by = $username;
 			$user_posted_to = $user;
 			//create statement string
-			$send_post = "INSERT INTO `posts` (`body`, `date_added`, `added_by`, `user_posted_to`, `project_id`) VALUES('$post', '$date', '$added_by', '$user_posted_to', '$id')";
-      //mysqli_query database
+			$send_post = "INSERT INTO `collaborate`.`posts` (`body`, `date_added`, `added_by`, `user_posted_to`, `project_id`) VALUES('$post', '$date', '$added_by', '$user_posted_to', '$id')";
+            //mysqli_query database
 			if(mysqli_query ($con, $send_post))
 			{
 

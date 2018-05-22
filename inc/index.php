@@ -1,6 +1,6 @@
 <?php
 /*
-@Auther: Gabriel Rodriguez
+@Author: Gabriel Rodriguez
 Page: Index
 Project: Collaborate 2017-2018
 Date: 3/6/2018
@@ -73,9 +73,9 @@ area
   					<input type="text" name="fname" size="25" placeholder="First Name" /><span class="err"><?php echo @$fnameErr;?></span><br /><br />
   					<input type="text" name="lname" size="25" placeholder="Last Name" /><span class="err"><?php echo @$lnameErr;?></span><br /><br />
   					<input type="text" name="uname" size="25" placeholder="Username" /><span class="err"><?php echo @$userErr;?></span><br /><br />
-  					<input type="text" name="email" size="25" placeholder="Email Address" /><span class="err"><?php echo @$emailErr;?></span><br /><br />
+  					<input type="text" name="email" size="25" placeholder="Email Address" /><span class="err"><?php echo @$emailErr;?><?php echo @$userLogErr;?></span><br /><br />
   					<input type="text" name="email2" size="25" placeholder="Re-Enter Email" /><span class="err"><?php echo @$email2Err?></span><br /><br />
-  					<input type="password" name="password" size="25" placeholder="Password" /><span class="err"><?php echo @$passErr;?></span><br /><br />
+  					<input type="password" name="password" size="25" placeholder="Password" /><span class="err"><?php echo @$passErr;?><?php echo @$passLogErr;?></span><br /><br />
   					<input type="password" name="password2" size="25" placeholder="Password Verification" /><span class="err"><?php echo @$pass2Err;?></span><br /><br />
   					<input type="submit" name="reg" value="Sign Up!" >
   				</form>

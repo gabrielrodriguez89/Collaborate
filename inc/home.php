@@ -1,5 +1,5 @@
 <!--
-@Auther: Gabriel Rodriguez
+@Author: Gabriel Rodriguez
 Page: Home
 Project: Collaborate 2017-2018
 Date: 3/6/2018
@@ -10,19 +10,24 @@ the project for others.
 
 -->
 <?php
-  include "./header.php";
+    include "./header.php";
 
+	if(!isset($_SESSION['username']))
+	{
+		Header("Location: ./../index.php");
+	}
 //filter and query function to support users search and filter menu
-  ShowFilter();
+    ShowFilter();
 
-//get user from url and retreive data from database
+   
+//get user from url and retrieve data from database
 	if(isset($_GET['query']))
 	{
 		$query =  mysqli_real_escape_string($con, $_GET['query']);
 		if (ctype_alnum($query))
 		{
-			$getProject = ("SELECT * FROM projects WHERE project_name='$query' OR description='$query' OR type_of_project='$query' OR state='$query' OR city='$query'");
-      GetProject($getProject, 0);
+			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `project_name`='$query' OR `description`='$query' OR `type_of_project`='$query' OR `state`='$query' OR `city`='$query'");
+            GetProject($getProject, 0);
 		}
 	}
 //search user query
@@ -37,27 +42,27 @@ the project for others.
 		{
 			if($state != "none")
 			{
-				$getProject = ("SELECT * FROM projects WHERE state=' " . $_SESSION['user_state_'] . "' AND type_of_project='$category'");
+				$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `state`=' " . $_SESSION['user_state_'] . "' AND `type_of_project`='$category'");
 			}
 			else
 			{
-				$getProject = ("SELECT * FROM projects WHERE type_of_project='$category'");
+				$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `type_of_project`='$category'");
 			}
 		}
 		else
 			if($state != "none")
 			{
-				$getProject = ("SELECT * FROM projects WHERE state=' " . $_SESSION['user_state_'] . "");
+				$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `state`=' " . $_SESSION['user_state_'] . "");
 			}
 		else
 		{
-			$getProject = ("SELECT * FROM projects WHERE city='" .$_SESSION['user_city_']. "' OR state=' " . $_SESSION['user_state_'] . "'");
-	  }
+			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `city`='" .$_SESSION['user_city_']. "' OR `state`=' " . $_SESSION['user_state_'] . "'");
+	    }
 
     //check to make sure query isn't blank
 		if($getProject != "")
 		{
-      GetProject($getProject, 0);
+            GetProject($getProject, 0);
 		}
 		else
 		{
@@ -66,9 +71,9 @@ the project for others.
 	}
 	else
 	{
-		$getProject = ("SELECT * FROM projects WHERE city='" . $_SESSION['user_city_'] . "' OR state=' " . $_SESSION['user_state_'] . "'");
-    GetProject($getProject, 0);
+		$getProject = ("SELECT * FROM `collaborate`.`projects`  WHERE `city`='" . $_SESSION['user_city_'] . "' OR `state`=' " . $_SESSION['user_state_'] . "'");
+        GetProject($getProject, 0);
 	}
-
+   
    _html_end();
 ?>

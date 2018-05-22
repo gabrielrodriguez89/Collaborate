@@ -11,7 +11,7 @@ the user also has the option to move the message to deleted
 by setting the ENUM value to 1.
 Collaborate 2017-2018
 */
-  include ("header.php");
+    include ("header.php");
 ?>
 <div id="message-nav">
     <div id="message-nav-buttons">
@@ -26,14 +26,12 @@ Collaborate 2017-2018
 	<div class="hr" ></div>
 	<br/><br/>
 <?php
-  //retreive messages that are marked from_user
-  $grab_messages = ("SELECT * FROM pvt_messages WHERE from_user='$username' && senderDelete='0'");
-  //call to function to get messages
-  GetMessages($get_messages, 2);
-?>
+	//retreive messages that are marked from_user
+	$grab_messages = ("SELECT * FROM `collaborate`.`pvt_messages` WHERE `from_user`='$username' AND `senderDelete`='0'");
+	//call to function to get messages
+	GetMessages($get_messages, 2);
 
-</div>
-<br/>
-<?php
-  _html_end();
+    print("</div><br/>");
+    
+    _html_end();
 ?>

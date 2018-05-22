@@ -10,45 +10,45 @@ The form below is used to support the messaging system
 TODO-
 * Create funtion to call for messages sent
 */
-  include "header.php";
+    include "header.php";
 //declarations
 	$msg_sub = $subErr = $messageErr = $msg_body = "";
   //GET user intended to receive message from URL
 	if (isset($_GET['u']))
     {
-      try
-      {
-        //open database connection
+		try
+		{
+			//open database connection
 
-        //statement contruction
-        $user = mysqli_real_escape_string($con, $_GET['u'])
-        //check username to assure digits and letters only
-        if (ctype_alnum($user))
-        {
-          //mysqli_query database
-          $check = mysqli_query ($con, "SELECT `username` FROM `users` WHERE `username`='$user'");
-          //check database for user
-          if ($userFound = mysqli_fetch_assoc($con, $check))
-          {
-            //mysqli_fetch_assoc() array for user data
-            $get = mysqli_fetch_assoc($check);
-            //set session variable
-            $user = $get['username'];
-          }
-        }
-        //compare user to the current session
-        if($username == $user)
-        {
-          $_SESSION['user'] = $user;
-          $user = $_SESSION["user"];
-        }
-        //close database connection
-        $con = NULL;
-      }
-      catch (\Exception $e)
-      {
+			//statement contruction
+			$user = mysqli_real_escape_string($con, $_GET['u'])
+			//check username to assure digits and letters only
+			if (ctype_alnum($user))
+			{
+				//mysqli_query database
+				$check = mysqli_query ($con, "SELECT `username` FROM `collaborate`.`users` WHERE `username`='$user'");
+				//check database for user
+				if ($userFound = mysqli_fetch_assoc($con, $check))
+				{
+				//mysqli_fetch_assoc() array for user data
+				$get = mysqli_fetch_assoc($check);
+				//set session variable
+				$user = $get['username'];
+				}
+			}
+			//compare user to the current session
+			if($username == $user)
+			{
+				$_SESSION['user'] = $user;
+				$user = $_SESSION["user"];
+			}
+			//close database connection
+			$con = NULL;
+		}
+		catch (\Exception $e)
+		{
 
-      }
+		}
 
 	}
   //if the user isn't sending themselves a message display form
@@ -94,8 +94,8 @@ TODO-
   			$deleted_send = '0';
         //prepair mysqli_query string
   			$send_msg = "INSERT INTO `pvt_messages` (`to_user`, `from_user`, `date`, `subject`, `message`, `opened`, `recipientDelete`, `senderDelete`) VALUES ('$user','$username','$date','$msg_sub','$msg_body','$opened','$deleted_recp','$deleted_send')";
-        //mysqli_query database
-        if(mysqli_query($con, $send_msg))
+			//mysqli_query database
+			if(mysqli_query($con, $send_msg))
   			{
   				header("Location: $user");
   			}

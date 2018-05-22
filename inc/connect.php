@@ -13,12 +13,23 @@ session_start();
 //database connection information
 function Connect()
 {
-	$conn = mysqli_connect("localhost:3302", "root", "********", "collaborate");
-	if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
-	return ($conn);
+	$servername = "localhost";
+	$db = "collaborate";
+    $username = "users";
+    $password = "users";
+	$port = 3306;
+
+    $conn = mysqli_connect($servername,$username, $password, $db, $port);
+
+    // Check connection
+    if (!$conn) 
+	{
+        die("Connection failed: " . mysqli_connect_error());
+    }
+	else
+	{
+		return $conn;
+	}
 }
 
 //used to test various data input by users, preventative measure for sql injection
@@ -45,10 +56,10 @@ function GetProject($project, $i)
 		$getProject = mysqli_query($con, $project);
 		//try parsing mysqli_query
 		if($getProject)
-    {
+        {
 			//loop to display all results of posted projects and users
-	    while($row = mysqli_fetch_assoc($getProject))
-	    {
+	        while($row = mysqli_fetch_assoc($getProject))
+	        {
 				//get project details
 				$proId = $row['id'];
 				$user = $row['username'];
@@ -59,102 +70,119 @@ function GetProject($project, $i)
 				$state = $row['state'];
 				$date = $row['date'];
 				$attachment = $row['attachment'];
-        $numProjects += 1;
+                $numProjects += 1;
 				switch ($i)
 				{
 					case '0':
-							//get user details
-							$get_user_data = mysqli_query ($con, "SELECT * FROM users WHERE username='$user'");
-							if($get_user_data)
+						//get user details
+						$get_user_data = mysqli_query ($con, "SELECT * FROM `collaborate`.`users` WHERE `username`='$user'");
+						if($get_user_data)
+						{
+							while($user_info = mysqli_fetch_assoc($get_user_data))
 							{
-								while($user_info = mysqli_fetch_assoc($get_user_data))
-								{
-									$id = $row['id'];
-									$fname = $user_info['first_name'];
-									$lname = $user_info['last_name'];
-									$city = $user_info['city'];
-									$state = $user_info['state'];
-								}
+								$id = $row['id'];
+								$fname = $user_info['first_name'];
+								$lname = $user_info['last_name'];
+								$city = $user_info['city'];
+								$state = $user_info['state'];
+								$profile_pic = $user_info['profile_pic'];
 							}
-							$check_pic = mysqli_query($con, "SELECT user_picture FROM profile_pictures WHERE user='$user'");
-							$get_pic_row = mysqli_fetch_assoc($check_pic);
-							$profile_pic = $get_pic_row['user_picture'];
+						}
 
-							//if there is no image for the project print this, else print this
-							if($attachment == "")
+						//if there is no image for the project print this, else print this
+						if($attachment == "")
+						{
+							
+							print ("<br/>");
+							print ("<a href='./profile.php?u=$user'>");
+							print ("<div class='display_project' onclick='Go_To_Profile()'>");
+							print ("<input id='getUser' name='id' value='$user' type='hidden' />");
+							print ("<img src='$profile_pic' alt='Profile picture for $user'/>");
+							print ("<h2>$user</h2>");
+							print ("<h5>$date</h5><br/><br/>");
+							print ("<div class='project_container'>");
+							print ("<h1>$project_name</h1>");
+							print ("<h2>$type</h2><br/><br/>");
+							print ("<p>$description</p>");
+							print ("</div>");
+							print ("</div>");
+							print ("</a>");
+						}
+						else
+						{
+							print ("<br/>");
+							print ("<a href='./profile.php?u=$user'>");
+							print ("<div class='display_project' onclick='Go_To_Profile()'>");
+							print ("<input id='getUser' name='id' value='$user' type='hidden' />");
+							print ("<img src='$profile_pic' alt='Profile picture for $user'/>");
+							print ("<h2>$user</h2>");
+							print ("<h5>$date</h5><br/><br/>");
+							print ("<div class='project_container'>");
+							if($attachment != "" AND $attachment != NULL)
 							{
-								print ("<br/>");
-								print ("<a href='$user?u=$user'>");
-								print ("<div class='display_project' onclick='Go_To_Profile()'>");
-								print ("<input id='getUser' name='id' value='$user' type='hidden' />");
-								print ("<img src='$profile_pic' alt='Profile picture for $user'/><br/>");
-								print ("<h2>$user</h2>");
-								print ("<h2>$date</h2><br/><br/>");
-								print ("<div class='project_container'>");
-								print ("<h1>$project_name</h1>");
-								print ("<h2>$type</h2><br/><br/>");
-								print ("<p>$description</p>");
-								print ("</div>");
-								print ("</div>");
-								print ("</a>");
+							    print ("<img src='$attachment' alt='picture for $project_name'/><br/>");
 							}
-							else
+							print ("<h1>$project_name</h1>");
+							print ("<h2>$type</h2><br/><br/>");
+							print ("<p>$description</p>");
+							print ("</div>");
+							print ("</div>");
+							print ("</a>");
+						}
+					  break;
+				    case '1':
+						if($attachment == '')
+						{
+							print ("<div id='showPro$proId' onclick='Show($proId)'>");
+							print ("<h1>$project_name</h1><br/>");
+							print ("<h2>$type</h2><br/>");
+							print ("</div><br/>");
+						}
+						else
+						{
+							print ("<div id='showPro$proId' onclick='Show($proId)'>");
+							print ("<img src='$attachment' alt='$attachment'/>");
+							print ("<h1>Name: $project_name</h1><br/>");
+							print ("<h1>Type: $type</h1>");
+							print ("</div><br/>");
+						}
+					  break;
+				    default:
+						if($attachment == "")
+						{
+							 print ("<div id='project$proId'>");
+							 print ("<h1>$project_name</h1><br/>");
+							 print ("<h5>$date</h5><br/>");
+							 print ("<h4>$type</h4><br/><br/>");
+							 print ("<p>$description</p>");
+							 print ("<br/>");
+						}
+						else
+						{
+							print ("<div id='project$proId'>");
+							if($attachment != "" AND $attachment != NULL)
 							{
-								print ("<br/>");
-								print ("<a href='$user?u=$user'>");
-								print ("<div class='display_project' onclick='Go_To_Profile()'>");
-								print ("<input id='getUser' name='id' value='$user' type='hidden' />");
-								print ("<img src='$profile_pic' alt='Profile picture for $user'/><br/>");
-								print ("<h2>$user</h2>");
-								print ("<h2>$date</h2><br/><br/>");
-								print ("<div class='project_container'>");
-								print ("<img src='$attachment' alt='picture for $project_name'/><br/>");
-								print ("<h1>$project_name</h1>");
-								print ("<h2>$type</h2><br/><br/>");
-								print ("<p>$description</p>");
-								print ("</div>");
-								print ("</div>");
-								print ("</a>");
+							    print ("<img src='$attachment' alt='picture for $project_name'/><br/>");
 							}
-						break;
-					case '1':
-							if($attachment == '')
-							{
-								print ("<div id='showPro' onclick='ShowProject($numProjects,$proId)>");
-								print ("<h1>$project_name</h1><br/>");
-								print ("<h2>$type</h2><br/>");
-								print ("</div><br/>");
-							}
-							else
-							{
-								print ("<div id='showPro' onclick='ShowProject($numProjects,$proId)'>");
-								print ("<img src='$attachment' alt='$attachment'/>");
-								print ("<h1>Name: $project_name</h1><br/>");
-								print ("<h1>Type: $type</h1>");
-								print ("</div><br/>");
-							}
-						break;
-					default:
-							if($attachment == "")
-							{
-								 print ("<div id='project$proId'>");
-						 		 print ("<h1>$project_name</h1><br/>");
-						 		 print ("<h3>$date</h3><br/>");
-						 		 print ("<h4>$type</h4><br/><br/>");
-						 		 print ("<p>$description</p>");
-						 		 print ("<br/>");
-							}
-							else
-							{
-								print ("<div id='project$proId'>");
-								print ("<img src='$attachment' alt='picture for $project_name'/><br/>");
-								print ("<h3>$date</h3><br/>");
-								print ("<h1>$project_name</h1><br/>");
-								print ("<h4>$type</h4><br/><br/>");
-								print ("<p>$description</p>");
-								print ("<br/>");
-							}
-						break;
+							print ("<h5>$date</h5><br/>");
+							print ("<h1>$project_name</h1><br/>");
+							print ("<h4>$type</h4><br/><br/>");
+							print ("<p>$description</p>");
+							print ("<br/>");
+						}
+						print ("<div class='chat'>");
+						print ("<div class='chatDiv'>");
+						print ("<input type='text' id='post' name='post' placeholder='Comment..'>");
+						print ("</div>");
+						print ("<div id='subChat'>");
+						print ("<button id='buttons' type='submit' onclick='sendPost($proId)' >Post</button>");
+						print ("</div>");
+						//get count of comments on projects
+						$total = CountPosts();
+
+						print ("<small id='openComment' onclick='Comments()'>Comments $total</small>");
+						print ("</div>	<!--chat close-->");
+					  break;
 				}
 			}
 		}
@@ -168,29 +196,8 @@ function GetProject($project, $i)
 }
 
 //photo uploads
-function UploadNewImage($image_type)
+function UploadNewImage($username)
 {
-	/*
-	used to seperate different "POST" uploads
-	int 2 == initial upload to profile picture
-	int 1 == projects
-	int 0 == profile image
-	*/
-	switch ($image_type)
-	{
-		case '0':
-		    $project = false;
-		    $pic_mysqli_query = ("UPDATE profile_pictures set user_picture='$url' WHERE user='$username'");
-			break;
-		case '1':
-		    $project = true;
-		    $pic_mysqli_query = ("UPDATE projects set attachment='$url' WHERE username='$username' AND project_name='$project'");
-			break;
-		default:
-		    $project = false;
-			  $pic_mysqli_query = ("INSERT INTO `collaborate`.`profile_pictures` (`user_picture`, `user`) VALUES ('$pic','$username')");
-			break;
-	}
 
 	try
 	{
@@ -253,14 +260,10 @@ function UploadNewImage($image_type)
 				$img_id = md5($img_id_before_md5);
 				*/
 				$url = "$target_file";
-			  mysqli_query ($con, $pic_mysqli_query);
-        //change pages if upload is for projects
-				if($project = true)
+			    $upload = mysqli_query ($con, "UPDATE `collaborate`.`users` SET `profile_pic`='$url' WHERE `username`='$username'");
+				if ($upload)
 				{
-					if($pic_mysqli_query)
-					{
-						header("Location: profile.php");
-					}
+				    header("Location: profile.php?u=$username");
 				}
 			}
 			else
@@ -283,7 +286,7 @@ function GetMessages($grab_messages, $x)
 	try
 	{
 		$con = Connect();
-    $get_messages = mysqli_query($con, $grab_messages);
+        $get_messages = mysqli_query($con, $grab_messages);
 		$sub = "";
 
 		if ($get_messages)
@@ -298,7 +301,7 @@ function GetMessages($grab_messages, $x)
 				$date = $get_msg['date'];
 				$opened = $get_msg['opened'];
 				$deleted = $get_msg['recipientDelete'];
-				$imgOfUser = mysqli_query ($con, "SELECT user_picture FROM profile_pictures WHERE user='$from_user'");
+				$imgOfUser = mysqli_query ($con, "SELECT `user_picture` FROM `collaborate`.`profile_pictures` WHERE `user`='$from_user'");
 
 				if(strlen($msg) < 1)
 				{
@@ -314,39 +317,39 @@ function GetMessages($grab_messages, $x)
 						switch ($x)
 						{
 							case '1':
-									//display messages to user, toggle functions written in javascript
-									//the id is used to find the correct message to restore and delete it
-									print ("<div id='$id'>");
-									print ("<div id='showMsg' onClick='toggle($id)'>");
-									print ("<img src='$profile_pic' alt='Avatar'>");
-									print ("<a href='$from_user'>$from_user</a>");
-									print ("<span class='time-right'>$date</span><br/></br/>");
-									print ("<input id='restore' name='restore' type='text' value='$id' hidden>");
-									print ("<button onclick='RestoreMsg()' id='delete' name='delete'>Restore</button>");
-									print ("<div id='toggleText$id' style='display: none;'>");
-									print ("<br/>");
-									print ("<p>$msg</p>");
-									print ("</div>");
-									print ("</div>");
-									print ("</div>");
-								break;
+								//display messages to user, toggle functions written in javascript
+								//the id is used to find the correct message to restore and delete it
+								print ("<div id='$id'>");
+								print ("<div id='showMsg' onClick='toggle($id)'>");
+								print ("<img src='$profile_pic' alt='Avatar'>");
+								print ("<a href='$from_user'>$from_user</a>");
+								print ("<span class='time-right'>$date</span><br/></br/>");
+								print ("<input id='restore' name='restore' type='text' value='$id' hidden>");
+								print ("<button onclick='RestoreMsg()' id='delete' name='delete'>Restore</button>");
+								print ("<div id='toggleText$id' style='display: none;'>");
+								print ("<br/>");
+								print ("<p>$msg</p>");
+								print ("</div>");
+								print ("</div>");
+								print ("</div>");
+							  break;
 							default:
-									//display messages to user, toggle functions written in javascript
-									//the id is used to find the correct message to restore and delete it
-									print ("<div id='$id'>");
-									print ("<div id='showMsg' onClick='toggle($id)'>");
-									print ("<img src='$profile_pic' alt='Avatar'>");
-									print ("<a href='$from_user'>$from_user</a>");
-									print ("<span class='time-right'>$date</span><br/></br/>");
-									print ("<input id='erase' name='erase' type='text' value='$id' hidden>");
-									print ("<button onclick='DeleteMsg()' id='delete' name='delete'>Delete</button>");
-									print ("<div id='toggleText$id' style='display: none;'>");
-									print ("<br/>");
-									print ("<p>$msg</p>");
-									print ("</div>");
-									print ("</div>");
-									print ("</div>");
-								break;
+								//display messages to user, toggle functions written in javascript
+								//the id is used to find the correct message to restore and delete it
+								print ("<div id='$id'>");
+								print ("<div id='showMsg' onClick='toggle($id)'>");
+								print ("<img src='$profile_pic' alt='Avatar'>");
+								print ("<a href='$from_user'>$from_user</a>");
+								print ("<span class='time-right'>$date</span><br/></br/>");
+								print ("<input id='erase' name='erase' type='text' value='$id' hidden>");
+								print ("<button onclick='DeleteMsg()' id='delete' name='delete'>Delete</button>");
+								print ("<div id='toggleText$id' style='display: none;'>");
+								print ("<br/>");
+								print ("<p>$msg</p>");
+								print ("</div>");
+								print ("</div>");
+								print ("</div>");
+							  break;
 						}
 					}
 				}
@@ -366,14 +369,14 @@ function GetMessages($grab_messages, $x)
 						print ("<div class='hr'></div>");
 						print ("<br/><br/>");
 					break;
-				default://sent
+				default: //sent
 						print ("&nbsp;&nbsp;&nbsp;Sent Messages Empty");
 						print ("<div class='hr'></div>");
 						print ("<br/><br/>");
 					break;
 			}
 		}
-	  //close connection
+	    //close connection
 		$con = NULL;
 	}
 	catch (Exception $e)
@@ -384,57 +387,61 @@ function GetMessages($grab_messages, $x)
 //options for search bar and filters
 function ShowFilter()
 {
-  //arrays to iterate through for options
-  $states = array("none","Alabama","Alaska","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts");
-  $states2 = array("Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma");
-  $states3 = array("Oregon","Pennsylvania","Rhode Island","South Carolina","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming");
+    //arrays to iterate through for options
+    $states = array("none","Alabama","Alaska","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts");
+    $states2 = array("Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma");
+    $states3 = array("Oregon","Pennsylvania","Rhode Island","South Carolina","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming");
 	$category = array("None","Music","Art","Apps","Web","Writing","Building","Growing","Other");
-  //filter for search area to find relavant projects using a search bar and optional drop down
-  print ('<br/>');
-  print ('<div id="refine">');
-  print ('<div class="search_box">');
-  print ('<form action="home.php" method="get" id="search">');
-  print ('<input type="text" name="mysqli_query" size="60" placeholder="Search"/>');
-  print ('<button id="submit" name="submit" value"submit"><img src="img/search.png"/></button>');
-  print ('</form>');
-  print ('</div>');
-  print ('<div class="hr"></div>');
-  print ('<div id="filter-people">');
-  print ('<a href="otherusers.php"><h1>People</h1></a>');
-  print ('</div>');
-  print ('<div class="hr"></div>');
-  print ('<div id="filter-state">');
-  print ('<form method="post" action="home.php">');
-  print ('<label for="state-choice">State</label><br/>');
-  print ('<select name="state-choice">');
+    //filter for search area to find relavant projects using a search bar and optional drop down
+    print ('<br/>');
+    print ('<div id="refine">');
+    print ('<div class="search_bar">');
+	print ('<form action="home.php" method="get" id="search">');
+	print ('<input type="text" name="mysqli_query" placeholder="Search ">');
+	print ('<input type="image" src="./../img/search.png" alt="Submit" name="submit">');
+    print ('</form><br/>');
+    print ('</div>');
+	print("<span id='adv' onclick='Advance()'>Advanced</span>");
+	print("<span id='clr' onclick='CLR()'>Close</span>");
+    print ('<div class="hr"></div>');
+    print ('<div id="filter-people">');
+    print ('<a href="otherusers.php"><h1>People</h1></a>');
+    print ('</div>');
+    print ('<div class="hr"></div>');
+    print ('<div id="filter-state">');
+    print ('<form method="post" action="home.php">');
+    print ('<label for="state-choice">State</label><br/>');
+    print ('<select name="state-choice">');
 	foreach ($states as $value)
-  {
-    print("<option value='$value'>$value</option>");
-  }
-  foreach ($states2 as $value2) {
-    print("<option value='$value2'>$value2</option>");
-  }
-	foreach ($states3 as $value3) {
+    {
+        print("<option value='$value'>$value</option>");
+    }
+    foreach ($states2 as $value2) 
+	{
+        print("<option value='$value2'>$value2</option>");
+    }
+	foreach ($states3 as $value3) 
+	{
 		print("<option value='$value3'>$value3</option>");
 	}
 	print ('</select><br/> <br/>');
-  print ('<label for="Choices">Select a Category</label><br/>');
+    print ('<label for="Choices">Select a Category</label><br/>');
 	print ('<select name="Choices">');
-  foreach ($category as $value) {
-    print("<option value='$value'>$value</option>");
-  }
-	print ('</select><br/>');
-  print ('<button name="state">Refine</button>');
-  print ('</form>');
-  print ('</div><br/><br/>');
-  print ('<div class="hr"></div>');
-  print ('</div>');
-  print ('<div class="bgstyle">');
+    foreach ($category as $value4) 
+	{
+        print("<option value='$value4'>$value4</option>");
+    }
+	print ('</select>');
+    print ('<button name="state">Refine</button>');
+    print ('</form>');
+    print ('</div><br/><br/>');
+    print ('<div class="hr"></div>');
+    print ('</div><br/>');
+    print ('<div class="bgstyle">');
 }
 //update users information POST from form in change_bio.php
 function UpdateUser()
 {
-
 	try
 	{
 		$con = Connect();
@@ -448,11 +455,11 @@ function UpdateUser()
 		$hobbies = test_input($_POST["hobbies"]);
 		$bio = test_input($_POST["description"]);
 		//update the users profile
-		$description = mysqli_query ($con, "UPDATE users SET first_name='$fname',last_name='$lname',bio='$bio',interest='$interests',hobbies='$hobbies',age='$age',city='$city',state='$state' WHERE username='$username'");
+		$description = mysqli_query ($con, "UPDATE `collaborate`.`users` SET `first_name`='$fname',`last_name`='$lname',`bio`='$bio',`interest`='$interests',`hobbies`='$hobbies',`age`='$age',`city`='$city',`state`='$state' WHERE `username`='$username'");
 		if($description)
 		{
 			//re-establish session data so information is correct
-			$sql = mysqli_query ($con, "SELECT * FROM users WHERE username='$username' LIMIT 1");
+			$sql = mysqli_query ($con, "SELECT * FROM `collaborate`.`users` WHERE `username`='$username' LIMIT 1");
 			SetUser($sql);
 			//redirect user to their profile
 			header("Location: $username");
@@ -473,38 +480,80 @@ function ShowBody($k)
 	if(isset($_SESSION['username']))
 	{
 		  $username = $_SESSION['username'];
+		  $pic = $_SESSION['get_user_pic'] ;
 	}
 
-	switch ($k) {
+	switch ($k) 
+	{
 		case '0':
-				print ("<body>");
-				print ("<div class='headerMenu'>");
-				print ("<div id='menu'>");
-				print ("<div class='logo'>");
-				print ("<img src='img/logo.png'/>");
-				print ("</div>");
-				print ("<div class='menuItem'>");
-				print ("</div>");
-				print ("</div>");
-			break;
+			print ("<body>");
+			print ("<div class='headerMenu'>");
+			print ("<div id='menu'>");
+			print ("<div class='logo'>");
+			print ("<img src='./../img/logo.png'/>");
+			print ("</div>");
+			print ("</div>");
+			print ("</div>");
+		  break;
 		case '1':
-				print ("<body>");
-				print ("<div class='headerMenu'>");
-				print ("<div id='menu'>");
-				print ("<div class='logo'>");
-				print ("<img src='./../img/logo.png'/>");
-				print ("</div>");
-				print ("<div class='menuItem'>");
-				print ("<a href='home.php'  >Collaborate</a>");
-				print ("<a href='inbox.php'>Inbox</a>");
-				print ("<a href='manage_account.php' >Account Settings</a>");
-				print ("<a href='$username'>$username</a>");
-				print ("<a href='logout.php' >Logout</a>");
-				print ("</div>");
-			break;
+			print ("<body>");
+			print ("<div class='headerMenu'>");
+			print ("<div id='menu'>");
+			print ("<div class='logo'>");
+			print ("<img src='./../img/logo.png'/>");
+			print ("</div>");
+			print ('<div id="search_bar3">');
+			print ('<div id="form2">');
+			print ('<form action="home.php" method="get" id="search">');
+			print ('<input type="text" name="mysqli_query" placeholder="Search">');
+			print ('</form>');
+			print ("</div>");
+			print ('<input type="image" id="img" src="./../img/search.png" alt="Submit" name="submit" onclick="SearchBar2()"><span class="tooltip">Search</span>');
+			print ('</div>');
+			print ('<div id="search_bar2">');
+			print ('<div id="form">');
+			print ('<form action="home.php" method="get" id="search">');
+			print ('<input type="text" name="mysqli_query" placeholder="Search">');
+			print ('</form>');
+			print ("</div>");
+			print ('<input type="image" id="img" src="./../img/search.png" alt="Submit" name="submit" onclick="SearchBar()"><span class="tooltip">Search</span>');
+			print ('</div>');
+			print ("<div class='menuItem'>");
+			print ("<div id='hideMenu'>");
+	        print ("<a href='home.php'  ><img id='home2' src='./../img/home.png' alt='Home' /><span class='tooltip'>Home</span></a>");
+			print ("<a href='inbox.php'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' /><span class='tooltip'>Inbox</span></a>");
+			print ("<a href='profile.php?u=$username'><img id='pic' src='$pic' alt='$username'/><span class='tooltip'>Profile</span></a>");
+			print ("</div>");
+			print ("<div class='dropdown2'>");
+			print ('<input type="image" src="./../img/settings.png" id="dropbtn"  onclick="DropDown()">');
+			print ('<div id="dropdown-content">');
+			print ("<a href='manage_account.php'  ><img id='manage' src='./../img/settings_hover.png' alt='Settings' /><span class='tooltip2'>Settings</span></a>");
+			print ("<a href='logout.php' ><img id='signout2' src='./../img/signout_hover.png' alt='Logout'/><span class='tooltip2'>Logout</span></a>");
+			print ('</div>');
+			print ("</div>");
+			print ("</div>");
+			print ("<div class='dropdown'>");
+			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn2" onclick="DropDown2()">');
+			print ('<div id="dropdown-content2" >');
+			print ('<div id="nav" >');
+			print ("<a href='home.php'  ><img id='home2' src='./../img/home.png' alt='Home' /><h4>Home</h4></a>");
+			print ("<hr/>");
+			print ("<a href='inbox.php'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' /><h4>Inbox</h4></a>");
+			print ("<hr/>");
+			print ("<a href='profile.php?u=$username'><img id='pic2' src='$pic' alt='$username'/><h4>Profile</h4></a>");
+			print ("<hr/>");
+			print ("<a href='manage_account.php'  ><img id='manage2' src='./../img/settings.png' alt='Settings' /><h3>Settings</h3></a>");
+			print ("<hr/>");
+			print ("<a href='logout.php' ><img id='signout2' src='./../img/signout.png' alt='Logout'/><h4>Logout</h4></a>");
+			print ('</div>');
+			print ("</div>");
+			print ("</div>");
+			print ("</div>");
+			print ('</div>');
+		  break;
 		default:
 		    print ("<body onload='read()''>");
-				print ("<div class='headerMenu'>");
+			print ("<div class='headerMenu'>");
 		    print ("<div id='menu'>");
 		    print ("<div class='logo'>");
 		    print ("<img src='img/logo.png'/>");
@@ -512,16 +561,15 @@ function ShowBody($k)
 		    print ("<div class='menuItem'>");
 		    print ("</div>");
 		    print ("</div>");
-			break;
+			
+		  break;
 	}
 }
 //footer section
 function _html_end()
 {
-	print ("<br><br>");
-	print ("</div>");
-	print ("<br><br>");
-	print ("<div id='footer'|>");
+	print ("<br/><br/>");
+	print ("<div id='footer'>");
 	print ("<small>&copy 2017 - Collaborate</small>");
 	print ("</div");
 	print ("</body>");
@@ -578,7 +626,7 @@ function CountPosts()
 		//open database connection
 		$con = Connect();
 		//get count of posts to projects
-		$getPost = mysqli_query($con, "SELECT COUNT(*) As total FROM posts WHERE user_posted_to='$username'");
+		$getPost = mysqli_query($con, "SELECT COUNT(*) As `total` FROM `collaborate`.`posts` WHERE `user_posted_to`='$username'");
 		$row = mysqli_fetch_assoc($getPost);
 		$total = $row['total'];
 		//close connection
@@ -651,7 +699,7 @@ function GetPosts($posts)
 			$body = $row['body'];
 			$time_stamp = $row['date_added'];
 			$added_by = $row['added_by'];
-			$imgOfUser = mysqli_query($con, "SELECT user_picture FROM profile_pictures WHERE user='$added_by'");
+			$imgOfUser = mysqli_query($con, "SELECT `user_picture` FROM `collaborate`.`profile_pictures` WHERE `user`='$added_by'");
 			$get_pic_row = mysqli_fetch_assoc($imgOfUser);
 			$profile_pic_db = $get_pic_row['user_picture'];
 			$user_posted_to = $row['user_posted_to'];
@@ -694,5 +742,54 @@ function GetPosts($posts)
 
 	}
 
+}
+function OtherUsers($query)
+{
+	$con = Connect();
+	try
+	{
+		if($getBio = mysqli_query($con, $query))
+	    {
+			while($row = mysqli_fetch_assoc($getBio))
+			{
+				$user = $row['username'];
+				$fname = $row['first_name'];
+				$lname = $row['last_name'];
+				$age = $row['age'];
+				$city = $row['city'];
+				$state = $row['state'];
+				$pic = $row['profile_pic'];
+
+				print ("<a href='$user?u=$user'>");
+				print ("<div id='profile2'>");
+
+				if ($pic == "")
+				{
+					print("<div id='proPic3'>");
+					print("<img src='./../img/no_photo.png' alt='Profile Picture '  >");
+					print("</div>");
+				}
+				else
+				{
+					print("<div id='proPic3'>");
+					print("<img src='$pic' alt='Profile Picture '>");
+					print("</div>");
+				}
+
+				print("<div class='profileLeftContent'>");
+				print("<div id='userInfo'>");
+				print("<h1>$fname&nbsp$lname</h1><br/><br/>");
+				print("<h3>$age&nbsp&nbsp&nbsp$city,&nbsp$state</h3>");
+				print("<br><br>");
+				print("</div>");
+				print("</div>");
+				print("</div></a>");
+			}
+		}
+	}
+	catch (Exception $e)
+	{
+
+	}
 }
 ?>
