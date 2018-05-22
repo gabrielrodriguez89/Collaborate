@@ -11,9 +11,35 @@ this Javascript page was created for Collaborate 2017-2018
 //not used fuction to show hidden sign in
 function SignIn()
 {
-	document.getElementById('h2sign').innerHTML = 'Sign In';
+	document.getElementById('h2sign').innerHTML = 'Sign In or<span id="in" onclick="Register()">Create Account</span>';
 	document.getElementById('signUp').style.display = 'none';
-  document.getElementById('signIn').style.display = 'block';
+    document.getElementById('signIn').style.display = 'block';
+}
+function Register()
+{
+	document.getElementById('h2sign').innerHTML = 'Sign Up Below or<span id="in" onclick="SignIn()">Sign In</span>';
+	document.getElementById('signUp').style.display = 'block';
+    document.getElementById('signIn').style.display = 'none';
+}
+function Advance()
+{
+	document.getElementById('refine').style.height = '250px';
+	document.getElementById('filter-people').style.display = 'block';
+	document.getElementById('filter-state').style.display = 'block';
+	document.getElementById('adv').style.display = 'none';
+	document.getElementById('clr').style.display = 'block';
+    document.getElementsByClassName('.hr').style.display = 'block';
+
+}
+function CLR()
+{
+	document.getElementById('refine').style.height = '50px';
+	document.getElementById('filter-people').style.display = 'none';
+	document.getElementById('filter-state').style.display = 'none';
+	document.getElementById('clr').style.display = 'none';
+	document.getElementById('adv').style.display = 'block';
+    document.getElementByClassName('.hr').style.display = 'none';
+
 }
 //function for mousein effect
 function In()
@@ -29,13 +55,13 @@ function Out()
 function UploadPic()
 {
 	document.getElementById('proPic').style.display = 'none';
-  document.getElementById('proPic2').style.display = 'block';
+    document.getElementById('proPic2').style.display = 'block';
 }
 //shows default image when no photo exhists
 function NoUpload()
 {
 	document.getElementById('proPic').style.display = 'block';
-  document.getElementById('proPic2').style.display = 'none';
+    document.getElementById('proPic2').style.display = 'none';
 }
 //toggles between the different projects requires 2 int
 //multiple switch statements depending on the amount of projects
@@ -183,28 +209,28 @@ function read()
 			switch(count)
 			{
 				case 0:
-				  document.getElementById('jumbo').style.display = 'none';
+				    document.getElementById('jumbo').style.display = 'none';
 					document.getElementById('jumbo1').style.display = 'block';
 					document.getElementById('img5').style.display = 'none';
-        	document.getElementById('img2').style.display = 'block';
+        	        document.getElementById('img2').style.display = 'block';
 				break;
 				case 1:
-				  document.getElementById('jumbo1').style.display = 'none';
+				    document.getElementById('jumbo1').style.display = 'none';
 					document.getElementById('jumbo2').style.display = 'block';
 					document.getElementById('img2').style.display = 'none';
-          document.getElementById('img3').style.display = 'block';
+                    document.getElementById('img3').style.display = 'block';
 				break;
 				case 2:
-				  document.getElementById('jumbo2').style.display = 'none';
+				    document.getElementById('jumbo2').style.display = 'none';
 					document.getElementById('jumbo3').style.display = 'block';
 					document.getElementById('img3').style.display = 'none';
-          document.getElementById('img7').style.display = 'block';
+                    document.getElementById('img7').style.display = 'block';
 			    break;
 				case 3:
-				  document.getElementById('jumbo3').style.display = 'none';
+				    document.getElementById('jumbo3').style.display = 'none';
 					document.getElementById('jumbo4').style.display = 'block';
 					document.getElementById('img7').style.display = 'none';
-          document.getElementById('img6').style.display = 'block';
+                    document.getElementById('img6').style.display = 'block';
 				break;
 			}
 			count++;
@@ -212,7 +238,7 @@ function read()
 		else
 		{
 			document.getElementById('img6').style.display = 'none';
-      document.getElementById('img4').style.display = 'block';
+            document.getElementById('img4').style.display = 'block';
 			document.getElementById('jumbo4').style.display = 'none';
 			document.getElementById('jumbo5').style.display = 'block';
 		}
@@ -255,34 +281,34 @@ function Go_To_Profile()
 {
 	var xHTTP = new XMLHttpRequest();
 	var id = document.getElementById("getUser").value;
-  xHTTP.onreadystatechange = function()
+    xHTTP.onreadystatechange = function()
 	{
-    if(this.readyState == 4 && this.status == 200)
-    {
-      document.getElementById("test").innerHTML = this.responseText;
-    }
-  };
+		if(this.readyState == 4 && this.status == 200)
+		{
+		  document.getElementById("test").innerHTML = this.responseText;
+		}
+    };
 	xHTTP.open("GET", "findUser.php?q=" + id, true);
-  xHTTP.send();
+    xHTTP.send();
 }
 //send comment to user project required id of message
 function sendPost(id)
 {
 	var newHTTP = new XMLHttpRequest();
 	var myPost = document.getElementById("post").value;
-  var post = "?post=" + myPost + "&id=" + id;
+    var post = "?post=" + myPost + "&id=" + id;
 	var url = "send_post.php" + post;
 	document.getElementById("post").value = "";
-  newHTTP.onreadystatechange = function()
+    newHTTP.onreadystatechange = function()
 	{
-      if(newHTTP.readyState == 4 && newHTTP.status == 200)
-      {
+        if(newHTTP.readyState == 4 && newHTTP.status == 200)
+        {
 	       var return_data = newHTTP.responseText;
 	       document.getElementById("post").innerHTML = return_data;
 	    }
-  }
+    }
 	newHTTP.open("GET", url, true);
-  newHTTP.send();
+    newHTTP.send();
 }
 //change ENUM to 0 in database for user messages
 function RestoreMsg()
@@ -291,18 +317,17 @@ function RestoreMsg()
 	var url = "restore_msg.php";
 	var msg = document.getElementById("restore").value;
 	document.getElementById("" + msg).style.display = "none";
-  var restore = "restore=" + msg;
+    var restore = "restore=" + msg;
 	newHTTP.open("POST", url, true);
-  newHTTP.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  newHTTP.onreadystatechange = function()
+    newHTTP.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    newHTTP.onreadystatechange = function()
 	{
-    if(newHTTP.readyState == 4 && newHTTP.status == 200)
-    {
-	     var return_data = newHTTP.responseText;
-
-	  }
-  }
-  newHTTP.send(restore);
+        if(newHTTP.readyState == 4 && newHTTP.status == 200)
+        {
+	       var return_data = newHTTP.responseText;
+	    }
+    }
+    newHTTP.send(restore);
 }
 //change ENUM to 1 in database to hide message
 function DeleteMsg()
@@ -311,30 +336,155 @@ function DeleteMsg()
 	var url = "del_msg.php";
 	var msg = document.getElementById("erase").value;
 	document.getElementById("" + msg).style.display = "none";
-  var erase = "id=" + msg;
+    var erase = "id=" + msg;
 	newHTTP.open("POST", url, true);
-  newHTTP.onreadystatechange = function()
+    newHTTP.onreadystatechange = function()
 	{
-    if(newHTTP.readyState == 4 && newHTTP.status == 200)
-    {
-	    var return_data = newHTTP.responseText;
-	    document.getElementById("erase").innerHTML = return_data;
-	  }
-  }
-  newHTTP.send(erase);
+        if(newHTTP.readyState == 4 && newHTTP.status == 200)
+        {
+	        var return_data = newHTTP.responseText;
+	        document.getElementById("erase").innerHTML = return_data;
+	    }
+    }
+    newHTTP.send(erase);
 }
 //toggles message views to open and close messages
 function toggle(id)
 {
-  var msg = document.getElementById("toggleText" + id);
-  if (msg.style.display == "block")
+    var msg = document.getElementById("toggleText" + id);
+    if (msg.style.display == "block")
 	{
 		msg.style.display = "none";
-  }
-  else
-  {
-      msg.style.display = "block";
-  }
+    }
+    else
+    {
+        msg.style.display = "block";
+    }
+}
+//toggles message views to open and close messages
+function Show(id)
+{
+    var proj = document.getElementById("showPro" + id);
+    if (proj.style.display == "block")
+	{
+		proj.style.display = "none";
+    }
+    else
+    {
+        proj.style.display = "block";
+    }
+}
+function ShowProfile()
+{
+    var pro = document.getElementById("viewProfile");
+    if (pro.style.display == "block")
+	{
+		pro.style.display = "none";
+    }
+    else
+    {
+        pro.style.display = "block";
+    }
+}
+function DropDown()
+{
+	var btn = document.getElementById("dropdown-content");
+
+	if (btn.style.display == "block")
+	{
+		btn.style.display = "none";
+	}
+	else
+	{
+		btn.style.display = "block";
+	}
+}
+function DropDown2()
+{
+	var btn = document.getElementById("dropdown-content2");
+	var btn2 = document.getElementById("nav");
+	var btn3 = document.getElementById("form");
+	var btn1 = document.getElementById("search_bar2");
+
+	if (btn.style.width == "100%" || btn.style.width == "60%" || btn.style.width == "75%")
+	{
+		btn.style.width = "0";
+		btn2.style.display = "none";
+		btn1.style.display = "block";
+	}
+	else
+	{
+		btn2.style.display = "block";
+		btn.style.width = "75%";
+		btn3.style.display = "none";
+		btn1.style.display = "none";
+	}
+}
+function SearchBar()
+{
+	var btn = document.getElementById("form");
+	var btn1 = document.getElementById("search_bar2");
+	var btn2 = document.getElementById("dropdown-content2");
+	var btn3 = document.getElementById("dropbtn2");
+	var btn4 = document.getElementById("nav");
+	
+	if (btn.style.display == "block")
+	{
+		btn.style.display = "none";
+		btn1.style.width = "0";
+	}
+	else
+	{
+		btn.style.display = "block";
+		btn1.style.width = "75%";
+	    btn2.style.width = "0";
+		btn3.style.display = "block";
+		btn4.style.display = "none";
+	}
+}
+function SearchBar2()
+{
+	var btn = document.getElementById("form2");
+	var btn2 = document.getElementById("hideMenu");
+	var btn1 = document.getElementById("search_bar3");
+	
+	if (btn.style.display == "block")
+	{
+		btn.style.display = "none";
+		btn1.style.width = "0";
+		btn2.style.display = "block";
+	}
+	else
+	{
+	
+		btn.style.display = "block";
+		btn1.style.width = "75%";
+	    btn2.style.display = "none";
+	}
+}
+function HomeOver()
+{
+	document.getElementById('home').src = './../img/home_hover.png';
+}
+function HomeOut()
+{
+	document.getElementById('home').src = './../img/home.png';
+}
+function HamOver()
+{
+	document.getElementById('dropbtn').src = './../img/hamburger_hover.png';
+}
+function HamOut()
+{
+	document.getElementById('dropbtn').src = './../img/hamburger.png';
+}
+function InboxOver()
+{
+	document.getElementById('inbox').src = './../img/inbox_over.png';
+}
+function InboxOut()
+{
+	document.getElementById('inbox').src = './../img/inbox.png';
 }
 //TODO optional feature to change color layout
 function Chameleon()
