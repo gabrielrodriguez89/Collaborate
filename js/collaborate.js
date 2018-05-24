@@ -402,7 +402,6 @@ function DropDown()
 function DropDown2()
 {
 	var btn = document.getElementById("dropdown-content2");
-	
 	var btn3 = document.getElementById("form");
 	var btn1 = document.getElementById("search_bar2");
 
@@ -413,7 +412,6 @@ function DropDown2()
 	}
 	else
 	{
-	
 		btn.style.display = "block";
 		btn3.style.display = "none";
 		btn1.style.display = "none";
