@@ -20,16 +20,16 @@ Side navigation for message inbox/sent/deleted
 <div id="message-nav">
     <div id="message-nav-buttons">
 		<a href="inbox.php"><button>Inbox</button></a>
-		<hr class="hr"/>
+		<hr id='hr2'/>
 		<a href="sent.php"><button>Sent</button></a>
-		<hr class="hr"/>
+		<hr id='hr2'/>
 		<a href="deleted.php"><button>Deleted</button></a>
 	</div>
 </div>
 <br/>
 <div class="bgstyle">
     <h2 id='messageHead' >Deleted</h2>
-	<div class="hr" ></div>
+	<hr />
 	<br/><br/>
 <?php
   //retreive messages that are marked deleted by user

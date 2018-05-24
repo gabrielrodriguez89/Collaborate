@@ -16,16 +16,16 @@ Collaborate 2017-2018
 <div id="message-nav">
     <div id="message-nav-buttons">
 		<a href="inbox.php"><button>Inbox</button></a>
-		<hr class="hr"/>
+		<hr id='hr2'/>
 		<a href="sent.php"><button>Sent</button></a>
-		<hr class="hr"/>
+		<hr id='hr2'/>
 		<a href="deleted.php"><button>Deleted</button></a>
 	</div>
 </div>
 <br/>
 <div class="bgstyle">
     <h2 id='messageHead' >Inbox</h2>
-	<hr class="hr"/>
+	<hr />
 	<br/><br/>
 <?php
   //retreive messages that are for user

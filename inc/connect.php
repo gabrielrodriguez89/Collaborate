@@ -120,7 +120,7 @@ function GetProject($project, $i)
 							print ("<div class='project_container'>");
 							if($attachment != "" AND $attachment != NULL)
 							{
-							    print ("<img src='$attachment' alt='picture for $project_name'/><br/>");
+							    print ("<img src='./../$attachment' alt='picture for $project_name'/><br/>");
 							}
 							print ("<h1>$project_name</h1>");
 							print ("<h2>$type</h2><br/><br/>");
@@ -361,17 +361,17 @@ function GetMessages($grab_messages, $x)
 			switch ($x) {
 				case '0'://inbox
 						print("<h3>Inbox Empty</h3>");
-						print ("<hr class='hr'/>");
+						print ("<hr />");
 						print ("<br/><br/>");
 					break;
 				case '1'://deleted
 						print ("<h2>Read Messages Empty</h2>");
-						print ("<hr class='hr'/>");
+						print ("<hr />");
 						print ("<br/><br/>");
 					break;
 				default: //sent
 						print ("<h2>Sent Messages Empty</h2>");
-						print ("<hr class='hr'/>");
+						print ("<hr/>");
 						print ("<br/><br/>");
 					break;
 			}
@@ -521,7 +521,7 @@ function ShowBody($k)
 			print ('<input type="image" src="./../img/hamburger2.png" id="dropbtn" onmouseover="HamOver()" onmouseout="HamOut()" onclick="DropDown()">');
 			print ('<div id="dropdown-content">');
 			print ("<a href='manage_account.php'  ><img id='signout2' src='./../img/settings.png' alt='Logout'/>Settings</a>");
-			print ("<hr class='hr'/>");
+			print ("<hr id='hr'/>");
 			print ("<a href='logout.php' ><img id='signout2' src='./../img/signout.png' alt='Logout'/>Logout</a>");
 			print ('</div>');
 			print ("</div>");
@@ -530,13 +530,13 @@ function ShowBody($k)
 			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn2" onmouseover="HamOver2()" onmouseout="HamOut2()" onclick="DropDown2()">');
 			print ('<div id="dropdown-content2" >');
 			print ("<a href='home.php'  ><img id='home2' src='./../img/home.png' alt='Home' />    Home</a>");
-			print ("<hr class='hr'/>");
+			print ("<hr id='hr'/>");
 			print ("<a href='inbox.php'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' />   Inbox</a>");
-			print ("<hr class='hr'/>");
+			print ("<hr id='hr'/>");
 			print ("<a href='profile.php?u=$username'><img id='pic2' src='$pic' alt='$username'/> Profile</a>");
-			print ("<hr class='hr'/>");
+			print ("<hr id='hr'/>");
 			print ("<a href='manage_account.php'  ><img id='manage2' src='./../img/settings.png' alt='Settings' />Settings</a>");
-			print ("<hr class='hr'/>");
+			print ("<hr id='hr'/>");
 			print ("<a href='logout.php' ><img id='signout2' src='./../img/signout.png' alt='Logout'/>  Logout</a>");
 			print ("</div>");
 			print ("</div>");
