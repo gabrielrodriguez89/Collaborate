@@ -402,20 +402,19 @@ function DropDown()
 function DropDown2()
 {
 	var btn = document.getElementById("dropdown-content2");
-	var btn2 = document.getElementById("nav");
+	
 	var btn3 = document.getElementById("form");
 	var btn1 = document.getElementById("search_bar2");
 
-	if (btn.style.width == "100%" || btn.style.width == "60%" || btn.style.width == "75%")
+	if (btn.style.display == "block")
 	{
-		btn.style.width = "0";
-		btn2.style.display = "none";
+		btn.style.display = "none";
 		btn1.style.display = "block";
 	}
 	else
 	{
-		btn2.style.display = "block";
-		btn.style.width = "75%";
+	
+		btn.style.display = "block";
 		btn3.style.display = "none";
 		btn1.style.display = "none";
 	}
@@ -426,7 +425,7 @@ function SearchBar()
 	var btn1 = document.getElementById("search_bar2");
 	var btn2 = document.getElementById("dropdown-content2");
 	var btn3 = document.getElementById("dropbtn2");
-	var btn4 = document.getElementById("nav");
+	
 	
 	if (btn.style.display == "block")
 	{
@@ -439,29 +438,10 @@ function SearchBar()
 		btn1.style.width = "75%";
 	    btn2.style.width = "0";
 		btn3.style.display = "block";
-		btn4.style.display = "none";
+		
 	}
 }
-function SearchBar2()
-{
-	var btn = document.getElementById("form2");
-	var btn2 = document.getElementById("hideMenu");
-	var btn1 = document.getElementById("search_bar3");
-	
-	if (btn.style.display == "block")
-	{
-		btn.style.display = "none";
-		btn1.style.width = "0";
-		btn2.style.display = "block";
-	}
-	else
-	{
-	
-		btn.style.display = "block";
-		btn1.style.width = "75%";
-	    btn2.style.display = "none";
-	}
-}
+
 function HomeOver()
 {
 	document.getElementById('home').src = './../img/home_hover.png';
@@ -472,11 +452,11 @@ function HomeOut()
 }
 function HamOver()
 {
-	document.getElementById('dropbtn').src = './../img/hamburger_hover.png';
+	document.getElementById('dropbtn').src = './../img/hamburger.png';
 }
 function HamOut()
 {
-	document.getElementById('dropbtn').src = './../img/hamburger.png';
+	document.getElementById('dropbtn').src = './../img/hamburger2.png';
 }
 function InboxOver()
 {
