@@ -214,10 +214,6 @@
 		position: fixed;
 		top: 50px;
 		left: 0;
-		-webkit-transition: width .01s; /* Safari */
-		-webkit-transition-timing-function: ease-in-out; /* Safari */
-		transition: width .01s;
-		transition-timing-function: ease-in-out;
 		width: 80%;
 		display: none;
 		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -246,20 +242,49 @@
 		color: #aaa;
 		width: 100%;
 		font-weight: bold;
-
+	    background-color: #585858;
 	}
 	#message-nav-buttons {
 		width: 100%;
-		
+		background-color: #585858;
 		display: flex;
 	}
 	#message-nav-buttons button{
+		text-align: center;
 		width: 100%;
 		color: #aaa;
-		padding: 8px 45px;
+		padding: 8px 30px;
 		font-weight: bold;
 		font-family: arial, helvetica, sans-serif;
 		border: none;
+	    background-color: #585858;
+	}
+	hr {
+	
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: #D8D8D8;
+		clear: both;
+	}
+	#hr {
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: #D8D8D8;
+		clear: both;
+		opacity: .5;
+	}
+	#hr2 {
+		width: 0;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: #D8D8D8;
+		clear: both;
+	}
+	#message-nav-buttons button:hover {
+		color: #ffffff;
+		font-weight: bold;
 	}
 }
 
@@ -268,13 +293,10 @@
     #message-nav-buttons button{
 		width: 100%;
 		color: #aaa;
-		padding: 8px 100px;
+		padding: 8px 90px;
 		font-weight: bold;
 		font-family: arial, helvetica, sans-serif;
 		border: none;
-	}
-	#dropdown-content2:hover {
-		width: 60%;
 	}
 	#profile {
 		float: left;
@@ -641,10 +663,10 @@
 	#message-nav {
 		position: fixed;
 		left: 0;
-		top: 11%;
+		top: 12%;
 		height: auto;
 		color: #aaa;
-		width: 22%;
+		width: 21.5%;
 		font-weight: bold;
 	}
 	#message-nav-buttons {
@@ -653,11 +675,23 @@
 	#message-nav-buttons button{
 		width: 100%;
 		padding: 10px;
-
 		color: #aaa;
 		font-weight: bold;
 		font-family: arial, helvetica, sans-serif;
 		border: none;
+	}
+	#hr {
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: #D8D8D8;
+		clear: both;
+		opacity: .4;
+	}
+	#message-nav-buttons button:hover {
+		color: #ffffff;
+		font-weight: bold;
+		background-color: #585858;
 	}
 }
 
@@ -682,17 +716,6 @@
     border: none;
     cursor: pointer;
 }
-.hr {
-	background-color: #aaa;
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: #aaa;
-	clear: both;
-}F
-
-
-
 .search_bar input[type='text'] {
 	background-color: #f2f2f2;
     border-radius: 5px;
@@ -1094,17 +1117,6 @@ input[type="text"]:hover, [type="password"]:hover{
 	text-decoration: none;
 	float: right;
 	padding:10px;
-}
-
-
-#message-nav-buttons button:hover {
-	color: #FFFFFF;
-	font-weight: bold;
-	background-color: #585858;
-	opacity: .8;
-	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #newUser {
 	margin: 0;
