@@ -16,11 +16,13 @@ Collaborate 2017-2018
 <div id="message-nav">
     <div id="message-nav-buttons">
 		<a href="inbox.php"><button>Inbox</button></a>
+		<hr class="hr"/>
 		<a href="sent.php"><button>Sent</button></a>
+		<hr class="hr"/>
 		<a href="deleted.php"><button>Deleted</button></a>
 	</div>
 </div>
-<br/>
+<br/><br/>
 <div class="bgstyle">
     <h2 id='messageHead' >Sent</h2>
 	<div class="hr" ></div>

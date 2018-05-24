@@ -19,9 +19,11 @@ Side navigation for message inbox/sent/deleted
 -->
 <div id="message-nav">
     <div id="message-nav-buttons">
-		<button src="inbox.php">Inbox</button>
-		<button src="sent.php">Sent</button>
-		<button src="deleted.php">Deleted</button>
+		<a href="inbox.php"><button>Inbox</button></a>
+		<hr class="hr"/>
+		<a href="sent.php"><button>Sent</button></a>
+		<hr class="hr"/>
+		<a href="deleted.php"><button>Deleted</button></a>
 	</div>
 </div>
 <br/>

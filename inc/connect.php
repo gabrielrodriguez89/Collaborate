@@ -360,18 +360,18 @@ function GetMessages($grab_messages, $x)
 			//display empty message to user based upon which message screen they are on
 			switch ($x) {
 				case '0'://inbox
-						print("&nbsp;&nbsp;&nbsp;Inbox Empty");
-						print ("<div class='hr'></div>");
+						print("<h3>Inbox Empty</h3>");
+						print ("<hr class='hr'/>");
 						print ("<br/><br/>");
 					break;
 				case '1'://deleted
-						print ("&nbsp;&nbsp;&nbsp;Read Messages Empty");
-						print ("<div class='hr'></div>");
+						print ("<h2>Read Messages Empty</h2>");
+						print ("<hr class='hr'/>");
 						print ("<br/><br/>");
 					break;
 				default: //sent
-						print ("&nbsp;&nbsp;&nbsp;Sent Messages Empty");
-						print ("<div class='hr'></div>");
+						print ("<h2>Sent Messages Empty</h2>");
+						print ("<hr class='hr'/>");
 						print ("<br/><br/>");
 					break;
 			}
@@ -490,7 +490,7 @@ function ShowBody($k)
 			print ("<div class='headerMenu'>");
 			print ("<div id='menu'>");
 			print ("<div class='logo'>");
-			print ("<img src='./../img/logo.png'/>");
+			print ("Collaborate");
 			print ("</div>");
 			print ("</div>");
 			print ("</div>");
@@ -500,16 +500,9 @@ function ShowBody($k)
 			print ("<div class='headerMenu'>");
 			print ("<div id='menu'>");
 			print ("<div class='logo'>");
-			print ("<img src='./../img/logo.png'/>");
+			print ("Collaborate");
 			print ("</div>");
-			print ('<div id="search_bar3">');
-			print ('<div id="form2">');
-			print ('<form action="home.php" method="get" id="search">');
-			print ('<input type="text" name="mysqli_query" placeholder="Search">');
-			print ('</form>');
-			print ("</div>");
-			print ('<input type="image" id="img" src="./../img/search.png" alt="Submit" name="submit" onclick="SearchBar2()"><span class="tooltip">Search</span>');
-			print ('</div>');
+		
 			print ('<div id="search_bar2">');
 			print ('<div id="form">');
 			print ('<form action="home.php" method="get" id="search">');
@@ -520,32 +513,31 @@ function ShowBody($k)
 			print ('</div>');
 			print ("<div class='menuItem'>");
 			print ("<div id='hideMenu'>");
-	        print ("<a href='home.php'  ><img id='home2' src='./../img/home.png' alt='Home' /><span class='tooltip'>Home</span></a>");
-			print ("<a href='inbox.php'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' /><span class='tooltip'>Inbox</span></a>");
-			print ("<a href='profile.php?u=$username'><img id='pic' src='$pic' alt='$username'/><span class='tooltip'>Profile</span></a>");
+	        print ("<a href='home.php'  >Home</a>");
+			print ("<a href='inbox.php'>Inbox</a>");
+			print ("<a href='profile.php?u=$username'>Profile</a>");
 			print ("</div>");
 			print ("<div class='dropdown2'>");
-			print ('<input type="image" src="./../img/settings.png" id="dropbtn"  onclick="DropDown()">');
+			print ('<input type="image" src="./../img/hamburger2.png" id="dropbtn" onmouseover="HamOver()" onmouseout="HamOut()" onclick="DropDown()">');
 			print ('<div id="dropdown-content">');
-			print ("<a href='manage_account.php'  ><img id='manage' src='./../img/settings_hover.png' alt='Settings' /><span class='tooltip2'>Settings</span></a>");
-			print ("<a href='logout.php' ><img id='signout2' src='./../img/signout_hover.png' alt='Logout'/><span class='tooltip2'>Logout</span></a>");
+			print ("<a href='manage_account.php'  ><img id='signout2' src='./../img/settings.png' alt='Logout'/>Settings</a>");
+			print ("<hr class='hr'/>");
+			print ("<a href='logout.php' ><img id='signout2' src='./../img/signout.png' alt='Logout'/>Logout</a>");
 			print ('</div>');
 			print ("</div>");
 			print ("</div>");
 			print ("<div class='dropdown'>");
-			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn2" onclick="DropDown2()">');
+			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn2" onmouseover="HamOver2()" onmouseout="HamOut2()" onclick="DropDown2()">');
 			print ('<div id="dropdown-content2" >');
-			print ('<div id="nav" >');
-			print ("<a href='home.php'  ><img id='home2' src='./../img/home.png' alt='Home' /><h4>Home</h4></a>");
-			print ("<hr/>");
-			print ("<a href='inbox.php'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' /><h4>Inbox</h4></a>");
-			print ("<hr/>");
-			print ("<a href='profile.php?u=$username'><img id='pic2' src='$pic' alt='$username'/><h4>Profile</h4></a>");
-			print ("<hr/>");
-			print ("<a href='manage_account.php'  ><img id='manage2' src='./../img/settings.png' alt='Settings' /><h3>Settings</h3></a>");
-			print ("<hr/>");
-			print ("<a href='logout.php' ><img id='signout2' src='./../img/signout.png' alt='Logout'/><h4>Logout</h4></a>");
-			print ('</div>');
+			print ("<a href='home.php'  ><img id='home2' src='./../img/home.png' alt='Home' />    Home</a>");
+			print ("<hr class='hr'/>");
+			print ("<a href='inbox.php'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' />   Inbox</a>");
+			print ("<hr class='hr'/>");
+			print ("<a href='profile.php?u=$username'><img id='pic2' src='$pic' alt='$username'/> Profile</a>");
+			print ("<hr class='hr'/>");
+			print ("<a href='manage_account.php'  ><img id='manage2' src='./../img/settings.png' alt='Settings' />Settings</a>");
+			print ("<hr class='hr'/>");
+			print ("<a href='logout.php' ><img id='signout2' src='./../img/signout.png' alt='Logout'/>  Logout</a>");
 			print ("</div>");
 			print ("</div>");
 			print ("</div>");
@@ -556,12 +548,11 @@ function ShowBody($k)
 			print ("<div class='headerMenu'>");
 		    print ("<div id='menu'>");
 		    print ("<div class='logo'>");
-		    print ("<img src='img/logo.png'/>");
+		    print ("Collaborate");
 		    print ("</div>");
 		    print ("<div class='menuItem'>");
 		    print ("</div>");
 		    print ("</div>");
-			
 		  break;
 	}
 }
