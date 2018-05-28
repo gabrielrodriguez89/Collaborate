@@ -43,7 +43,7 @@ Collaborate 2017-2018
 						<br/><br/>
 						<label for="description">Description</label>
 						<textarea id="desc" type="text" maxlength="255" name="description" placeholder="Tell us about your project" ></textarea><br /><br />
-						<button type="submit" name="project">Collaborate</button>
+						<button class="btn" type="submit" name="project">Collaborate</button>
 					</form>
 				</td>
 			</tr>

@@ -93,9 +93,9 @@ if (isset($_SESSION['username']))
 	}
 	else
 	{
-		print ("<link rel='stylesheet' type='text/css' href='css/style.css' >");
-		print ("<link rel='stylesheet' type='text/css' href='css/profile.css' >");
-		print ("<script src='js/collaborate.js' ></script>");
+		print ("<link rel='stylesheet' type='text/css' href='./css/style.css' >");
+		print ("<link rel='stylesheet' type='text/css' href='./css/profile.css' >");
+		print ("<script src='./js/collaborate.js' ></script>");
 		print ("</head>");
 		//funtion that hold the Body tag with navigation control
 		ShowBody(2);

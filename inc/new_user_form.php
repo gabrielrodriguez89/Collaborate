@@ -113,7 +113,7 @@ Form to gather user information for profile
 	print("<textarea name='hobbies' placeholder='What are a few of your hobbies' ></textarea><br /><br />");
 	print("<label for='description'>Description</label>");
 	print("<textarea name='description' placeholder='Introduce yourself to the other users' ></textarea><br /><br />");
-	print("<input type='submit' name='about' value='Submit' >");
+	print("<input id='btn' type='submit' name='about' value='Submit' >");
 	print("</form>");
 	print("</div>");
 	print("</div>");

@@ -70,7 +70,7 @@ profile it will be displayed without editing options.
 				print ("<form action='#' method='post' enctype='multipart/form-data'>");
 				print ("<br>");
 				print ("<input type='file' name='fileToUpload' id='fileToUpload'><br><br>");
-				print ("<input type='submit' name='upload' value='submit'>");
+				print ("<input id='btn' type='submit' name='upload' value='submit'>");
 				print ("<small onclick='NoUpload()'>Cancel</small>");
 				print ("</form>");
 				print ("</div> ");
@@ -116,16 +116,16 @@ profile it will be displayed without editing options.
 			//limit user projects to 5
 			try
 			{
-			$total = CountPosts();
-			//remove option to add project if limit reached
-			if($total >= 5)
-			{
+				$total = CountPosts();
+				//remove option to add project if limit reached
+				if($total >= 5)
+				{
 
-			}
-			else
-			{
-				echo '<a href="create_project.php" id="add"><u >ADD</u></a>';
-			}
+				}
+				else
+				{
+					echo '<a href="create_project.php" id="add"><u >ADD</u></a>';
+				}
 			}
 			catch (\Exception $e) 
 			{

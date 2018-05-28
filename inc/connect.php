@@ -361,17 +361,17 @@ function GetMessages($grab_messages, $x)
 			switch ($x) {
 				case '0'://inbox
 						print("<h3>Inbox Empty</h3>");
-						print ("<hr />");
+						print ("<hr class='hr'/>");
 						print ("<br/><br/>");
 					break;
 				case '1'://deleted
 						print ("<h2>Read Messages Empty</h2>");
-						print ("<hr />");
+						print ("<hr class='hr'/>");
 						print ("<br/><br/>");
 					break;
 				default: //sent
 						print ("<h2>Sent Messages Empty</h2>");
-						print ("<hr/>");
+						print ("<hr class='hr'/>");
 						print ("<br/><br/>");
 					break;
 			}
@@ -403,11 +403,11 @@ function ShowFilter()
     print ('</div>');
 	print("<span id='adv' onclick='Advance()'>Advanced</span>");
 	print("<span id='clr' onclick='CLR()'>Close</span>");
-    print ('<div class="hr"></div>');
+    print ('<hr class="hr"/>');
     print ('<div id="filter-people">');
     print ('<a href="otherusers.php"><h1>People</h1></a>');
     print ('</div>');
-    print ('<div class="hr"></div>');
+    print ('<hr class="hr"/>');
     print ('<div id="filter-state">');
     print ('<form method="post" action="home.php">');
     print ('<label for="state-choice">State</label><br/>');
@@ -435,7 +435,7 @@ function ShowFilter()
     print ('<button name="state">Refine</button>');
     print ('</form>');
     print ('</div><br/><br/>');
-    print ('<div class="hr"></div>');
+    print ('<hr class="hr"/>');
     print ('</div><br/>');
     print ('<div class="bgstyle">');
 }
@@ -487,72 +487,72 @@ function ShowBody($k)
 	{
 		case '0':
 			print ("<body>");
-			print ("<div class='headerMenu'>");
+			print ("<div id='headerMenu'>");
 			print ("<div id='menu'>");
-			print ("<div class='logo'>");
+			print ("<div id='logo'>");
 			print ("Collaborate");
 			print ("</div>");
 			print ("</div>");
 			print ("</div>");
 		  break;
 		case '1':
-			print ("<body>");
-			print ("<div class='headerMenu'>");
+			print ("<body onload='Chameleon()'>");
+			print ("<div id='headerMenu'>");
 			print ("<div id='menu'>");
-			print ("<div class='logo'>");
+			print ("<div id='logo'>");
 			print ("Collaborate");
 			print ("</div>");
-		
 			print ('<div id="search_bar2">');
 			print ('<div id="form">');
 			print ('<form action="home.php" method="get" id="search">');
 			print ('<input type="text" name="mysqli_query" placeholder="Search">');
 			print ('</form>');
 			print ("</div>");
-			print ('<input type="image" id="img" src="./../img/search.png" alt="Submit" name="submit" onclick="SearchBar()"><span class="tooltip">Search</span>');
+			print ('<input type="image" id="img" src="./../img/search.png" alt="Submit" name="submit" onmouseover="SearchOver()" onmouseout="SearchOut()" onclick="SearchBar()"><span class="tooltip">Search</span>');
 			print ('</div>');
 			print ("<div class='menuItem'>");
 			print ("<div id='hideMenu'>");
-	        print ("<a href='home.php'  >Home</a>");
-			print ("<a href='inbox.php'>Inbox</a>");
-			print ("<a href='profile.php?u=$username'>Profile</a>");
+	        print ("<a href='home.php' class='a' >Home</a>");
+			print ("<a href='inbox.php' class='a'>Inbox</a>");
+			print ("<a href='profile.php?u=$username' class='a'>Profile</a>");
 			print ("</div>");
 			print ("<div class='dropdown2'>");
-			print ('<input type="image" src="./../img/hamburger2.png" id="dropbtn" onmouseover="HamOver()" onmouseout="HamOut()" onclick="DropDown()">');
+			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn" onmouseover="HamOver()" onmouseout="HamOut()" onclick="DropDown()">');
 			print ('<div id="dropdown-content">');
-			print ("<a href='manage_account.php'  ><img id='signout2' src='./../img/settings.png' alt='Logout'/>Settings</a>");
-			print ("<hr id='hr'/>");
-			print ("<a href='logout.php' ><img id='signout2' src='./../img/signout.png' alt='Logout'/>Logout</a>");
+			print ("<a href='manage_account.php'  class='a'><img id='signout2' src='./../img/settings.png' alt='Logout'/>Settings</a>");
+			print ("<hr class='hr'/>");
+			print ("<a href='logout.php' class='a'><img id='signout2' src='./../img/signout.png' alt='Logout'/>Logout</a>");
 			print ('</div>');
 			print ("</div>");
 			print ("</div>");
 			print ("<div class='dropdown'>");
 			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn2" onmouseover="HamOver2()" onmouseout="HamOut2()" onclick="DropDown2()">');
 			print ('<div id="dropdown-content2" >');
-			print ("<a href='home.php'  ><img id='home2' src='./../img/home.png' alt='Home' />    Home</a>");
-			print ("<hr id='hr'/>");
-			print ("<a href='inbox.php'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' />   Inbox</a>");
-			print ("<hr id='hr'/>");
-			print ("<a href='profile.php?u=$username'><img id='pic2' src='$pic' alt='$username'/> Profile</a>");
-			print ("<hr id='hr'/>");
-			print ("<a href='manage_account.php'  ><img id='manage2' src='./../img/settings.png' alt='Settings' />Settings</a>");
-			print ("<hr id='hr'/>");
-			print ("<a href='logout.php' ><img id='signout2' src='./../img/signout.png' alt='Logout'/>  Logout</a>");
+			print ("<a href='home.php'  class='a'><img id='home2' src='./../img/home.png' alt='Home' />Home</a>");
+			print ("<hr class='hr'/>");
+			print ("<a href='inbox.php' class='a'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' />Inbox</a>");
+			print ("<hr class='hr'/>");
+			print ("<a href='profile.php?u=$username' class='a'><img id='pic2' src='$pic' alt='$username'/>Profile</a>");
+			print ("<hr class='hr'/>");
+			print ("<a href='manage_account.php' class='a'><img id='manage2' src='./../img/settings.png' alt='Settings' />Settings</a>");
+			print ("<hr class='hr'/>");
+			print ("<a href='logout.php' class='a'><img id='signout2' src='./../img/signout.png' alt='Logout'/>Logout</a>");
 			print ("</div>");
 			print ("</div>");
 			print ("</div>");
 			print ('</div>');
 		  break;
 		default:
-		    print ("<body onload='read()''>");
-			print ("<div class='headerMenu'>");
+		    print ("<body onload='read()'>");
+			print ("<div id='headerMenu'>");
 		    print ("<div id='menu'>");
-		    print ("<div class='logo'>");
+		    print ("<div id='logo'>");
 		    print ("Collaborate");
 		    print ("</div>");
 		    print ("<div class='menuItem'>");
 		    print ("</div>");
 		    print ("</div>");
+			print ("</div>");
 		  break;
 	}
 }

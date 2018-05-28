@@ -37,7 +37,7 @@ display form to user to allow them to change profile information
 	print ("<textarea name='hobbies' placeholder='$user_hobbies' >$user_hobbies</textarea><br /><br />");
 	print ("<label for='description'>Describe Yourself</label>");
 	print ("<textarea name='description' placeholder='$user_bio' >$user_bio</textarea><br /><br />");
-	print ("<input onclick='changeAbout()' type='submit' name='about' value='Save' >");
+	print ("<input id='btn' onclick='changeAbout()' type='submit' name='about' value='Save' >");
 	print ("<a href='$username'>Cancel</a>");
 	print ("</form>");
 	print ("</div>");

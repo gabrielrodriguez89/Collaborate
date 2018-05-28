@@ -68,7 +68,7 @@ TODO-
     print ("<div class='hr'></div>");
     print ("<br/><br/>");
     print ("<textarea id='message' type='text' name='message' placeholder='Message Body'></textarea><span id='err'><?php echo $messageErr; ?></span>");
-    print ("<input type='submit' name='submit' value='Send'/>");
+    print ("<input id='btn' type='submit' name='submit' value='Send'/>");
     print ("</form>");
     print ("</div>");
 	}
