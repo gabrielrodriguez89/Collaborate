@@ -262,14 +262,14 @@ area
 						<input type="submit" name="log" value="Login" />
 					</form>
 					<form id="signUp" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-						<input type="text" name="fname" size="25" placeholder="First Name" /><span class="err"><?php echo $fnameErr;?></span><br /><br />
-						<input type="text" name="lname" size="25" placeholder="Last Name" /><span class="err"><?php echo $lnameErr;?></span><br /><br />
-						<input type="text" name="uname" size="25" placeholder="Username" /><span class="err"><?php echo $userErr;?></span><br /><br />
-						<input type="text" name="email" size="25" placeholder="Email Address" /><span class="err"><?php echo $emailErr;?></span><br /><br />
-						<input type="text" name="email2" size="25" placeholder="Re-Enter Email" /><span class="err"><?php echo $email2Err?></span><br /><br />
-						<input type="password" name="password" size="25" placeholder="Password" /><span class="err"><?php echo $passErr;?></span><br /><br />
-						<input type="password" name="password2" size="25" placeholder="Password Verification" /><span class="err"><?php echo $pass2Err;?></span><br /><br />
-						<input type="submit" name="reg" value="Sign Up!" >
+						<input type="text" name="fname" placeholder="First Name" /><span class="err"><?php echo $fnameErr;?></span><br /><br />
+						<input type="text" name="lname" placeholder="Last Name" /><span class="err"><?php echo $lnameErr;?></span><br /><br />
+						<input type="text" name="uname" placeholder="Username" /><span class="err"><?php echo $userErr;?></span><br /><br />
+						<input type="text" name="email" placeholder="Email Address" /><span class="err"><?php echo $emailErr;?></span><br /><br />
+						<input type="text" name="email2" placeholder="Re-Enter Email" /><span class="err"><?php echo $email2Err;?></span><br /><br />
+						<input type="password" name="password" placeholder="Password" /><span class="err"><?php echo $passErr;?></span><br /><br />
+						<input type="password" name="password2" placeholder="Password Verification" /><span class="err"><?php echo $pass2Err;?></span><br /><br />
+						<input type="submit" name="reg" value="Sign Up!" />
 					</form>
 				</td>
 			</tr>
