@@ -377,13 +377,16 @@ function Show(id)
 function ShowProfile()
 {
     var pro = document.getElementById("viewProfile");
+	var pro2 = document.getElementById("minProfile");
     if (pro.style.display == "block")
 	{
 		pro.style.display = "none";
+		pro2.style.border = "none";
     }
     else
     {
         pro.style.display = "block";
+		pro2.style.border = "2px solid #585858";
     }
 }
 function DropDown()
@@ -423,19 +426,21 @@ function SearchBar()
 	var btn1 = document.getElementById("search_bar2");
 	var btn2 = document.getElementById("dropdown-content2");
 	var btn3 = document.getElementById("dropbtn2");
-	
+	var btn4 = document.getElementById("hideMenu");
 	
 	if (btn.style.display == "block")
 	{
 		btn.style.display = "none";
 		btn1.style.width = "0";
+		btn4.style.display = "block";
 	}
 	else
 	{
 		btn.style.display = "block";
 		btn1.style.width = "75%";
-	    btn2.style.width = "0";
+	    btn2.style.display = "none";
 		btn3.style.display = "block";
+		btn4.style.display = "none";
 		
 	}
 }
@@ -450,11 +455,19 @@ function HomeOut()
 }
 function HamOver()
 {
-	document.getElementById('dropbtn').src = './../img/hamburger.png';
+	document.getElementById('dropbtn').src = './../img/hamburger2.png';
 }
 function HamOut()
 {
-	document.getElementById('dropbtn').src = './../img/hamburger2.png';
+	document.getElementById('dropbtn').src = './../img/hamburger.png';
+}
+function SearchOver()
+{
+	document.getElementById('img').src = './../img/search2.png';
+}
+function SearchOut()
+{
+	document.getElementById('img').src = './../img/search.png';
 }
 function InboxOver()
 {
@@ -468,28 +481,55 @@ function InboxOut()
 function Chameleon()
 {
 	var color = document.getElementById("color-changing").value;
-
-	switch(color)
+	var value = document.getElementById("color").value = color;
+	var menu = document.getElementById("headerMenu");
+	var btn = document.getElementById("btn");
+	var drp = document.getElementById("dropdown-content");
+	var drp2 = document.getElementById("dropdown-content2");
+	var nav = document.getElementById("message-nav-buttons");
+	var nav2 = document.getElementById("message-nav");
+	
+	switch(value)
 	{
 		case "Blue":
-			document.getElementByClassName("headerMenu").style.backgroundColor = '';
-			document.getElementById("").style.backgroundColor = '';
+			menu.style.backgroundColor = '#000080';
+			btn.style.backgroundColor = '#000080';
+			drp.style.backgroundColor = '#0000cc';
+			drp2.style.backgroundColor = '#0000cc';
+			nav.style.backgroundColor = '#0000cc';
+			nav2.style.backgroundColor = '#0000cc';
 			break;
 		case "Purple":
-			document.getElementByClassName("headerMenu").style.backgroundColor = '';
-			document.getElementById("").style.backgroundColor = '';
+			menu.style.backgroundColor = '#26004d';
+			btn.style.backgroundColor = '#26004d';
+			drp.style.backgroundColor = '#5900b3';
+			drp2.style.backgroundColor = '#5900b3';
+			nav.style.backgroundColor = '#5900b3';
+			nav2.style.backgroundColor = '#5900b3';
 			break;
 		case "Green":
-			document.getElementByClassName("headerMenu").style.backgroundColor = '';
-			document.getElementById("").style.backgroundColor = '';
+			menu.style.backgroundColor = '#003300';
+			btn.style.backgroundColor = '#003300';
+			drp.style.backgroundColor = '#006600';
+			drp2.style.backgroundColor = '#006600';
+			nav.style.backgroundColor = '#006600';
+			nav2.style.backgroundColor = '#006600';
 			break;
 		case "Pink":
-			document.getElementByClassName("headerMenu").style.backgroundColor = '';
-			document.getElementById("").style.backgroundColor = '';
+			menu.style.backgroundColor = '#e60073';
+			btn.style.backgroundColor = '#e60073';
+			drp.style.backgroundColor = '#ff1a8c';
+			drp2.style.backgroundColor = '#ff1a8c';
+			nav.style.backgroundColor = '#ff1a8c';
+			nav2.style.backgroundColor = '#ff1a8c';
 			break;
 		default:
-		  document.getElementByClassName("headerMenu").style.backgroundColor = '#800000';
-			document.getElementById("").style.backgroundColor = '';
+		    menu.style.backgroundColor = '#282828';
+			btn.style.backgroundColor = '#282828';
+			drp.style.backgroundColor = '#585858';
+			drp2.style.backgroundColor = '#585858';
+			nav.style.backgroundColor = '#585858';
+			nav2.style.backgroundColor = '#585858';
 			break;
 	}
 }
