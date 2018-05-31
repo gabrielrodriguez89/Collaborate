@@ -286,10 +286,10 @@ function GetMessages($grab_messages, $x)
 	try
 	{
 		$con = Connect();
-        $get_messages = mysqli_query($con, $grab_messages);
+        
 		$sub = "";
 
-		if ($get_messages)
+		if ($get_messages = mysqli_query($con, $grab_messages))
 		{
 			$numrows_read = mysqli_num_rows($get_messages);
 			while ($get_msg = mysqli_fetch_assoc($grab_messages))
@@ -360,18 +360,21 @@ function GetMessages($grab_messages, $x)
 			//display empty message to user based upon which message screen they are on
 			switch ($x) {
 				case '0'://inbox
-						print("<h3>Inbox Empty</h3>");
-						print ("<hr class='hr'/>");
+				        print ("<img class='empty' src='./../img/inbox_over.png' alt='No Messages' />");
+						print ("<h2>Inbox Empty</h2>");
+						print ('<div id="hr"></div>');
 						print ("<br/><br/>");
 					break;
 				case '1'://deleted
-						print ("<h2>Read Messages Empty</h2>");
-						print ("<hr class='hr'/>");
+				        print ("<img class='empty' src='./../img/inbox_over.png' alt='No Messages' />");
+						print ("<h2>No erased messages</h2>");
+						print ('<div id="hr"></div>');
 						print ("<br/><br/>");
 					break;
 				default: //sent
-						print ("<h2>Sent Messages Empty</h2>");
-						print ("<hr class='hr'/>");
+				        print ("<img class='empty' src='./../img/inbox_over.png' alt='No Messages' />");
+						print ("<h2>Your sent box is empty</h2>");
+						print ('<div id="hr"></div>');
 						print ("<br/><br/>");
 					break;
 			}
@@ -401,13 +404,13 @@ function ShowFilter()
 	print ('<input type="image" src="./../img/search.png" alt="Submit" name="submit">');
     print ('</form><br/>');
     print ('</div>');
-	print("<span id='adv' onclick='Advance()'>Advanced</span>");
-	print("<span id='clr' onclick='CLR()'>Close</span>");
-    print ('<hr class="hr"/>');
+	print ("<span id='adv' onclick='Advance()'>Advanced</span>");
+	print ("<span id='clr' onclick='CLR()'>Close</span>");
+    print ('<div id="hr"></div>');
     print ('<div id="filter-people">');
     print ('<a href="otherusers.php"><h1>People</h1></a>');
     print ('</div>');
-    print ('<hr class="hr"/>');
+    print ('<div id="hr"></div>');
     print ('<div id="filter-state">');
     print ('<form method="post" action="home.php">');
     print ('<label for="state-choice">State</label><br/>');
@@ -435,7 +438,7 @@ function ShowFilter()
     print ('<button name="state">Refine</button>');
     print ('</form>');
     print ('</div><br/><br/>');
-    print ('<hr class="hr"/>');
+    print ('<div id="hr"></div>');
     print ('</div><br/>');
     print ('<div class="bgstyle">');
 }
@@ -445,7 +448,7 @@ function UpdateUser()
 	try
 	{
 		$con = Connect();
-
+        $username = $_SESSION["username"];
 		$fname = test_input($_POST["fname"]);
 		$lname = test_input($_POST["lname"]);
 		$age = test_input($_POST["age"]);
@@ -460,9 +463,9 @@ function UpdateUser()
 		{
 			//re-establish session data so information is correct
 			$sql = mysqli_query ($con, "SELECT * FROM `collaborate`.`users` WHERE `username`='$username' LIMIT 1");
-			SetUser($sql);
+			
 			//redirect user to their profile
-			header("Location: $username");
+			header("Location: profile.php?u=$username");
 		}
 		else
 		{
@@ -503,40 +506,46 @@ function ShowBody($k)
 			print ("Collaborate");
 			print ("</div>");
 			print ('<div id="search_bar2">');
+			print ("<div id='img'>");
+			print ('<input type="image" id="search_img" src="./../img/search.png" onclick="SearchBar()"><span class="tooltip">Search</span>');
+			print ("</div>");
 			print ('<div id="form">');
 			print ('<form action="home.php" method="get" id="search">');
 			print ('<input type="text" name="mysqli_query" placeholder="Search">');
+			print ('<input type="image" src="./../img/search2.png" alt="Submit" name="submit">');
 			print ('</form>');
 			print ("</div>");
-			print ('<input type="image" id="img" src="./../img/search.png" alt="Submit" name="submit" onmouseover="SearchOver()" onmouseout="SearchOut()" onclick="SearchBar()"><span class="tooltip">Search</span>');
+			print ('</div>');
+			print ("<div id='img2'>");
+			print ('<input type="image" id="" src="./../img/back.png" onclick="SearchBar()">');
 			print ('</div>');
 			print ("<div class='menuItem'>");
 			print ("<div id='hideMenu'>");
-	        print ("<a href='home.php' class='a' >Home</a>");
-			print ("<a href='inbox.php' class='a'>Inbox</a>");
-			print ("<a href='profile.php?u=$username' class='a'>Profile</a>");
+	        print ("<a href='home.php' class='a' ><img id='home3' src='./../img/home.png' alt='Home' />Home</a>");
+			print ("<a href='inbox.php' class='a'><img id='inbox_icon3' src='./../img/inbox.png' alt='Inbox' />Inbox</a>");
+			print ("<a href='profile.php?u=$username' class='a'><img id='pic3' src='$pic' alt='$username'/>Profile</a>");
 			print ("</div>");
 			print ("<div class='dropdown2'>");
-			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn" onmouseover="HamOver()" onmouseout="HamOut()" onclick="DropDown()">');
+			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn" onclick="DropDown()">');
 			print ('<div id="dropdown-content">');
 			print ("<a href='manage_account.php'  class='a'><img id='signout2' src='./../img/settings.png' alt='Logout'/>Settings</a>");
-			print ("<hr class='hr'/>");
+			print ("<hr id='hr'/>");
 			print ("<a href='logout.php' class='a'><img id='signout2' src='./../img/signout.png' alt='Logout'/>Logout</a>");
 			print ('</div>');
 			print ("</div>");
 			print ("</div>");
 			print ("<div class='dropdown'>");
-			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn2" onmouseover="HamOver2()" onmouseout="HamOut2()" onclick="DropDown2()">');
-			print ('<div id="dropdown-content2" >');
-			print ("<a href='home.php'  class='a'><img id='home2' src='./../img/home.png' alt='Home' />Home</a>");
-			print ("<hr class='hr'/>");
-			print ("<a href='inbox.php' class='a'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' />Inbox</a>");
-			print ("<hr class='hr'/>");
-			print ("<a href='profile.php?u=$username' class='a'><img id='pic2' src='$pic' alt='$username'/>Profile</a>");
-			print ("<hr class='hr'/>");
-			print ("<a href='manage_account.php' class='a'><img id='manage2' src='./../img/settings.png' alt='Settings' />Settings</a>");
-			print ("<hr class='hr'/>");
-			print ("<a href='logout.php' class='a'><img id='signout2' src='./../img/signout.png' alt='Logout'/>Logout</a>");
+			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn2" onclick="DropDown2()">');
+			print ('<div id="dropdown-content2">');
+			print ("<a href='home.php'><img id='home2' src='./../img/home.png' alt='Home' /><span id='txt'>Home</span></a>");
+			print ("<hr id='hr'/>");
+			print ("<a href='inbox.php'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' /><span id='txt'>Inbox</span></a>");
+			print ("<hr id='hr'/>");
+			print ("<a href='profile.php?u=$username'><img id='pic2' src='$pic' alt='$username'/><span id='txt'>Profile</span></a>");
+			print ("<hr id='hr'/>");
+			print ("<a href='manage_account.php'><img id='manage2' src='./../img/settings.png' alt='Settings' /><span id='txt'>Settings</span></a>");
+			print ("<hr id='hr'/>");
+			print ("<a href='logout.php'><img id='signout2' src='./../img/signout.png' alt='Logout'/><span id='txt'>Logout</span></a>");
 			print ("</div>");
 			print ("</div>");
 			print ("</div>");

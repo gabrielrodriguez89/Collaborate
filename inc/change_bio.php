@@ -20,7 +20,7 @@ display form to user to allow them to change profile information
 	print ("<div id='changeAbout'>");
 	print ("<div id='changeAbout2'>");
 	print ("<h1>About me</h1><br/>");
-	print ("<form action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>' method='POST'>");
+	print ("<form action='#' method='POST'>");
 	print ("<label for='fname'>First Name</label>");
 	print ("<input type='text' name='fname' value='$user_fname'><br/><br/>");
 	print ("<label for='lname'>Last Name</label>");

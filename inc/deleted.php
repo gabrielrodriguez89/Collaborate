@@ -19,21 +19,21 @@ Side navigation for message inbox/sent/deleted
 -->
 <div id="message-nav">
     <div id="message-nav-buttons">
-		<a href="inbox.php"><button>Inbox</button></a>
-		<hr class="hr"/>
-		<a href="sent.php"><button>Sent</button></a>
-		<hr class="hr"/>
-		<a href="deleted.php"><button>Deleted</button></a>
+		<a href="inbox.php"><img src='./../img/inbox_icon.png' alt='Inbox' />Inbox</a>
+		<hr id="hr2"/>
+		<a href="sent.php"><img src='./../img/sent.png' alt='Sent' />Sent</a>
+		<hr id="hr2"/>
+		<a href="deleted.php"><img src='./../img/trash.png' alt='Sent' />Deleted</a><br/>
 	</div>
 </div>
 <br/>
 <div class="bgstyle">
     <h2 id='messageHead' >Deleted</h2>
-	<hr class="hr"/>
+	<div id="hr"></div>
 	<br/><br/>
 <?php
   //retreive messages that are marked deleted by user
-  $grab_messages = ( "SELECT * FROM pvt_messages WHERE to_user='$username' && recipientDelete='1'");
+  $get_messages = ( "SELECT * FROM pvt_messages WHERE to_user='$username' && recipientDelete='1'");
   //call to function to get messages
   GetMessages($get_messages, 1);
 ?>

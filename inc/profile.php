@@ -54,11 +54,15 @@ profile it will be displayed without editing options.
 		//compare user to the current session
 		if($username == $user)
 		{
-			print ('<div id="profile">');
-            print ("<div id='minProfile' onclick='ShowProfile()'>");
+			print ("<div id='profileButtons'>");
+			print ("<div id='minProfile' onclick='ShowProfile()'>");
 			print ("<h1>Profile</h1>");
 			print ("</div>");
-			print ("<div id='viewProfile'>");
+			print ("<div id='minProject' onclick='ShowProject()'>");
+			print ("<h1>Project</h1>");
+			print ("</div>");
+			print ("</div>");
+			print ('<div id="profile">');
 			//get the users profile picture
 			if($user_pic == "")
 			{
@@ -87,12 +91,12 @@ profile it will be displayed without editing options.
 				
 				UploadNewImage($username);
 			}
-			print ("<div class='profileheading'>");
-			print ("<a href='change_bio.php' id='aboutMe'><u >EDIT</u></a>");
-			print ("</div>");
-			print ("<div class='profileLeftContent'>");
+			print ("<a href='./change_bio.php' ><div class='profileheading2'>");
+			print ("Edit");
+			print ("</div></a>");
+			print ("<div class='profileLeft'>");
 			print ("<div id='me'>");
-			print ("<h1>$user_fname&nbsp$user_lname</h3><br/><br/>");
+			print ("<h1>$user_fname&nbsp$user_lname</h1><br/><br/>");
 			print ("<h3>Age:&nbsp$user_age</h3><br/>");
 			print ("<h3>Location:&nbsp$user_city_,&nbsp$user_state_</h3><br/>");
 			print ("<h3>Hobbies:&nbsp$user_hobbies</h3><br/>");
@@ -107,34 +111,10 @@ profile it will be displayed without editing options.
 			}
 
 			print ("</div><!--Close Profile div-->");
-			print ("</div> ");
+		
 			print ("</div> ");
 			print ("<div class='bgstyle2'>");
 			print ("<div id='projectMain'>");
-			print ("<div class='profileheading'>");
-
-			//limit user projects to 5
-			try
-			{
-				$total = CountPosts();
-				//remove option to add project if limit reached
-				if($total >= 5)
-				{
-
-				}
-				else
-				{
-					echo '<a href="create_project.php" id="add"><u >ADD</u></a>';
-				}
-			}
-			catch (\Exception $e) 
-			{
-
-			}
-
-			print("<h2 id='bio'>Projects</h2>");
-			print("</div>");
-			print("<br/>");
 			print("<div class='profileLeftContent'>");
 
 			//get and display the users projects and display them in small window
