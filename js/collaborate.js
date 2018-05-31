@@ -28,7 +28,7 @@ function Advance()
 	document.getElementById('filter-state').style.display = 'block';
 	document.getElementById('adv').style.display = 'none';
 	document.getElementById('clr').style.display = 'block';
-    document.getElementsByClassName('.hr').style.display = 'block';
+    document.getElementsByClassName('#hr').style.display = 'block';
 
 }
 function CLR()
@@ -38,7 +38,7 @@ function CLR()
 	document.getElementById('filter-state').style.display = 'none';
 	document.getElementById('clr').style.display = 'none';
 	document.getElementById('adv').style.display = 'block';
-    document.getElementByClassName('.hr').style.display = 'none';
+    document.getElementByClassName('#hr').style.display = 'none';
 
 }
 //function for mousein effect
@@ -376,17 +376,23 @@ function Show(id)
 }
 function ShowProfile()
 {
-    var pro = document.getElementById("viewProfile");
+    var pro = document.getElementById("profile");
 	var pro2 = document.getElementById("minProfile");
+	
+	
     if (pro.style.display == "block")
 	{
 		pro.style.display = "none";
-		pro2.style.border = "none";
+		pro2.style.backgroundColor = "#585858";
+		pro2.style.color = "#ffffff";
+        pro2.style.marginBottom = "0px";
     }
     else
     {
         pro.style.display = "block";
-		pro2.style.border = "2px solid #585858";
+		pro2.style.backgroundColor = "#E8E8E8";
+		pro2.style.color = "#585858";
+        pro2.style.marginBottom = "15px";
     }
 }
 function DropDown()
@@ -405,19 +411,28 @@ function DropDown()
 function DropDown2()
 {
 	var btn = document.getElementById("dropdown-content2");
-	var btn3 = document.getElementById("form");
 	var btn1 = document.getElementById("search_bar2");
+	var btn2 = document.getElementById("message-nav");
+	var btn3 = document.getElementById("form");
+	var btn4 = document.getElementById("msg");
+	var btn5 = document.getElementById("minProject");
 
 	if (btn.style.display == "block")
 	{
 		btn.style.display = "none";
 		btn1.style.display = "block";
+		btn2.style.display = "block";
+		btn4.style.display = "block";
+		btn5.style.display = "block";
 	}
 	else
 	{
 		btn.style.display = "block";
-		btn3.style.display = "none";
 		btn1.style.display = "none";
+		btn2.style.display = "none";
+		btn3.style.display = "none";
+		btn4.style.display = "none";
+		btn5.style.display = "none";
 	}
 }
 function SearchBar()
@@ -427,12 +442,16 @@ function SearchBar()
 	var btn2 = document.getElementById("dropdown-content2");
 	var btn3 = document.getElementById("dropbtn2");
 	var btn4 = document.getElementById("hideMenu");
+	var btn5 = document.getElementById("img");
+	var btn6 = document.getElementById("img2");
 	
 	if (btn.style.display == "block")
 	{
 		btn.style.display = "none";
 		btn1.style.width = "0";
-		btn4.style.display = "block";
+		btn4.style.display = "flex";
+		btn5.style.display = "block";
+		btn6.style.display = "none";
 	}
 	else
 	{
@@ -441,7 +460,8 @@ function SearchBar()
 	    btn2.style.display = "none";
 		btn3.style.display = "block";
 		btn4.style.display = "none";
-		
+		btn5.style.display = "none";
+		btn6.style.display = "block";
 	}
 }
 
@@ -463,11 +483,11 @@ function HamOut()
 }
 function SearchOver()
 {
-	document.getElementById('img').src = './../img/search2.png';
+	document.getElementById('search_img').src = './../img/search2.png';
 }
 function SearchOut()
 {
-	document.getElementById('img').src = './../img/search.png';
+	document.getElementById('search_img').src = './../img/search.png';
 }
 function InboxOver()
 {
