@@ -364,28 +364,37 @@ function toggle(id)
 //toggles message views to open and close messages
 function Show(id)
 {
-    var proj = document.getElementById("showPro" + id);
+
+    var proj = document.getElementById("project" + id);
+	var pro2 = document.getElementById("showPro" + id);
+	
     if (proj.style.display == "block")
 	{
 		proj.style.display = "none";
+		pro2.style.backgroundColor = "#585858";
     }
     else
     {
         proj.style.display = "block";
+		pro2.style.backgroundColor = "#282828";
     }
 }
 function ShowProfile()
 {
     var pro = document.getElementById("profile");
 	var pro2 = document.getElementById("minProfile");
+	var pro3 = document.getElementById("bgstyle2");
+	var pro4 = document.getElementById("minProject");
+	var pro5 = document.getElementById("projectheading");
+    var pro6 = document.getElementById("pro-ico");
 	
-	
-    if (pro.style.display == "block")
+	if (pro.style.display == "block")
 	{
 		pro.style.display = "none";
 		pro2.style.backgroundColor = "#585858";
 		pro2.style.color = "#ffffff";
         pro2.style.marginBottom = "0px";
+		pro6.src = './../img/no-photo.png'
     }
     else
     {
@@ -393,6 +402,44 @@ function ShowProfile()
 		pro2.style.backgroundColor = "#E8E8E8";
 		pro2.style.color = "#585858";
         pro2.style.marginBottom = "15px";
+		pro3.style.display = "none";
+		pro4.style.backgroundColor = "#585858";
+		pro4.style.color = "#ffffff";
+        pro4.style.marginBottom = "0px";
+		pro5.style.display = "none";
+		pro6.src = "./../img/no-photo2.png";
+    }
+}
+function ShowProject()
+{
+    var pro = document.getElementById("bgstyle2");
+	var pro2 = document.getElementById("minProject");
+	var pro3 = document.getElementById("profile");
+	var pro4 = document.getElementById("minProfile");
+	var pro5 = document.getElementById("projectheading");
+	var pro6 = document.getElementById("proj-ico");
+	
+    if (pro.style.display == "flex")
+	{
+		pro.style.display = "none";
+		pro2.style.backgroundColor = "#585858";
+		pro2.style.color = "#ffffff";
+        pro2.style.marginBottom = "0px";
+		pro5.style.display = "none";
+		pro6.src = "./../img/project.png";
+    }
+    else
+    {
+        pro.style.display = "flex";
+		pro2.style.backgroundColor = "#E8E8E8";
+		pro2.style.color = "#585858";
+        pro2.style.marginBottom = "15px";
+		pro3.style.display = "none";
+		pro4.style.backgroundColor = "#585858";
+		pro4.style.color = "#ffffff";
+        pro4.style.marginBottom = "0px";
+		pro5.style.display = "block";
+		pro6.src = "./../img/project2.png";
     }
 }
 function DropDown()
@@ -498,10 +545,8 @@ function InboxOut()
 	document.getElementById('inbox').src = './../img/inbox.png';
 }
 //TODO optional feature to change color layout
-function Chameleon()
+function Chameleon(color)
 {
-	var color = document.getElementById("color-changing").value;
-	var value = document.getElementById("color").value = color;
 	var menu = document.getElementById("headerMenu");
 	var btn = document.getElementById("btn");
 	var drp = document.getElementById("dropdown-content");
@@ -509,47 +554,10 @@ function Chameleon()
 	var nav = document.getElementById("message-nav-buttons");
 	var nav2 = document.getElementById("message-nav");
 	
-	switch(value)
-	{
-		case "Blue":
-			menu.style.backgroundColor = '#000080';
-			btn.style.backgroundColor = '#000080';
-			drp.style.backgroundColor = '#0000cc';
-			drp2.style.backgroundColor = '#0000cc';
-			nav.style.backgroundColor = '#0000cc';
-			nav2.style.backgroundColor = '#0000cc';
-			break;
-		case "Purple":
-			menu.style.backgroundColor = '#26004d';
-			btn.style.backgroundColor = '#26004d';
-			drp.style.backgroundColor = '#5900b3';
-			drp2.style.backgroundColor = '#5900b3';
-			nav.style.backgroundColor = '#5900b3';
-			nav2.style.backgroundColor = '#5900b3';
-			break;
-		case "Green":
-			menu.style.backgroundColor = '#003300';
-			btn.style.backgroundColor = '#003300';
-			drp.style.backgroundColor = '#006600';
-			drp2.style.backgroundColor = '#006600';
-			nav.style.backgroundColor = '#006600';
-			nav2.style.backgroundColor = '#006600';
-			break;
-		case "Pink":
-			menu.style.backgroundColor = '#e60073';
-			btn.style.backgroundColor = '#e60073';
-			drp.style.backgroundColor = '#ff1a8c';
-			drp2.style.backgroundColor = '#ff1a8c';
-			nav.style.backgroundColor = '#ff1a8c';
-			nav2.style.backgroundColor = '#ff1a8c';
-			break;
-		default:
-		    menu.style.backgroundColor = '#282828';
-			btn.style.backgroundColor = '#282828';
-			drp.style.backgroundColor = '#585858';
-			drp2.style.backgroundColor = '#585858';
-			nav.style.backgroundColor = '#585858';
-			nav2.style.backgroundColor = '#585858';
-			break;
-	}
+	menu.style.backgroundColor = color;
+	btn.style.backgroundColor = color;
+	drp.style.backgroundColor = color;
+	drp2.style.backgroundColor = color;
+	nav.style.backgroundColor = color;
+	nav2.style.backgroundColor = color;	
 }
