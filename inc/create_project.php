@@ -11,6 +11,7 @@ Collaborate 2017-2018
 
 */
     include ("header.php");
+	
   	if(!isset($_SESSION['username']))
 	{
 		Header("Location: index.php");
@@ -44,6 +45,7 @@ Collaborate 2017-2018
 						<label for="description">Description</label>
 						<textarea id="desc" type="text" maxlength="255" name="description" placeholder="Tell us about your project" ></textarea><br /><br />
 						<button class="btn" type="submit" name="project">Collaborate</button>
+					    <a href="./profile.php?u=<?php print($username); ?>"><h4>Cancel</h4></a>
 					</form>
 				</td>
 			</tr>
@@ -105,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 	else
 	{
-	    header("Location: profile.php");
+	    header("Location: profile.php?u=$username");
 	}
 }
     _html_end();

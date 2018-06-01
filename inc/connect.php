@@ -10,6 +10,8 @@ Connect.php was created to maintain all of the functions used in the Collaborate
 */
 session_start();
 
+
+
 //database connection information
 function Connect()
 {
@@ -92,7 +94,6 @@ function GetProject($project, $i)
 						//if there is no image for the project print this, else print this
 						if($attachment == "")
 						{
-							
 							print ("<br/>");
 							print ("<a href='./profile.php?u=$user'>");
 							print ("<div class='display_project' onclick='Go_To_Profile()'>");
@@ -131,21 +132,11 @@ function GetProject($project, $i)
 						}
 					  break;
 				    case '1':
-						if($attachment == '')
-						{
 							print ("<div id='showPro$proId' onclick='Show($proId)'>");
-							print ("<h1>$project_name</h1><br/>");
+							print ("<h1>$project_name</h1>");
 							print ("<h2>$type</h2><br/>");
-							print ("</div><br/>");
-						}
-						else
-						{
-							print ("<div id='showPro$proId' onclick='Show($proId)'>");
-							print ("<img src='$attachment' alt='$attachment'/>");
-							print ("<h1>Name: $project_name</h1><br/>");
-							print ("<h1>Type: $type</h1>");
-							print ("</div><br/>");
-						}
+							print ("</div>");	
+							print ('<hr id="hr"/>');
 					  break;
 				    default:
 						if($attachment == "")
@@ -162,26 +153,17 @@ function GetProject($project, $i)
 							print ("<div id='project$proId'>");
 							if($attachment != "" AND $attachment != NULL)
 							{
-							    print ("<img src='$attachment' alt='picture for $project_name'/><br/>");
+							    print ("<img src='$attachment' alt='picture for $project_name'/>");
 							}
-							print ("<h5>$date</h5><br/>");
+							print ("<h5>$date</h5><br/><br/>");
 							print ("<h1>$project_name</h1><br/>");
 							print ("<h4>$type</h4><br/><br/>");
 							print ("<p>$description</p>");
 							print ("<br/>");
+							
 						}
-						print ("<div class='chat'>");
-						print ("<div class='chatDiv'>");
-						print ("<input type='text' id='post' name='post' placeholder='Comment..'>");
-						print ("</div>");
-						print ("<div id='subChat'>");
-						print ("<button id='buttons' type='submit' onclick='sendPost($proId)' >Post</button>");
-						print ("</div>");
-						//get count of comments on projects
-						$total = CountPosts();
-
-						print ("<small id='openComment' onclick='Comments()'>Comments $total</small>");
-						print ("</div>	<!--chat close-->");
+						print ("</div>	<!--project close-->");
+						
 					  break;
 				}
 			}
@@ -484,6 +466,7 @@ function ShowBody($k)
 	{
 		  $username = $_SESSION['username'];
 		  $pic = $_SESSION['get_user_pic'] ;
+		  $color = $_SESSION['color'];
 	}
 
 	switch ($k) 
@@ -499,7 +482,7 @@ function ShowBody($k)
 			print ("</div>");
 		  break;
 		case '1':
-			print ("<body onload='Chameleon()'>");
+			print ("<body onload='Chameleon($color)'>");
 			print ("<div id='headerMenu'>");
 			print ("<div id='menu'>");
 			print ("<div id='logo'>");
@@ -516,7 +499,7 @@ function ShowBody($k)
 			print ('</form>');
 			print ("</div>");
 			print ('</div>');
-			print ("<div id='img2'>");
+			print ("<div id='img8'>");
 			print ('<input type="image" id="" src="./../img/back.png" onclick="SearchBar()">');
 			print ('</div>');
 			print ("<div class='menuItem'>");
@@ -549,6 +532,7 @@ function ShowBody($k)
 			print ("</div>");
 			print ("</div>");
 			print ("</div>");
+			
 			print ('</div>');
 		  break;
 		default:
@@ -598,7 +582,7 @@ function GetProfilePic($user)
 		if ($profile_pic_db == NULL)
 		{
 			//print ("<img src='img/no_photo.png' alt='No photo to show'  >");
-			print ("<img src='./../img/no_photo.png' alt='No photo to show'  >");
+			print ("<img src='./../img/no-photo.png' alt='No photo to show'  >");
 		}
 		else
 		{
@@ -707,7 +691,7 @@ function GetPosts($posts)
 			if($profile_pic_db == NULL)
 			{
 				print ("<div class='con_chat'>");
-				print ("<img src='./../img/no_photo.png' alt='Avatar'>");
+				print ("<img src='./../img/no-photo.png' alt='Avatar'>");
 				print ("<p>$body</p>");
 				print ("<span class='time-right'>$time_stamp</span><br/></br/>");
 				print ("<span class='delete' onclick=''>Delete</span>");
@@ -766,7 +750,7 @@ function OtherUsers($query)
 				if ($pic == "")
 				{
 					print("<div id='proPic3'>");
-					print("<img src='./../img/no_photo.png' alt='Profile Picture '  >");
+					print("<img src='./../img/no-photo.png' alt='Profile Picture '  >");
 					print("</div>");
 				}
 				else

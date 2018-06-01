@@ -12,7 +12,8 @@ a menu is displayed for the user, else login and registration
 options are displayed
 */
 
-  require_once "connect.php";
+    require_once "connect.php";
+
 
 //check session status
 if (isset($_SESSION['username']))

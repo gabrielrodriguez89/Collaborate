@@ -11,7 +11,7 @@ the user also has the option to move the message back to the deleted
 by setting the ENUM value to 1.
 Collaborate 2017-2018
 */
-  include "header.php";
+    include "header.php";
 ?>
 <div id="message-nav">
     <div id="message-nav-buttons">

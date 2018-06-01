@@ -26,7 +26,7 @@ display form to user to allow them to change profile information
 	print ("<label for='lname'>Last Name</label>");
 	print ("<input type='text' name='lname' value='$user_lname'><br/><br/>");
 	print ("<label for='age'>Age</label>");
-	print ("<input type='text' name='age' value='$user_age']'><br/><br/>");
+	print ("<input type='date' name='age' value='$user_age']'><br/><br/>");
 	print ("<label for='city'>City</label>");
 	print ("<input type='text' name='city' value='$user_city_'><br/><br/>");
 	print ("<label for='state'>State</label>");

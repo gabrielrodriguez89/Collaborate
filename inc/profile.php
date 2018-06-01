@@ -56,10 +56,11 @@ profile it will be displayed without editing options.
 		{
 			print ("<div id='profileButtons'>");
 			print ("<div id='minProfile' onclick='ShowProfile()'>");
-			print ("<h1>Profile</h1>");
+			print ("<img src='./../img/no-photo.png' alt='profile' id='pro-ico'/><h1>Profile</h1>");
 			print ("</div>");
+			print ('<hr id="hr2"/>');
 			print ("<div id='minProject' onclick='ShowProject()'>");
-			print ("<h1>Project</h1>");
+			print ("<img src='./../img/project.png' alt='project' id='proj-ico'/><h1>Projects</h1>");
 			print ("</div>");
 			print ("</div>");
 			print ('<div id="profile">');
@@ -67,24 +68,24 @@ profile it will be displayed without editing options.
 			if($user_pic == "")
 			{
 				print ("<div id='proPic'>");
-				print ("<span onclick='UploadPic()'><img src='./../img/upload_photo.png' alt='Placeholder for user to upload image' ></span>");
+				print ("<span onclick='UploadPic()'><img src='./../img/no-photo.png' alt='Placeholder for user to upload image' ></span>");
 				print ("</div>");
-				print ("<div id='proPic2'>");
-				print ("<br>");
-				print ("<form action='#' method='post' enctype='multipart/form-data'>");
-				print ("<br>");
-				print ("<input type='file' name='fileToUpload' id='fileToUpload'><br><br>");
-				print ("<input id='btn' type='submit' name='upload' value='submit'>");
-				print ("<small onclick='NoUpload()'>Cancel</small>");
-				print ("</form>");
-				print ("</div> ");
+			
 			}
 			else
 			{
 				print ("<div id='proPic'>");
-				print ("<img src='$user_pic' alt='Profile Picture for $username'>");
+				print ("<img src='$user_pic' alt='Profile Picture for $username' onclick='UploadPic()'>");
 				print ("</div>");
 			}
+			print ("<div id='proPic2'>");
+			print ("<br>");
+			print ("<form action='#' method='post' enctype='multipart/form-data'>");
+			print ("<input type='file' name='fileToUpload' id='fileToUpload'><br><br>");
+			print ("<input id='btn' type='submit' name='upload' value='Save'>");
+			print ("<small onclick='NoUpload()'>Cancel</small>");
+			print ("</form>");
+			print ("</div> ");
 			//upload profile picture if non exist
 			if (isset($_POST['upload']))
 			{
@@ -92,7 +93,7 @@ profile it will be displayed without editing options.
 				UploadNewImage($username);
 			}
 			print ("<a href='./change_bio.php' ><div class='profileheading2'>");
-			print ("Edit");
+			print ("<img id='Edit' src='./../img/Edit.png' alt='Edit' /><h3>Edit</h3>");
 			print ("</div></a>");
 			print ("<div class='profileLeft'>");
 			print ("<div id='me'>");
@@ -113,10 +114,28 @@ profile it will be displayed without editing options.
 			print ("</div><!--Close Profile div-->");
 		
 			print ("</div> ");
-			print ("<div class='bgstyle2'>");
-			print ("<div id='projectMain'>");
-			print("<div class='profileLeftContent'>");
+			print ('<div id="projectheading">');
+			print ('<h1>Projects</h1>');
+			print ('</div>');
+			print ("<div id='bgstyle2'>");
 
+			print ("<div id='projectMain'>");
+			print ("<div class='profileLeftContent'>");
+
+			
+		    $total = CountPosts();
+			//remove option to add project if limit reached
+			if($total >= 5)
+			{
+
+			}
+			else
+			{
+				print ('<a href="create_project.php"><div id="add">');
+				print ('<img id="" src="./../img/add.png" alt="Add" /><h3>Add</h3>');
+				print ('</div></a>');
+				print ('<hr id="hr"/>');
+			}
 			//get and display the users projects and display them in small window
 			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `username`='$username' ORDER BY `id` LIMIT 5");
 			GetProject($getProject, 1);
@@ -131,7 +150,6 @@ profile it will be displayed without editing options.
 			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `username`='$username' ORDER BY `id` LIMIT 5");
 			GetProject($getProject, 2);
 
-			print ("</div>	<!--project close-->");
 			print ("</div>	<!--user_content close-->");
 			print ("<div id='user_content2'>");
 			print ("<span id='close' onclick='Close()'><u>Close</u></span>");
