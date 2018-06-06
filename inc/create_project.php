@@ -26,6 +26,7 @@ Collaborate 2017-2018
 					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
 						<label for="pro_name">Name of Project</label>
 						<input type="text" name="pro_name" size="" placeholder="Name" ><br /><br />
+						<div id="select">
 						<label for="Choices">Select a Category</label><br/>
 						<select name="Choices">
 							<option value="None">None</option>
@@ -38,7 +39,23 @@ Collaborate 2017-2018
 							<option value="Growing">Growing</option>
 							<option value="Other">Other</option>
 						</select>
-						<br/><br/>
+						</div>
+						<div id="select2">
+						    <label for="Choices">Enter Category (i.e. Application, Art)</label><br/>
+							<input list="type" name="Choices">
+							<datalist id="type">
+								<option value="None">
+								<option value="Music">
+								<option value="Art">
+								<option value="Applications">
+								<option value="Web">
+								<option value="Writing">
+								<option value="Building">
+								<option value="Growing">
+								<option value="Other">
+							</datalist>
+						</div>
+						<br/>
 						<label for="projectAttach">Upload Image</label><br/>
 						<input type="file" name="projectAttach" >
 						<br/><br/>

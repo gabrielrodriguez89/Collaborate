@@ -54,10 +54,9 @@ function GetProject($project, $i)
 	{
 		//open connection
 		$con = Connect();
-		//mysqli_query database
 		$getProject = mysqli_query($con, $project);
 		//try parsing mysqli_query
-		if($getProject)
+		if($numrows = mysqli_num_rows($getProject) > 0)
         {
 			//loop to display all results of posted projects and users
 	        while($row = mysqli_fetch_assoc($getProject))
@@ -168,6 +167,16 @@ function GetProject($project, $i)
 				}
 			}
 		}
+		else
+		{
+			if($i == 2)
+			{
+				print ("<div id='no_project'>");
+			    print ("<h1>There are no projects to display</h1>");
+				print ('<img src="./../img/no_proj.png" alt="no project" />');
+				print ("</div>");
+			}
+		}
 	}
 	catch (Exception $e)
 	{
@@ -263,18 +272,17 @@ function UploadNewImage($username)
 }
 
 //get messages in inbox/outbox/deleted
-function GetMessages($grab_messages, $x)
+function GetMessages($messages, $x)
 {
 	try
 	{
 		$con = Connect();
-        
 		$sub = "";
 
-		if ($get_messages = mysqli_query($con, $grab_messages))
+		if ($get_messages = mysqli_query($con, $messages))
 		{
 			$numrows_read = mysqli_num_rows($get_messages);
-			while ($get_msg = mysqli_fetch_assoc($grab_messages))
+			while ($get_msg = mysqli_fetch_assoc($get_messages))
 			{
 				$id = $get_msg['id'];
 				$from_user = $get_msg['from_user'];
@@ -287,7 +295,7 @@ function GetMessages($grab_messages, $x)
 
 				if(strlen($msg) < 1)
 				{
-					//skip umpty messages
+					//skip empty messages
 				}
 				else
 				{
@@ -422,7 +430,7 @@ function ShowFilter()
     print ('</div><br/><br/>');
     print ('<div id="hr"></div>');
     print ('</div><br/>');
-    print ('<div class="bgstyle">');
+    
 }
 //update users information POST from form in change_bio.php
 function UpdateUser()
@@ -466,9 +474,7 @@ function ShowBody($k)
 	{
 		  $username = $_SESSION['username'];
 		  $pic = $_SESSION['get_user_pic'] ;
-		  $color = $_SESSION['color'];
 	}
-
 	switch ($k) 
 	{
 		case '0':
@@ -482,7 +488,7 @@ function ShowBody($k)
 			print ("</div>");
 		  break;
 		case '1':
-			print ("<body onload='Chameleon($color)'>");
+			print ("<body>");
 			print ("<div id='headerMenu'>");
 			print ("<div id='menu'>");
 			print ("<div id='logo'>");
@@ -511,9 +517,11 @@ function ShowBody($k)
 			print ("<div class='dropdown2'>");
 			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn" onclick="DropDown()">');
 			print ('<div id="dropdown-content">');
-			print ("<a href='manage_account.php'  class='a'><img id='signout2' src='./../img/settings.png' alt='Logout'/>Settings</a>");
+			print ("<a href='otherusers.php'><img id='signout2' src='./../img/no-photo3.png' alt='Other Users'/><span id='txt'>People</span></a>");
 			print ("<hr id='hr'/>");
-			print ("<a href='logout.php' class='a'><img id='signout2' src='./../img/signout.png' alt='Logout'/>Logout</a>");
+			print ("<a href='manage_account.php'><img id='signout2' src='./../img/settings.png' alt='Logout'/><span id='txt'>Settings</span></a>");
+			print ("<hr id='hr'/>");
+			print ("<a href='logout.php'><img id='signout2' src='./../img/signout.png' alt='Logout'/><span id='txt'>Logout</span></a>");
 			print ('</div>');
 			print ("</div>");
 			print ("</div>");
@@ -526,13 +534,14 @@ function ShowBody($k)
 			print ("<hr id='hr'/>");
 			print ("<a href='profile.php?u=$username'><img id='pic2' src='$pic' alt='$username'/><span id='txt'>Profile</span></a>");
 			print ("<hr id='hr'/>");
+			print ("<a href='otherusers.php'><img id='people2' src='./../img/no-photo3.png' alt='Other Users'/><span id='txt'>People</span></a>");
+			print ("<hr id='hr'/>");
 			print ("<a href='manage_account.php'><img id='manage2' src='./../img/settings.png' alt='Settings' /><span id='txt'>Settings</span></a>");
 			print ("<hr id='hr'/>");
 			print ("<a href='logout.php'><img id='signout2' src='./../img/signout.png' alt='Logout'/><span id='txt'>Logout</span></a>");
 			print ("</div>");
 			print ("</div>");
 			print ("</div>");
-			
 			print ('</div>');
 		  break;
 		default:
@@ -545,7 +554,6 @@ function ShowBody($k)
 		    print ("<div class='menuItem'>");
 		    print ("</div>");
 		    print ("</div>");
-			print ("</div>");
 		  break;
 	}
 }
@@ -574,22 +582,16 @@ function GetProfilePic($user)
 		//open database connection
 		$con = Connect();
 		//mysqli_query database for image
-		$check_pic = mysqli_query($con, "SELECT user_picture FROM profile_pictures WHERE user='$user'");
-		$get_pic_row = mysqli_fetch_assoc($check_pic);
-		$profile_pic_db = $get_pic_row['user_picture'];
-
-    //display "NoPhoto.PNG" if user has no photo
-		if ($profile_pic_db == NULL)
+		$check_pic = "SELECT user_picture FROM profile_pictures WHERE user='$user'";
+		if($get_pic = mysqli_query($con, $check_pic))
+		{
+			$get_pic_row = mysqli_fetch_assoc($get_pic);
+			$profile_pic_db = $get_pic_row['user_picture'];
+        }
+		else
 		{
 			//print ("<img src='img/no_photo.png' alt='No photo to show'  >");
 			print ("<img src='./../img/no-photo.png' alt='No photo to show'  >");
-		}
-		else
-		{
-			$profile_pic = $profile_pic_db;
-			print ("<div id='proPic'>");
-			print ("<img src='$profile_pic' alt='Profile Picture for $user'  >");
-			print ("</div>");
 		}
 		$con = NULL;
 	}
@@ -603,7 +605,7 @@ function CountPosts()
 {
 	if(isset($_SESSION['username']))
 	{
-			$username = $_SESSION['username'];
+		$username = $_SESSION['username'];
 	}
 	try
 	{
@@ -638,13 +640,18 @@ function GetBio($bio)
 			$user = $row['username'];
 			$fname = $row['first_name'];
 			$lname = $row['last_name'];
-			$age = $row['age'];
+			$date = $row['age'];
 			$city = $row['city'];
 			$state = $row['state'];
 			$hobbies = $row['hobbies'];
 			$interest = $row['interest'];
 			$user_bio = $row['bio'];
 		}
+		$date1 = new DateTime($date);
+		$date2 = new DateTime("now");
+		$date3 = $date1->diff($date2);
+		$age = $date3->y;
+		
 		print ("<div id='me'>");
 		print ("<h1>$fname&nbsp$lname</h3><br/><br/>");
 		print ("<h3>Age:&nbsp$age</h3><br/>");
@@ -739,17 +746,21 @@ function OtherUsers($query)
 				$user = $row['username'];
 				$fname = $row['first_name'];
 				$lname = $row['last_name'];
-				$age = $row['age'];
+				$date = $row['age'];
 				$city = $row['city'];
 				$state = $row['state'];
 				$pic = $row['profile_pic'];
 
-				print ("<a href='$user?u=$user'>");
+				print ("<a href='./profile.php?u=$user'>");
 				print ("<div id='profile2'>");
-
+				$date1 = new DateTime($date);
+				$date2 = new DateTime("now");
+				$date3 = $date1->diff($date2);
+				$age = $date3->y;
+		
 				if ($pic == "")
 				{
-					print("<div id='proPic3'>");
+					print("<div id='proPic4'>");
 					print("<img src='./../img/no-photo.png' alt='Profile Picture '  >");
 					print("</div>");
 				}
@@ -760,11 +771,10 @@ function OtherUsers($query)
 					print("</div>");
 				}
 
-				print("<div class='profileLeftContent'>");
+				print("<div class='profileLeftContent2'>");
 				print("<div id='userInfo'>");
 				print("<h1>$fname&nbsp$lname</h1><br/><br/>");
 				print("<h3>$age&nbsp&nbsp&nbsp$city,&nbsp$state</h3>");
-				print("<br><br>");
 				print("</div>");
 				print("</div>");
 				print("</div></a>");

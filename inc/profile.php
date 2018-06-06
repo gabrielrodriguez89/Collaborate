@@ -24,7 +24,7 @@ profile it will be displayed without editing options.
 	is the profile page owner. If not display alternate view without
 	edit abilities.
 	*/
-
+	
 	if (isset($_GET['u']))
     {
 		try
@@ -54,9 +54,14 @@ profile it will be displayed without editing options.
 		//compare user to the current session
 		if($username == $user)
 		{
+			$date1 = new DateTime($user_age);
+			$date2 = new DateTime("now");
+			$date3 = $date1->diff($date2);
+			$age = $date3->y;
+			
 			print ("<div id='profileButtons'>");
 			print ("<div id='minProfile' onclick='ShowProfile()'>");
-			print ("<img src='./../img/no-photo.png' alt='profile' id='pro-ico'/><h1>Profile</h1>");
+			print ("<img src='./../img/no-photo2.png' alt='profile' id='pro-ico'/><h1>Profile</h1>");
 			print ("</div>");
 			print ('<hr id="hr2"/>');
 			print ("<div id='minProject' onclick='ShowProject()'>");
@@ -81,7 +86,7 @@ profile it will be displayed without editing options.
 			print ("<div id='proPic2'>");
 			print ("<br>");
 			print ("<form action='#' method='post' enctype='multipart/form-data'>");
-			print ("<input type='file' name='fileToUpload' id='fileToUpload'><br><br>");
+			print ("<input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>");
 			print ("<input id='btn' type='submit' name='upload' value='Save'>");
 			print ("<small onclick='NoUpload()'>Cancel</small>");
 			print ("</form>");
@@ -89,16 +94,15 @@ profile it will be displayed without editing options.
 			//upload profile picture if non exist
 			if (isset($_POST['upload']))
 			{
-				
 				UploadNewImage($username);
 			}
 			print ("<a href='./change_bio.php' ><div class='profileheading2'>");
-			print ("<img id='Edit' src='./../img/Edit.png' alt='Edit' /><h3>Edit</h3>");
+			print ("<img id='Edit' src='./../img/Edit.gif' alt='Edit' /><h3>Edit</h3>");
 			print ("</div></a>");
 			print ("<div class='profileLeft'>");
 			print ("<div id='me'>");
 			print ("<h1>$user_fname&nbsp$user_lname</h1><br/><br/>");
-			print ("<h3>Age:&nbsp$user_age</h3><br/>");
+			print ("<h3>Age:&nbsp$age</h3><br/>");
 			print ("<h3>Location:&nbsp$user_city_,&nbsp$user_state_</h3><br/>");
 			print ("<h3>Hobbies:&nbsp$user_hobbies</h3><br/>");
 			print ("<h3>Interest:&nbsp$user_interest</h3><br/>");
@@ -118,24 +122,19 @@ profile it will be displayed without editing options.
 			print ('<h1>Projects</h1>');
 			print ('</div>');
 			print ("<div id='bgstyle2'>");
-
 			print ("<div id='projectMain'>");
 			print ("<div class='profileLeftContent'>");
-
 			
 		    $total = CountPosts();
 			//remove option to add project if limit reached
-			if($total >= 5)
-			{
-
-			}
-			else
+			if(!$total >= 5)
 			{
 				print ('<a href="create_project.php"><div id="add">');
-				print ('<img id="" src="./../img/add.png" alt="Add" /><h3>Add</h3>');
+				print ('<img id="" src="./../img/add.gif" alt="Add" /><h3>Add</h3>');
 				print ('</div></a>');
 				print ('<hr id="hr"/>');
 			}
+		
 			//get and display the users projects and display them in small window
 			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `username`='$username' ORDER BY `id` LIMIT 5");
 			GetProject($getProject, 1);
@@ -144,7 +143,7 @@ profile it will be displayed without editing options.
 			print ("<br/>");
 			print ("</div><!--projectmain close-->");
 			print ("<div class='projects'>");
-			print ("<div id='user_content' >");
+			print ("<div id='user_content'>");
 
 			//get projects and set them in separate div elements for full display
 			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `username`='$username' ORDER BY `id` LIMIT 5");
@@ -165,8 +164,6 @@ profile it will be displayed without editing options.
 			print ("</div><!--bgstyle close-->");
 			print ("<br/>");
 		}
-	
-
 		//if the profile being viewed belongs to someone else display this
 		else
 		{
@@ -177,22 +174,21 @@ profile it will be displayed without editing options.
 			//get users picture from database
 			GetProfilePic($user_name);
 			print("<br>");
-			print ("<div class='profileLeftContent'>");
+			print ("<div class='profileLeft'>");
 			//get users bio from database
-			$getBio = ("SELECT * FROM `collaborate`.`users` WHERE `username`='$user'");
+			$getBio = ("SELECT * FROM `collaborate`.`users` WHERE `username`='$user_name'");
 			GetBio($getBio);
 
 			print ("<br/>");
-			print ("<div class='bgstyle2'>");
+			print ('<div id="projectheading">');
+			print ('<h1>Projects</h1>');
+			print ('</div>');
+			print ("<div id='bgstyle2'>");
 			print ("<div id='projectMain'>");
-			print ("<div class='profileheading'>");
-			print ("<h2 id='bio'>Projects</h2>");
-			print ("</div>");
-			print ("<br/>");
 			print ("<div class='profileLeftContent'>");
 
 			//get and display the users projects and display them in small window
-			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `username`='$username' ORDER BY `id` LIMIT 5");
+			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `username`='$user_name' ORDER BY `id` LIMIT 5");
 			GetProject($getProject, 1);
 
 			print ("</div><!--profileleftcontent close-->");
@@ -202,7 +198,7 @@ profile it will be displayed without editing options.
 			print ("<div id='user_content' >");
 
 			//get projects and set them in separate div elements for full display
-			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `username`='$username' ORDER BY `id` LIMIT 5");
+			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `username`='$user_name' ORDER BY `id` LIMIT 5");
 			GetProject($getProject, 2);
 
 			print ("</div>	<!--project close-->");
@@ -214,7 +210,7 @@ profile it will be displayed without editing options.
 
 			//get comments for profile
 			//get comments for profile
-			$getPost = ("SELECT * FROM posts WHERE user_posted_to='$username' ORDER BY id DESC LIMIT 10");
+			$getPost = ("SELECT * FROM posts WHERE user_posted_to='$user_name' ORDER BY id DESC LIMIT 10");
 			GetPosts($getPost);
 
 			print ("</div><!--projects close-->");

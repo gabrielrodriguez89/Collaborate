@@ -5,7 +5,7 @@
 	{
 		Header("Location: ./../index.php");
 	}
-    ShowFilter();
+    print ('<div class="bgstyle3">');
     
 	if(isset($_GET['query']))
 	{
@@ -64,8 +64,6 @@
 		$query =  "SELECT * FROM users WHERE state='$user_state_' OR city='$user_city_'";
 	    OtherUsers($query);
 	}
-
-    print("</div><br/>");
-
+    print ("</div>");
     _html_end();
 ?>

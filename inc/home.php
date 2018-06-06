@@ -12,14 +12,12 @@ the project for others.
 <?php
     include "./header.php";
 
+	print ('<div class="bgstyle">');
+	
 	if(!isset($_SESSION['username']))
 	{
 		Header("Location: ./../index.php");
 	}
-//filter and query function to support users search and filter menu
-    ShowFilter();
-
-   
 //get user from url and retrieve data from database
 	if(isset($_GET['query']))
 	{
@@ -74,6 +72,6 @@ the project for others.
 		$getProject = ("SELECT * FROM `collaborate`.`projects`  WHERE `city`='" . $_SESSION['user_city_'] . "' OR `state`=' " . $_SESSION['user_state_'] . "'");
         GetProject($getProject, 0);
 	}
-   
+   print ("</div>");
    _html_end();
 ?>
