@@ -37,23 +37,32 @@
 #proPic2 {
 	position: relative;
 	top: 0;
-	width: 50%;
+	width: 100%;
 	height: 150px;	
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 20px;
-	padding: 10px;
 	display: none;
+	background-color: #D8D8D8;
+	padding: 5px;
+	border-radius: 4px;
+	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#proPic2 input[type="file"]{
+	border: 2px solid #C2C2C2;
 }
 #proPic2 input[type="submit"]{
-	width: 50%;
+	width: 40%;
+	font-size: 8pt;
 	position: absolute;
 	left: 0;
 }
 #proPic2 small {
 	position:absolute;
-	right: 0;
-	top: 70%;
+	right: 20px;
+	top: 80%;
 	color: #282828;
 }
 #proPic2 small:hover {
@@ -103,13 +112,12 @@ fileLeftContent {
 	margin-right: auto;
 }
 .profileLeftContent div{
-	height: 50px;
+	height: 70px;
 	text-align: center;
 	padding: 10px;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #585858;
-	opacity: 1;
 	transition-timing-function: ease-in-out;
 	-webkit-transition-duration: .5s;
 	transition-duration: .5s;
@@ -134,15 +142,37 @@ fileLeftContent {
 	font-size: 8pt;
 	font-weight: bold;
 	opacity: .7;
-	
+}
+.profileLeftContent2 div{
+	height: 80px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	transition-timing-function: ease-in-out;
+	-webkit-transition-duration: .5s;
+	transition-duration: .5s;
+}
+.profileLeftContent2 h1 {
+	text-align: center;
+	color: #585858;
+	font-size: 10pt;
+	font-weight: bold;
+
+}
+.profileLeftContent2 h3 {
+	text-align: center;
+	color: #585858;
+	font-size: 8pt;
+	font-weight: bold;
+	opacity: .7;
 }
 .projects {
-	position: relative;
-    left: 5%;
 	width: 65%;
     min-height: 300px;
     margin-bottom: 25px;
+	margin-top: 10%;
 	overflow: auto;
+	padding: 10px;
 }
 #user_content {
 	overflow: auto;
@@ -197,12 +227,24 @@ fileLeftContent {
 	width: 80%;
 	text-align: justify;
 	overflow: auto;
+	margin-bottom: 20px;
 }
 #me h1{
-    margin-left: 20px;
+    margin-top: 10px;
 	width: 80%;
 	text-align: center;
 	overflow: auto;
+}
+#no_project {
+	margin-left: auto;
+	margin-right: auto;
+}
+#no_project img{
+	background-color: none;
+	border-radius: 0;
+	margin-left: 25%;
+	margin-right: auto;
+	opacity: .8;
 }
 #userInfo {
 	width: 70%;
@@ -343,7 +385,10 @@ fileLeftContent {
     opacity: .7;
 }
 #profile2 {
-	overflow: none;
+	margin-left: 20px;
+	height: auto;
+	width: 200px;
+
 }
 #profile2 h1{
 	margin-left: 5px;
@@ -352,27 +397,10 @@ fileLeftContent {
 	height: 150px;
 	width: 100%;
 }
-#profile2 button {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	margin: 0;
-	border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: #FFFFFF;
-    text-align: ;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-	background-color: #282828;
-}
-#profile2 button:hover {
-	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    opacity: .7;
+#proPic4 img{
+	height: 150px;
+	width: 80%;
+	padding: 10px;
 }
 #buttons {
 	background-color:#282828;
