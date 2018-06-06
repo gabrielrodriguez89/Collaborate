@@ -278,28 +278,10 @@ area
 
 	
 	<div class="bgstyleIndex">
-    <!--
-    Container with images and text
-    -->
-		<br/><br/>
-		<div class="photos">
-			<img id="img1" src="img/intro_pic_1.jpg" alt="" >
-			<img id="img2" src="img/intro_pic_2.jpg" alt="" >
-			<img id="img3" src="img/intro_pic_3.jpg" alt="" >
-			<img id="img4" src="img/intro_pic_4.jpg" alt="" >
-			<img id="img5" src="img/intro_pic_5.jpg" alt="" >
-			<img id="img6" src="img/intro_pic_6.jpg" alt="" >
-			<img id="img7" src="img/intro_pic_7.jpg" alt="" >
-			<div class="container">
-				<h1 id="jumbo"><img src="img/slide1.png"></h1>
-				<h1 id="jumbo1"><img src="img/slide2.png"></h1>
-				<h1 id="jumbo2"><img src="img/slide3.png"></h1>
-				<h1 id="jumbo3"><img src="img/slide4.png"></h1>
-				<h1 id="jumbo4"><img src="img/slide5.png"></h1>
-				<h1 id="jumbo5"><img src="img/slide6.png"></h1>
-			</div>
-		</div>
-		<br/><br/>
+		<p>Where ideas bring us together to 
+		meet like-minded individuals helping you to achieve your creative dreams.
+		Join Collaborate and bring your project to life.
+		</p>
 	</div>
 
 <?php
