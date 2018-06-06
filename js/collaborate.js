@@ -63,187 +63,7 @@ function NoUpload()
 	document.getElementById('proPic').style.display = 'block';
     document.getElementById('proPic2').style.display = 'none';
 }
-//toggles between the different projects requires 2 int
-//multiple switch statements depending on the amount of projects
-function ShowProject(control, id)
-{
-	if(control == 0)
-	{
 
-	}
-	else
-		if(control == 1)
-	    {
-		    document.getElementById("project1").style.display = "block";
-	    }
-	else
-		if(control == 2)
-		{
-			switch(id)
-	        {
-				case 1:
-					document.getElementById("project2").style.display = "none";
-					document.getElementById("project1").style.display = "block";
-				  break;
-				case 2:
-					document.getElementById("project1").style.display = "none";
-					document.getElementById("project2").style.display = "block";
-				  break;
-			}
-		}
-	else
-		if(control == 3)
-		{
-			switch(id)
-			{
-				case 1:
-					document.getElementById("project2").style.display = "none";
-					document.getElementById("project3").style.display = "none";
-					document.getElementById("project1").style.display = "block";
-				  break;
-				case 2:
-					document.getElementById("project1").style.display = "none";
-					document.getElementById("project3").style.display = "none";
-					document.getElementById("project2").style.display = "block";
-				  break;
-				case 3:
-					document.getElementById("project1").style.display = "none";
-					document.getElementById("project2").style.display = "none";
-					document.getElementById("project3").style.display = "block";
-				  break;
-		    }
-		}
-	else
-		if(control == 4)
-		{
-			switch(id)
-			{
-				case 1:
-					document.getElementById("project3").style.display = "none";
-					document.getElementById("project2").style.display = "none";
-					document.getElementById("project4").style.display = "none";
-					document.getElementById("project1").style.display = "block";
-				  break;
-				case 2:
-					document.getElementById("project1").style.display = "none";
-					document.getElementById("project3").style.display = "none";
-					document.getElementById("project4").style.display = "none";
-					document.getElementById("project2").style.display = "block";
-				  break;
-				case 3:
-					document.getElementById("project1").style.display = "none";
-					document.getElementById("project2").style.display = "none";
-					document.getElementById("project4").style.display = "none";
-					document.getElementById("project3").style.display = "block";
-				  break;
-				case 4:
-					document.getElementById("project1").style.display = "none";
-					document.getElementById("project2").style.display = "none";
-					document.getElementById("project3").style.display = "none";
-					document.getElementById("project4").style.display = "block";
-				  break;
-			}
-		}
-	else
-	{
-		switch(id)
-		{
-			case 1:
-				document.getElementById("project3").style.display = "none";
-				document.getElementById("project2").style.display = "none";
-				document.getElementById("project4").style.display = "none";
-				document.getElementById("project5").style.display = "none";
-				document.getElementById("project1").style.display = "block";
-			  break;
-			case 2:
-				document.getElementById("project1").style.display = "none";
-				document.getElementById("project3").style.display = "none";
-				document.getElementById("project4").style.display = "none";
-				document.getElementById("project5").style.display = "none";
-				document.getElementById("project2").style.display = "block";
-			  break;
-			case 3:
-				document.getElementById("project1").style.display = "none";
-				document.getElementById("project2").style.display = "none";
-				document.getElementById("project4").style.display = "none";
-				document.getElementById("project5").style.display = "none";
-				document.getElementById("project3").style.display = "block";
-			  break;
-			case 4:
-				document.getElementById("project1").style.display = "none";
-				document.getElementById("project2").style.display = "none";
-				document.getElementById("project3").style.display = "none";
-				document.getElementById("project5").style.display = "none";
-				document.getElementById("project4").style.display = "block";
-			  break;
-			case 5:
-				document.getElementById("project1").style.display = "none";
-				document.getElementById("project2").style.display = "none";
-				document.getElementById("project3").style.display = "none";
-				document.getElementById("project4").style.display = "none";
-				document.getElementById("project5").style.display = "block";
-			  break;
-		}
-	}
-}
-//landing page images and text alternate automatically
-function read()
-{
-	var w = window.innerWidth
-    || document.documentElement.clientWidth
-    || document.body.clientWidth;
-
-    var h = window.innerHeight
-    || document.documentElement.clientHeight
-    || document.body.clientHeight;
-		document.body.style.height = h;
-		document.body.style.width = w;
-
-    var time = setInterval(display, 4500);
-    var count = 0;
-
-    function display()
-		{
-      if(count < 4)
-		{
-			switch(count)
-			{
-				case 0:
-				    document.getElementById('jumbo').style.display = 'none';
-					document.getElementById('jumbo1').style.display = 'block';
-					document.getElementById('img5').style.display = 'none';
-        	        document.getElementById('img2').style.display = 'block';
-				break;
-				case 1:
-				    document.getElementById('jumbo1').style.display = 'none';
-					document.getElementById('jumbo2').style.display = 'block';
-					document.getElementById('img2').style.display = 'none';
-                    document.getElementById('img3').style.display = 'block';
-				break;
-				case 2:
-				    document.getElementById('jumbo2').style.display = 'none';
-					document.getElementById('jumbo3').style.display = 'block';
-					document.getElementById('img3').style.display = 'none';
-                    document.getElementById('img7').style.display = 'block';
-			    break;
-				case 3:
-				    document.getElementById('jumbo3').style.display = 'none';
-					document.getElementById('jumbo4').style.display = 'block';
-					document.getElementById('img7').style.display = 'none';
-                    document.getElementById('img6').style.display = 'block';
-				break;
-			}
-			count++;
-    }
-		else
-		{
-			document.getElementById('img6').style.display = 'none';
-            document.getElementById('img4').style.display = 'block';
-			document.getElementById('jumbo4').style.display = 'none';
-			document.getElementById('jumbo5').style.display = 'block';
-		}
-	}
-}
 //opens comments
 function Comments()
 {
@@ -364,20 +184,20 @@ function toggle(id)
 //toggles message views to open and close messages
 function Show(id)
 {
-
+    localStorage.setItem("last", id);
     var proj = document.getElementById("project" + id);
 	var pro2 = document.getElementById("showPro" + id);
 	
-    if (proj.style.display == "block")
+	if (proj.style.display == "block")
 	{
 		proj.style.display = "none";
 		pro2.style.backgroundColor = "#585858";
-    }
-    else
-    {
-        proj.style.display = "block";
+	}
+	else
+	{
+		proj.style.display = "block";
 		pro2.style.backgroundColor = "#282828";
-    }
+	}
 }
 function ShowProfile()
 {
@@ -387,6 +207,7 @@ function ShowProfile()
 	var pro4 = document.getElementById("minProject");
 	var pro5 = document.getElementById("projectheading");
     var pro6 = document.getElementById("pro-ico");
+	var pro7 = document.getElementById("proj-ico");
 	
 	if (pro.style.display == "block")
 	{
@@ -408,6 +229,7 @@ function ShowProfile()
         pro4.style.marginBottom = "0px";
 		pro5.style.display = "none";
 		pro6.src = "./../img/no-photo2.png";
+		pro7.src = "./../img/project.png";
     }
 }
 function ShowProject()
@@ -418,6 +240,7 @@ function ShowProject()
 	var pro4 = document.getElementById("minProfile");
 	var pro5 = document.getElementById("projectheading");
 	var pro6 = document.getElementById("proj-ico");
+	var pro7 = document.getElementById("pro-ico");
 	
     if (pro.style.display == "flex")
 	{
@@ -440,6 +263,7 @@ function ShowProject()
         pro4.style.marginBottom = "0px";
 		pro5.style.display = "block";
 		pro6.src = "./../img/project2.png";
+		pro7.src = './../img/no-photo.png'
     }
 }
 function DropDown()
@@ -490,7 +314,7 @@ function SearchBar()
 	var btn3 = document.getElementById("dropbtn2");
 	var btn4 = document.getElementById("hideMenu");
 	var btn5 = document.getElementById("img");
-	var btn6 = document.getElementById("img2");
+	var btn6 = document.getElementById("img8");
 	
 	if (btn.style.display == "block")
 	{
@@ -511,7 +335,6 @@ function SearchBar()
 		btn6.style.display = "block";
 	}
 }
-
 function HomeOver()
 {
 	document.getElementById('home').src = './../img/home_hover.png';
