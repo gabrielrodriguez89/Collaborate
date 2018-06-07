@@ -1,4 +1,12 @@
+/*
+@Author: Gabriel Rodriguez
+Page: StyleSheet
+Date: 6/6/2018
+Project: Collaborate
 
+This CSS was written for Collaborate 2017-2018
+
+*/
 @media only screen and (max-width: 768px) {
 	#headerMenu {
 		position: -webkit-sticky;
@@ -523,7 +531,6 @@
 		width: 40%;
 
 	}
-	
 }
 @media screen and (min-width: 769px) {
 	#headerMenu {
@@ -542,7 +549,7 @@
 		margin-left: auto;
 		width: 50%;
 		margin-bottom: 10px;
-		height: auto;
+		height: 100%;
 		background-color: #FFFFFF;
 		padding: 20px;
 		display: ;
@@ -582,10 +589,10 @@
     }
     .bgstyleIndex {
 		margin-top: 5%;
-		width: 30%;
-		margin-left: auto;
+		width: 50%;
+		margin-left: 35%;
 		margin-right: auto;
-		padding:15px;
+		padding:20px;
 		height: 300px;
 		margin-bottom: 20px;
 		display: flex-wrap;
@@ -697,6 +704,9 @@
 		height: 50px;
 		width: 50px;
 	}
+	#img {
+		margin-top: 2px;
+	}
 	#img:hover .tooltip {
 		visibility: visible;
 		margin-left: -30px;
@@ -775,9 +785,9 @@
 		float: left;
 		position: -webkit-sticky;
 		position: sticky;
-		top: 10%;
+		top: 12%;
 		margin-left: 2%;
-		width: 20%;
+		width: 25%;
 	}
 	#signIn {
 		display: none;
@@ -960,7 +970,7 @@
 		width: 90%;
 		margin-left: auto;
 		margin-right: auto;
-		background-color: #E8E8E8;
+		background-color: #D8D8D8;
 		clear: both;
 		height: 1px;
 		display: flex;
@@ -969,7 +979,16 @@
 		width: 90%;
 		margin-left: auto;
 		margin-right: auto;
-		background-color: #E8E8E8;
+		background-color: #D8D8D8;
+		clear: both;
+		height: 1px;
+		display: flex;
+	}
+	#hr-left{
+		width: 80%;
+		margin-left: 0;
+		margin-right: auto;
+		background-color: #D8D8D8;
 		clear: both;
 		height: 1px;
 		display: flex;
@@ -1004,9 +1023,8 @@
 		right: 0;
 		top: 0;
 		width: 40px;
-		height: 40px;
+		height: 35px;
 		margin: 0;
-		
 	}
 	#img8 {
 		position: absolute;
@@ -1082,10 +1100,10 @@
 		left: 10%;
 	}
 	#select2 {
-		display: none;
+		display: block;
 	}
 	#select {
-		display: block;
+		display: none;
 	}
 }
 * {
@@ -1327,6 +1345,16 @@ h2, #in {
 td {
 	width: 100%;
 }
+#draft {
+	float: left;
+    margin-top: 30px;
+	border-radius: none;
+}
+#draft-2 #showMsg{
+	width: 90%;
+	margin-left: 5%;
+	display: flex-wrap;
+}
 form input[type="submit"] {
 	font-weight: bold;
 	background-color: #282828;
@@ -1334,20 +1362,15 @@ form input[type="submit"] {
 	border: 2px solid #D8D8D8;
 	font-size: 16px;
 	padding:8px;
-	width: 108%;
+	width: 100%;
 	resize: vertical;
 }
-form input{
+form input, textarea, select{
+	border-radius: 4px;
 	border: 1px solid #D8D8D8;
 	font-size: 12px;
 	padding: 10px;
 	width: 100%;
-	outline: none;
-	resize: vertical;
-	border-radius: 4px;
-}
-form input, textarea, select{
-	border-radius: 4px;
 }
 #showProject {
 	font-weight: bold;
@@ -1391,7 +1414,10 @@ form input, textarea, select{
 	font-family: roboto, arial, helvetica, sans-serif;
 	font-size: 1.3em;
 }
-
+#newProject h1{
+	font-size: 16pt;
+	font-weight: bold;
+}
 #project1 {
 	height: auto;
 	display: none;
@@ -1554,7 +1580,7 @@ form input, textarea, select{
 	border: 1px solid #E8E8E8;
 }
 #newUser textarea{
-	width: 102%;
+	width: 100%;
 	height: 50px;
 	border: 1px solid #C0C0C0;
 }
@@ -1562,40 +1588,22 @@ form input, textarea, select{
 	border: 1px solid #282828;
 
 }
-/*
-
-footer start
-
-*/
 #footer {
     margin-top: 92%;
 	margin-left:5%;
 	font-weight: bold;
 	color: #585858;
 }
-/*
-
-footer end
-
-*/
-
-/*
-
-header start
-
-*/
 #menu {
 	width: 100%;
 	height: 60px;
 	display: flex;
 }
-
 #user:hover {
 	opacity: .8;
 	height: 40px;
 	width: 40px;
 }
-
 .userPic {
 	float: left;
 	margin-top: 3px;
@@ -1606,23 +1614,6 @@ header start
 	border-radius: 50%;
 	margin-right: auto;
 }
-/*
-
-header end
-
-*/
-
-/*
-
-index start
-
-*/
-
-/*
-
-SignIn start
-
-*/
 #in:hover {
 	color: #282828;
 	font-size: 22px;
@@ -1632,22 +1623,6 @@ SignIn start
 	color: red;
 	font-size: 16px;
 }
-/*
-
-SignIn end
-
-*/
-/*
-
-index end
-
-*/
-
-/*
-
-change_bio start
-
-*/
 #changeAbout {
 	margin: 0;
 	height: 90%;
@@ -1663,6 +1638,13 @@ change_bio start
 	height: 90%;
 	width: 60%;
 }
+#changeAbout2 a{
+	margin-left: 60%;
+}
+#changeAbout2 h1{
+	font-size: 16pt;
+	font-weight: bold;
+}
 #changeAbout label {
 	padding: 0;
 	margin: 0;
@@ -1673,35 +1655,33 @@ change_bio start
 	height: 40px;
 	margin: 10px;
 }
-#changeAbout input[type="text"]:hover, [type="submit"]:hover, [type="date"]:hover{
-	border: 1px solid #282828;
-}
 #changeAbout textarea{
-	width: 102%;
+	width: 100%;
 	height: 90px;
 	padding: 12px 20px;
     box-sizing: border-box;
     border-radius: 4px;
     resize: none;
-	border: 1px solid #E8E8E8;
-}
-#changeAbout textarea:hover{
-	border: 1px solid #282828;
 }
 #btn {
+	width: 25%;
+	margin-top: 40px;
+	margin-left: 75%;
 	padding: 10px;
 }
-/*
-
-change_bio end
-
-*/
-
-/*
-
-create project start
-
-*/
+#btn2 {
+	width: 25%;
+	margin-top: 0px;
+	margin-right: 75%;
+	padding: 10px;
+	background-color: #ffffff;
+	border: none;
+	color: #585858;
+}
+#btn2:hover {
+	box-shadow: none;
+	opacity: .7;
+}
 #addProject {
 	margin-left: auto;
 	margin-right: auto;
@@ -1756,19 +1736,6 @@ create project start
 	width: 100%;
 	height: 100px;
 }
-
-/*
-
-create project end
-
-*/
-
-
-/*
-
-send_msg start
-
-*/
 .reply {
 	margin-left: auto;
 	margin-right: auto;
@@ -1777,24 +1744,29 @@ send_msg start
 }
 #sub {
 	width: 98.8%;
-	border: 1px solid #C0C0C0;
+	border: 1px solid #E8E8E8;
 }
-#message {
+.reply textarea {
 	width: 100%;
 	height: 400px;
-	border: 1px solid #C0C0C0;
+	border: 2px solid #D8D8D8;
+	resize: none;
+	color: #282828;
+	font-size: 12pt;
+	font-weight: bold;
+	text-align: justify;
 }
-/*
+.reply h1 {
+	font-size: 20pt;
+	color: #585858;
+	font-weight: bold;
+}
+.reply h2 {
+	color: #585858;
+	font-weight: bold;
+	text-align: justify;
+}
 
-send_msg end
-
-*/
-
-/*
-
-start home
-
-*/
 #search img {
 	margin: auto;
 	height: 100%;
@@ -1840,17 +1812,6 @@ start home
 	-webkit-box-shadow: 0 2px 5px 0 rgba(169, 169, 169, 0.4), 0 6px 8px 0 rgba(169, 169, 169, 0.14);
 	box-shadow: 0 2px 5px 0 rgba(169, 169, 169, 0.4), 0 6px 8px 0 rgba(169, 169, 169, 0.14);
 }
-/*
-
-stop home
-
-*/
-
-/*
-
-start inbox
-
-*/
 #showMsg {
 	margin-left: auto;
 	margin-right: auto;
