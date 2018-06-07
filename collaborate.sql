@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2018 at 11:01 AM
+-- Generation Time: Jun 07, 2018 at 03:00 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.35
 
@@ -94,15 +94,25 @@ INSERT INTO `projects` (`id`, `username`, `project_name`, `description`, `type_o
 
 CREATE TABLE `pvt_messages` (
   `id` int(11) NOT NULL,
-  `to_id` int(11) NOT NULL,
-  `from_id` int(11) NOT NULL,
+  `to_user` varchar(50) NOT NULL,
+  `from_user` varchar(50) NOT NULL,
   `date` date NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
+  `draft` enum('0','1') NOT NULL,
   `opened` enum('0','1') NOT NULL,
   `recipientDelete` enum('0','1') NOT NULL,
   `senderDelete` enum('0','1') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pvt_messages`
+--
+
+INSERT INTO `pvt_messages` (`id`, `to_user`, `from_user`, `date`, `subject`, `message`, `draft`, `opened`, `recipientDelete`, `senderDelete`) VALUES
+(11, 'buster', 'grod', '2018-06-06', '', 'hi', '0', '0', '1', '1'),
+(12, 'buster', 'grod', '2018-06-06', '', 'bro it worked', '1', '0', '0', '1'),
+(13, 'buster', 'grod', '2018-06-07', '', 'bro it worked', '1', '0', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -134,10 +144,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `sign_up_date`, `activated`, `bio`, `interest`, `hobbies`, `profile_pic`, `age`, `city`, `state`, `background`) VALUES
-(6, 'grod', 'Gabriel', 'Rodriguez', 'gabrielrodriguez89@outlook.com', '5f4dcc3b5aa765d61d8327deb882cf99', '2017-12-23', '0', 'do it', 'coding', 'sex', 0x2e2f2e2e2f75706c6f6164732f75736572646174612f757365725f70686f746f732f49676558304a5456685a484d5145362f416e6e69655f31362e6a7067, '0000-00-00', 'Denver', 'Colorado', ''),
+(6, 'grod', 'Gabriel', 'Rodriguez', 'gabrielrodriguez89@outlook.com', '5f4dcc3b5aa765d61d8327deb882cf99', '2017-12-23', '0', 'do it', 'coding', 'sex', 0x2e2f2e2e2f75706c6f6164732f75736572646174612f757365725f70686f746f732f49676558304a5456685a484d5145362f416e6e69655f31362e6a7067, '1989-05-20', 'Denver', 'Colorado', ''),
 (7, 'buster', 'dave', 'buster', 'bust@me.com', '5f4dcc3b5aa765d61d8327deb882cf99', '2018-01-10', '0', 'hfgshs', 'sghsgh', 'sghsgh', '', '0000-00-00', 'Denver', 'Colorado', ''),
-(8, 'adams', 'John', 'Adams', 'johnadams@yahoo.com', '5f4dcc3b5aa765d61d8327deb882cf99', '2018-01-25', '0', 'i like to move it move it', 'something', 'i like to move it', '', '0000-00-00', 'denver', 'colorado', ''),
-(11, 'grod', 'Gabriel', 'Rodriguez', 'gabriel@yahoo.com', '5f4dcc3b5aa765d61d8327deb882cf99', '2018-05-08', '0', 'do it', 'coding', 'sex', 0x2e2f2e2e2f75706c6f6164732f75736572646174612f757365725f70686f746f732f584e45466b6156667065535a4349742f416e6e69655f31362e6a7067, '0000-00-00', 'Denver', 'Colorado', '');
+(8, 'adams', 'John', 'Adams', 'johnadams@yahoo.com', '5f4dcc3b5aa765d61d8327deb882cf99', '2018-01-25', '0', 'i like to move it move it', 'something', 'i like to move it', '', '0000-00-00', 'denver', 'colorado', '');
 
 --
 -- Indexes for dumped tables
@@ -187,7 +196,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `pvt_messages`
 --
 ALTER TABLE `pvt_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
