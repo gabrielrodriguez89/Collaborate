@@ -131,33 +131,29 @@ function sendPost(id)
     newHTTP.send();
 }
 //change ENUM to 0 in database for user messages
-function RestoreMsg()
+function RestoreMsg(id)
 {
 	var newHTTP = new XMLHttpRequest();
-	var url = "restore_msg.php";
-	var msg = document.getElementById("restore").value;
-	document.getElementById("" + msg).style.display = "none";
-    var restore = "restore=" + msg;
-	newHTTP.open("POST", url, true);
-    newHTTP.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	document.getElementById(id).style.display = "none";
+	var url = "restore_msg.php?id=" + id;
+	newHTTP.open("GET", url, true);
     newHTTP.onreadystatechange = function()
 	{
         if(newHTTP.readyState == 4 && newHTTP.status == 200)
         {
 	       var return_data = newHTTP.responseText;
+		   document.getElementById("restore").innerHTML = return_data;
 	    }
     }
-    newHTTP.send(restore);
+    newHTTP.send();
 }
 //change ENUM to 1 in database to hide message
-function DeleteMsg()
+function DeleteMsg(id)
 {
 	var newHTTP = new XMLHttpRequest();
-	var url = "del_msg.php";
-	var msg = document.getElementById("erase").value;
-	document.getElementById("" + msg).style.display = "none";
-    var erase = "id=" + msg;
-	newHTTP.open("POST", url, true);
+	document.getElementById(id).style.display = "none";
+	var url = "del_msg.php?id=" + id;
+	newHTTP.open("GET", url, true);
     newHTTP.onreadystatechange = function()
 	{
         if(newHTTP.readyState == 4 && newHTTP.status == 200)
@@ -166,7 +162,7 @@ function DeleteMsg()
 	        document.getElementById("erase").innerHTML = return_data;
 	    }
     }
-    newHTTP.send(erase);
+    newHTTP.send();
 }
 //toggles message views to open and close messages
 function toggle(id)
