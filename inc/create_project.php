@@ -22,7 +22,7 @@ Collaborate 2017-2018
         <table >
 			<tr>
 				<td id="newProject">
-					<h2 >Lets Collaborate</h2><br/><br/>
+					<h1>Lets Collaborate</h1><br/><br/>
 					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
 						<label for="pro_name">Name of Project</label>
 						<input type="text" name="pro_name" size="" placeholder="Name" ><br /><br />

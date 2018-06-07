@@ -1,12 +1,12 @@
 <?php
 /*
 @Auther: Gabriel Rodriguez
-Page: Sent
+Page: Drafts
 Project: Collaborate
 Date: 3/6/2018
 
-sent.php was written to retreive messages from the database
-these messages are currently marked from_user
+draft.php was written to retreive messages from the database
+these messages are currently marked draft
 the user also has the option to move the message to deleted
 by setting the ENUM value to 1.
 Collaborate 2017-2018
@@ -26,16 +26,17 @@ Collaborate 2017-2018
 </div>
 <br/>
 <div class="bgstyle">
-    <h2 id='messageHead' >Sent</h2>
+    <h2 id='messageHead' >Drafts</h2>
 	<div id="hr"></div>
 	<br/><br/>
+	<div id="draft-2">
 <?php
 	//retreive messages that are marked from_user
-	$get_messages = ("SELECT * FROM `collaborate`.`pvt_messages` WHERE `from_user`='$username' AND `senderDelete`='0'");
+	$get_messages = ("SELECT * FROM `collaborate`.`pvt_messages` WHERE `from_user`='$username' AND `draft`='1'");
 	//call to function to get messages
-	GetMessages($get_messages, 2);
+	GetMessages($get_messages, 3);
 
-    print("</div><br/>");
+    print("</div></div><br/>");
     
     _html_end();
 ?>

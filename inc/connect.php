@@ -281,28 +281,35 @@ function GetMessages($messages, $x)
 
 		if ($get_messages = mysqli_query($con, $messages))
 		{
-			$numrows_read = mysqli_num_rows($get_messages);
-			while ($get_msg = mysqli_fetch_assoc($get_messages))
+			if($numrows_read = mysqli_num_rows($get_messages) > 0)
 			{
-				$id = $get_msg['id'];
-				$from_user = $get_msg['from_user'];
-				$to_user = $get_msg['to_user'];
-				$msg = $get_msg['message'];
-				$date = $get_msg['date'];
-				$opened = $get_msg['opened'];
-				$deleted = $get_msg['recipientDelete'];
-				$imgOfUser = mysqli_query ($con, "SELECT `user_picture` FROM `collaborate`.`profile_pictures` WHERE `user`='$from_user'");
+				while ($get_msg = mysqli_fetch_assoc($get_messages))
+				{
+					$id = $get_msg['id'];
+					$from_user = $get_msg['from_user'];
+					$to_user = $get_msg['to_user'];
+					$msg = $get_msg['message'];
+					$date = $get_msg['date'];
+					$opened = $get_msg['opened'];
+					$deleted = $get_msg['recipientDelete'];
+					$imgOfUser = mysqli_query ($con, "SELECT `profile_pic` FROM `collaborate`.`users` WHERE `username`='$to_user'");
 
-				if(strlen($msg) < 1)
-				{
-					//skip empty messages
-				}
-				else
-				{
+					if(strlen($msg) < 1)
+					{
+						$msg = "Empty Message";
+					}
 					if($imgOfUser)
 					{
 						$get_pic_row = mysqli_fetch_assoc($imgOfUser);
-						$profile_pic = $get_pic_row['user_picture'];
+						
+						if($get_pic_row['profile_pic'] != "" )
+						{
+						    $profile_pic = $get_pic_row['profile_pic'];
+						}
+						else
+						{
+							$profile_pic = "./../img/no-photo.png";
+						}
 
 						switch ($x)
 						{
@@ -312,10 +319,27 @@ function GetMessages($messages, $x)
 								print ("<div id='$id'>");
 								print ("<div id='showMsg' onClick='toggle($id)'>");
 								print ("<img src='$profile_pic' alt='Avatar'>");
-								print ("<a href='$from_user'>$from_user</a>");
+								print ("<a href='profile.php?u=$to_user'>$to_user</a>");
 								print ("<span class='time-right'>$date</span><br/></br/>");
 								print ("<input id='restore' name='restore' type='text' value='$id' hidden>");
-								print ("<button onclick='RestoreMsg()' id='delete' name='delete'>Restore</button>");
+								print ("<button onclick='RestoreMsg($id)' id='delete' name='delete'>Restore</button>");
+								print ("<div id='toggleText$id' style='display: none;'>");
+								print ("<br/>");
+								print ("<p>$msg</p>");
+								print ("</div>");
+								print ("</div>");
+								print ("</div>");
+							  break;
+							case '2':
+								//display messages to user, toggle functions written in javascript
+								//the id is used to find the correct message to restore and delete it
+								print ("<div id='$id'>");
+								print ("<div id='showMsg' onClick='toggle($id)'>");
+								print ("<img src='$profile_pic' alt='Avatar'>");
+								print ("<a href='profile.php?u=$to_user'>$to_user</a>");
+								print ("<span class='time-right'>$date</span><br/></br/>");
+								print ("<input id='erase' name='erase' type='text' value='$id' hidden>");
+								print ("<button onclick='DeleteMsg($id)' id='delete' name='delete'>Delete</button>");
 								print ("<div id='toggleText$id' style='display: none;'>");
 								print ("<br/>");
 								print ("<p>$msg</p>");
@@ -324,50 +348,57 @@ function GetMessages($messages, $x)
 								print ("</div>");
 							  break;
 							default:
-								//display messages to user, toggle functions written in javascript
-								//the id is used to find the correct message to restore and delete it
-								print ("<div id='$id'>");
-								print ("<div id='showMsg' onClick='toggle($id)'>");
-								print ("<img src='$profile_pic' alt='Avatar'>");
-								print ("<a href='$from_user'>$from_user</a>");
-								print ("<span class='time-right'>$date</span><br/></br/>");
-								print ("<input id='erase' name='erase' type='text' value='$id' hidden>");
-								print ("<button onclick='DeleteMsg()' id='delete' name='delete'>Delete</button>");
-								print ("<div id='toggleText$id' style='display: none;'>");
-								print ("<br/>");
-								print ("<p>$msg</p>");
-								print ("</div>");
-								print ("</div>");
-								print ("</div>");
-							  break;
+							//display messages to user, toggle functions written in javascript
+							//the id is used to find the correct message to restore and delete it
+							print ("<div id='draft'>");
+							print ("<a href='send_msg.php?u=$to_user&id=$id'><img src='./../img/Edit.gif' alt='Edit' /></a>");
+							print ("</div>");
+							print ("<div id='$id'>");
+							print ("<div id='showMsg' onClick='toggle($id)'>");
+							print ("<img src='$profile_pic' alt='Avatar'>");
+							print ("<a href='profile.php?u=$to_user'>$to_user</a>");
+							print ("<span class='time-right'>$date</span><br/></br/>");
+							print ("<input id='erase' name='erase' type='text' value='$id' hidden>");
+							print ("<button onclick='DeleteMsg($id)' id='delete' name='delete'>Delete</button>");
+							print ("<div id='toggleText$id' style='display: none;'>");
+							print ("<br/>");
+							print ("<p>$msg</p>");
+							print ("</div>");
+							print ("</div>");
+							print ("</div>");
+							break;
 						}
 					}
+				}
+			}
+			else
+			{
+				//display empty message to user based upon which message screen they are on
+				switch ($x) {
+					case '0'://inbox
+							print ("<img class='empty' src='./../img/inbox_over.png' alt='No Messages' />");
+							print ("<h2>Inbox Empty</h2>");
+							print ('<div id="hr"></div>');
+							print ("<br/><br/>");
+						break;
+					case '1'://deleted
+							print ("<img class='empty' src='./../img/inbox_over.png' alt='No Messages' />");
+							print ("<h2>No erased messages</h2>");
+							print ('<div id="hr"></div>');
+							print ("<br/><br/>");
+						break;
+					default: //sent
+							print ("<img class='empty' src='./../img/inbox_over.png' alt='No Messages' />");
+							print ("<h2>Your sent box is empty</h2>");
+							print ('<div id="hr"></div>');
+							print ("<br/><br/>");
+						break;
 				}
 			}
 		}
 		else
 		{
-			//display empty message to user based upon which message screen they are on
-			switch ($x) {
-				case '0'://inbox
-				        print ("<img class='empty' src='./../img/inbox_over.png' alt='No Messages' />");
-						print ("<h2>Inbox Empty</h2>");
-						print ('<div id="hr"></div>');
-						print ("<br/><br/>");
-					break;
-				case '1'://deleted
-				        print ("<img class='empty' src='./../img/inbox_over.png' alt='No Messages' />");
-						print ("<h2>No erased messages</h2>");
-						print ('<div id="hr"></div>');
-						print ("<br/><br/>");
-					break;
-				default: //sent
-				        print ("<img class='empty' src='./../img/inbox_over.png' alt='No Messages' />");
-						print ("<h2>Your sent box is empty</h2>");
-						print ('<div id="hr"></div>');
-						print ("<br/><br/>");
-					break;
-			}
+			print ("Sorry, an error occured while trying to connect with the database.");
 		}
 	    //close connection
 		$con = NULL;
@@ -627,7 +658,7 @@ function CountPosts()
 //get users bio and information to display
 function GetBio($bio)
 {
-	$user = $fname = $lname = $age = $city = $state = $hobbies = $interest = $user_bio = "";
+	$user = $fname = $lname = $age = $city = $state = $hobbies = $interest = $user_bio = $date = "";
 	try
 	{
 		//open connection

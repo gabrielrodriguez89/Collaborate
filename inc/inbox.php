@@ -19,6 +19,8 @@ Collaborate 2017-2018
 		<hr id="hr2"/>
 		<a href="sent.php"><img src='./../img/sent.png' alt='Sent' />Sent</a>
 		<hr id="hr2"/>
+		<a href="draft.php"><img src='./../img/draft.png'  alt='Draft' />Drafts</a>
+		<hr id="hr2"/>
 		<a href="deleted.php"><img src='./../img/trash.png' alt='Sent' />Deleted</a><br/>
 	</div>
 </div>
@@ -29,14 +31,14 @@ Collaborate 2017-2018
 	<div id="hr"></div>
 	<br/><br/>
 <?php
-  //retreive messages that are for user
-  $get_messages = ("SELECT * FROM `pvt_messages` WHERE to_user='$username' && opened='0' && recipientDelete='0'");
-  //call to function to get messages
-  GetMessages($get_messages, 0);
-?>
-</div>
-</div>
-<br/>
-<?php
-  _html_end();
+    //retreive messages that are for user
+    $get_messages = ("SELECT * FROM `pvt_messages` WHERE to_user='$username' AND opened='0' AND recipientDelete='0'");
+    //call to function to get messages
+    GetMessages($get_messages, 2);
+
+	print("</div>");
+	print("</div>");
+	print("</div><br/>");
+	
+    _html_end();
 ?>

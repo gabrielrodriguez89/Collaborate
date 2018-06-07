@@ -11,21 +11,13 @@ called with AJAXmysqli_mysqli_query
 */
     include "header.php";
 
+	$id = $_GET['id'];
     try
     {
-		//get message id using POST
-		$id = $_POST['restore'];
+		$con = Connect();
 		//prep for mysqli_mysqli_query
-		$restore_msg = "UPDATE `collaborate`.`pvt_messages` SET `recipientDelete` = '0' WHERE `to_user` = '$username' AND `id` = '$id'";
-		//mysqli_mysqli_query database
-		if(mysqli_query($con, $restore_msg))
-		{
-
-		}
-		else
-		{
-		    echo "error";
-		}
+		$restore_msg = mysqli_query($con, "UPDATE `collaborate`.`pvt_messages` SET `senderDelete` = '0' WHERE `from_user`='$username' AND `id`= '$id'");
+        $con = NULL;
 	}
 	catch (\Exception $e)
 	{

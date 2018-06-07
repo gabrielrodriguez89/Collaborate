@@ -35,16 +35,16 @@ profile it will be displayed without editing options.
 		    $user = mysqli_real_escape_string($con, $_GET['u']);
 		    if (ctype_alnum($user))
 		    {
-			//mysqli_query database
-			$check = mysqli_query ($con, "SELECT `username`, `profile_pic` FROM `collaborate`.`users` WHERE `username`='$user'");
-			//get asscoc data
-			if ($get = mysqli_fetch_assoc($check))
-			{
-			  //set user
-			  $user = $get['username'];
-			  $user_pic = $get['profile_pic'];
-			}
-			$con = NULL;
+				//mysqli_query database
+				$check = mysqli_query ($con, "SELECT `username`, `profile_pic` FROM `collaborate`.`users` WHERE `username`='$user'");
+				//get asscoc data
+				if ($get = mysqli_fetch_assoc($check))
+				{
+				  //set user
+				  $user = $get['username'];
+				  $user_pic = $get['profile_pic'];
+				}
+				$con = NULL;
 			}
 		}
 		catch (\Exception $e)

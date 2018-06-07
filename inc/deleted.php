@@ -23,6 +23,8 @@ Side navigation for message inbox/sent/deleted
 		<hr id="hr2"/>
 		<a href="sent.php"><img src='./../img/sent.png' alt='Sent' />Sent</a>
 		<hr id="hr2"/>
+		<a href="draft.php"><img src='./../img/draft.png'  alt='Draft' />Drafts</a>
+		<hr id="hr2"/>
 		<a href="deleted.php"><img src='./../img/trash.png' alt='Sent' />Deleted</a><br/>
 	</div>
 </div>
@@ -32,13 +34,12 @@ Side navigation for message inbox/sent/deleted
 	<div id="hr"></div>
 	<br/><br/>
 <?php
-  //retreive messages that are marked deleted by user
-  $get_messages = ( "SELECT * FROM pvt_messages WHERE to_user='$username' && recipientDelete='1'");
-  //call to function to get messages
-  GetMessages($get_messages, 1);
-?>
-</div>
-<br/>
-<?php
-   _html_end()
+    //retreive messages that are marked deleted by user
+    $get_messages = ( "SELECT * FROM `collaborate`.`pvt_messages` WHERE `from_user`='$username' AND `senderDelete`='1'");
+    //call to function to get messages
+    GetMessages($get_messages, 1);
+
+    print("</div><br/>");
+
+    _html_end()
 ?>
