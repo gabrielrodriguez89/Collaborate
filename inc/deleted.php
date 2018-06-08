@@ -29,17 +29,28 @@ Side navigation for message inbox/sent/deleted
 	</div>
 </div>
 <br/>
-<div class="bgstyle">
-    <h2 id='messageHead' >Deleted</h2>
-	<div id="hr"></div>
-	<br/><br/>
 <?php
+
+
+
+    $count = CountDeleted();
+    if($count > 0)
+	{
+        print ("<div id='messageHead'><h2>Trash<div id='del'><a href='empty_trash.php?u=$username'><img src='./../img/delete_trash.png' alt='Empty Trash' /><h4>Empty Trash</h4></a></div></h2></div>");
+    }
+	else
+	{
+		print ("<div id='messageHead'><h2>Trash</h2></div>");
+	}
+	print ('<div class="bgstyle4">');
+    print ('<div id="msg"><br/>');
+	print ('<div id="draft-2">');
     //retreive messages that are marked deleted by user
-    $get_messages = ( "SELECT * FROM `collaborate`.`pvt_messages` WHERE `from_user`='$username' AND `senderDelete`='1'");
+    $get_messages = ( "SELECT * FROM `collaborate`.`pvt_messages` WHERE `from_user`='$username' AND `senderDelete`='1' OR `to_user` = '$username' AND `recipientDelete`='1'");
     //call to function to get messages
     GetMessages($get_messages, 1);
 
-    print("</div><br/>");
+    print("</div></div></div>");
 
     _html_end()
 ?>

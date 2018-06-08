@@ -25,17 +25,20 @@ Collaborate 2017-2018
 	</div>
 </div>
 <br/>
-<div class="bgstyle">
-    <h2 id='messageHead' >Sent</h2>
-	<div id="hr"></div>
-	<br/><br/>
+<div id='messageHead'>
+<h2  >Sent</h2>
+</div>
+<div class="bgstyle4">
+    <div id="msg">
+	<br/>
+	<div id="draft-2">
 <?php
 	//retreive messages that are marked from_user
-	$get_messages = ("SELECT * FROM `collaborate`.`pvt_messages` WHERE `from_user`='$username' AND `senderDelete`='0'");
+	$get_messages = ("SELECT * FROM `collaborate`.`pvt_messages` WHERE `from_user`='$username' AND `senderDelete`='0' AND `draft`='0'");
 	//call to function to get messages
 	GetMessages($get_messages, 2);
 
-    print("</div><br/>");
+    print("</div></div></div>");
     
     _html_end();
 ?>

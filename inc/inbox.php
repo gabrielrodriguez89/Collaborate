@@ -25,20 +25,22 @@ Collaborate 2017-2018
 	</div>
 </div>
 <br/>
-<div class="bgstyle">
+<div id='messageHead'>
+<h2  >Inbox</h2>
+</div>
+<div class="bgstyle4">
     <div id="msg">
-    <h2 id='messageHead' >Inbox</h2>
-	<div id="hr"></div>
-	<br/><br/>
+	<br/>
+	<div id="draft-2">
 <?php
     //retreive messages that are for user
-    $get_messages = ("SELECT * FROM `pvt_messages` WHERE to_user='$username' AND opened='0' AND recipientDelete='0'");
+    $get_messages = ("SELECT * FROM `pvt_messages` WHERE to_user='$username' AND opened='0' AND recipientDelete='0' AND `draft`='0'");
     //call to function to get messages
     GetMessages($get_messages, 2);
 
 	print("</div>");
 	print("</div>");
-	print("</div><br/>");
+	print("</div>");
 	
     _html_end();
 ?>

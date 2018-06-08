@@ -169,7 +169,15 @@ profile it will be displayed without editing options.
 		{
 			$_SESSION['user'] = $user;
 			$user_name = $_SESSION['user'];
-
+			print ("<div id='profileButtons'>");
+			print ("<div id='minProfile' onclick='ShowProfile()'>");
+			print ("<img src='./../img/no-photo2.png' alt='profile' id='pro-ico'/><h1>Profile</h1>");
+			print ("</div>");
+			print ('<hr id="hr2"/>');
+			print ("<div id='minProject' onclick='ShowProject()'>");
+			print ("<img src='./../img/project.png' alt='project' id='proj-ico'/><h1>Projects</h1>");
+			print ("</div>");
+			print ("</div>");
 			print ("<div id='profile'>");
 			//get users picture from database
 			GetProfilePic($user_name);

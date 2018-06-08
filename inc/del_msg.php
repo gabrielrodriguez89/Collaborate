@@ -11,21 +11,36 @@ messages displayed in deleted box
 
 */
 	include("header.php");
+
 	//id of message
 	$id = $_GET['id'];
 	try
 	{
 		//open MySQL connection
 		$con = Connect();
+		
+		$getUser = mysqli_query ($con, "SELECT * FROM `collaborate`.`pvt_messages` WHERE `id`='$id'");
+		
+		$row = mysqli_fetch_assoc($getUser);
+		
+		$name = $row['from_user'];
 		//update ENUM value
-		$erase_msg = mysqli_query ($con, "UPDATE `collaborate`.`pvt_messages` SET `senderDelete` = '1' WHERE `from_user` = '$username' AND `id`='$id'");
-        //close connection
-		$con = NULL;
+		if($name == $username)
+		{
+			$erase_msg = mysqli_query ($con, "UPDATE `collaborate`.`pvt_messages` SET `senderDelete` = '1' WHERE `from_user` = '$username' AND`id`='$id'");
+		}
+		else
+		{
+			$erase_msg = mysqli_query ($con, "UPDATE `collaborate`.`pvt_messages` SET `recipientDelete` = '1' WHERE `to_user` = '$username' AND `id`='$id'");
+		}
 	}
 	catch (\Exception $e)
 	{
 		//TODO create log for exceptions
 	}
-
+	finally
+	{
+		$con = NULL;
+	}
 
 ?>

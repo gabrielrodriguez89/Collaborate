@@ -307,6 +307,7 @@ function GetMessages($messages, $x)
 						    $profile_pic = $get_pic_row['profile_pic'];
 						}
 						else
+							
 						{
 							$profile_pic = "./../img/no-photo.png";
 						}
@@ -316,30 +317,14 @@ function GetMessages($messages, $x)
 							case '1':
 								//display messages to user, toggle functions written in javascript
 								//the id is used to find the correct message to restore and delete it
-								print ("<div id='$id'>");
+								print ("<div id='draft$id'>");
+								print ("<div id='draft'>");
+								print ("<input type='image' src='./../img/restore.png' onclick='RestoreMsg($id)' id='delete' name='delete' alt='Restore'><span class='tooltip'>Restore</span>");
+								print ("</div>");
 								print ("<div id='showMsg' onClick='toggle($id)'>");
 								print ("<img src='$profile_pic' alt='Avatar'>");
 								print ("<a href='profile.php?u=$to_user'>$to_user</a>");
 								print ("<span class='time-right'>$date</span><br/></br/>");
-								print ("<input id='restore' name='restore' type='text' value='$id' hidden>");
-								print ("<button onclick='RestoreMsg($id)' id='delete' name='delete'>Restore</button>");
-								print ("<div id='toggleText$id' style='display: none;'>");
-								print ("<br/>");
-								print ("<p>$msg</p>");
-								print ("</div>");
-								print ("</div>");
-								print ("</div>");
-							  break;
-							case '2':
-								//display messages to user, toggle functions written in javascript
-								//the id is used to find the correct message to restore and delete it
-								print ("<div id='$id'>");
-								print ("<div id='showMsg' onClick='toggle($id)'>");
-								print ("<img src='$profile_pic' alt='Avatar'>");
-								print ("<a href='profile.php?u=$to_user'>$to_user</a>");
-								print ("<span class='time-right'>$date</span><br/></br/>");
-								print ("<input id='erase' name='erase' type='text' value='$id' hidden>");
-								print ("<button onclick='DeleteMsg($id)' id='delete' name='delete'>Delete</button>");
 								print ("<div id='toggleText$id' style='display: none;'>");
 								print ("<br/>");
 								print ("<p>$msg</p>");
@@ -348,25 +333,23 @@ function GetMessages($messages, $x)
 								print ("</div>");
 							  break;
 							default:
-							//display messages to user, toggle functions written in javascript
-							//the id is used to find the correct message to restore and delete it
-							print ("<div id='draft'>");
-							print ("<a href='send_msg.php?u=$to_user&id=$id'><img src='./../img/Edit.gif' alt='Edit' /></a>");
-							print ("</div>");
-							print ("<div id='$id'>");
-							print ("<div id='showMsg' onClick='toggle($id)'>");
-							print ("<img src='$profile_pic' alt='Avatar'>");
-							print ("<a href='profile.php?u=$to_user'>$to_user</a>");
-							print ("<span class='time-right'>$date</span><br/></br/>");
-							print ("<input id='erase' name='erase' type='text' value='$id' hidden>");
-							print ("<button onclick='DeleteMsg($id)' id='delete' name='delete'>Delete</button>");
-							print ("<div id='toggleText$id' style='display: none;'>");
-							print ("<br/>");
-							print ("<p>$msg</p>");
-							print ("</div>");
-							print ("</div>");
-							print ("</div>");
-							break;
+								//display messages to user, toggle functions written in javascript
+								//the id is used to find the correct message to restore and delete it
+								print ("<div id='draft$id'>");
+								print ("<div id='draft'>");
+								print ("<input type='image' src='./../img/trash.png' onclick='DeleteMsg($id)' id='delete' name='delete' alt='Delete'><span class='tooltip'>Delete</span>");
+								print ("</div>");
+								print ("<div id='showMsg' onClick='toggle($id)'>");
+								print ("<img src='$profile_pic' alt='Avatar'>");
+								print ("<a href='profile.php?u=$to_user'>$to_user</a>");
+								print ("<span class='time-right'>$date</span><br/></br/>");
+								print ("<div id='toggleText$id' style='display: none;'>");
+								print ("<br/>");
+								print ("<p>$msg</p>");
+								print ("</div>");
+								print ("</div>");
+								print ("</div>");
+							  break;
 						}
 					}
 				}
@@ -646,14 +629,48 @@ function CountPosts()
 		$getPost = mysqli_query($con, "SELECT COUNT(*) As `total` FROM `collaborate`.`posts` WHERE `user_posted_to`='$username'");
 		$row = mysqli_fetch_assoc($getPost);
 		$total = $row['total'];
-		//close connection
-		$con = NULL;
 	}
 	catch (\Exception $e)
 	{
 
 	}
-	return $total;
+	finally
+	{
+		//close connection
+		$con = NULL;
+	    return $total;
+	}
+}
+function CountDeleted()
+{
+	$total = 0;
+	
+	if(isset($_SESSION['username']))
+	{
+		$username = $_SESSION['username'];
+	}
+	try
+	{
+		//open database connection
+		$con = Connect();
+		//get count of posts to projects
+		$get = "SELECT COUNT(*) As `total` FROM `collaborate`.`pvt_messages` WHERE `from_user`= '$username' AND `senderDelete`='1' OR `to_user` = '$username' AND `recipientDelete`='1'";
+		if($getRow = mysqli_query($con, $get))
+		{
+			$row = mysqli_fetch_assoc($getRow);
+			$total = $row['total'];
+		}	
+	}
+	catch (\Exception $e)
+	{
+        print("There was an error connecting to the database, please try again.");
+	}
+	finally
+	{
+		//close connection
+		$con = NULL;
+	    return $total;
+	}
 }
 //get users bio and information to display
 function GetBio($bio)
@@ -804,8 +821,9 @@ function OtherUsers($query)
 
 				print("<div class='profileLeftContent2'>");
 				print("<div id='userInfo'>");
-				print("<h1>$fname&nbsp$lname</h1><br/><br/>");
-				print("<h3>$age&nbsp&nbsp&nbsp$city,&nbsp$state</h3>");
+				print("<h1>$fname&nbsp$lname</h1><br/>");
+				print("<h3>$age</h3><br/>");
+				print("<h3>$city,&nbsp$state</h3>");
 				print("</div>");
 				print("</div>");
 				print("</div></a>");

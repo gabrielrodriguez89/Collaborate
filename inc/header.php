@@ -44,7 +44,14 @@ options are displayed
 					$user_bio = $row['bio'];
 					$get_user_pic = $row['profile_pic'];
 					
-					$_SESSION['get_user_pic'] = $get_user_pic;
+					if($get_user_pic == "")
+					{
+						$_SESSION['get_user_pic'] = "./../img/no-photo.png";
+					}
+					else
+					{
+					    $_SESSION['get_user_pic'] = $get_user_pic;
+					}
 					$_SESSION['user_id'] = $user_id;
 					$_SESSION['user_fname'] = $first_name;
 					$_SESSION['user_lname'] = $last_name;
