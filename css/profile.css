@@ -4,19 +4,9 @@
 	width: auto;
 	height: 40px;
 }
-
 #profile input[type="submit"]{
 	float: right;
 	margin: 20px;
-}
-
-
-
-
-#profile2:hover {
-	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
-	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
 }
 #projectMain:hover {
 
@@ -220,6 +210,7 @@ fileLeftContent {
 	position:absolute;
 	top:0;
 	left:0;
+	
 	font-size:9px;
 	min-height: 400px;
 	overflow: auto;

@@ -194,9 +194,7 @@ This CSS was written for Collaborate 2017-2018
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 10px;
-		-moz-box-shadow: 0 2px 8px 0 rgba(169, 169, 169, 0.4), 0 6px 20px 0 rgba(169, 169, 169, 0.2);
-		-webkit-box-shadow: 0 2px 8px 0 rgba(169, 169, 169, 0.4), 0 6px 20px 0 rgba(169, 169, 169, 0.2);
-		box-shadow: 0 2px 8px 0 rgba(169, 169, 169, 0.4), 0 6px 20px 0 rgba(169, 169, 169, 0.2);
+		border: 2px solid #E8E8E8;
 	}
 	.display_project img {
 		height: 50px;
@@ -217,7 +215,7 @@ This CSS was written for Collaborate 2017-2018
         clear: both;
 		margin-top: 30px;
 		padding: 10px;
-		border: 1px solid #f1f1f1;
+		border: 1px solid #E8E8E8;
 		height: auto;
 		width: 70%;
 		margin-left: auto;
@@ -308,9 +306,9 @@ This CSS was written for Collaborate 2017-2018
 		border-radius: 6px;
 		display: flex;
 		background-color: #ffffff;
-		-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+		-moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.1);
 	}
 	.profileLeftContent2 {
 		height: auto;
@@ -802,17 +800,17 @@ This CSS was written for Collaborate 2017-2018
 	#hideMenu {
 		position: absolute;
 		left: 35%;
-	    font-size: 9pt;
+	    font-size: 10pt;
+		font-weight: bold;
 		margin-left: auto;
 		display: flex;
 	}
 	#hideMenu img {
-		height: 18px;
-		width: 18px;
-		padding-left: 3px;
+		height: 21px;
+		width: 25px;
 	}
 	#hideMenu a {
-		margin-left: 0%;
+		margin-left: 10%;
 		padding:0 50px;
 	}
 	.menuItem a:hover {
@@ -946,10 +944,8 @@ This CSS was written for Collaborate 2017-2018
 		padding: 15px;
 		margin-left: auto;
 		margin-right: auto;
-		margin-bottom: 10px;
-		-moz-box-shadow: 0 2px 8px 0 rgba(169, 169, 169, 0.4), 0 6px 20px 0 rgba(169, 169, 169, 0.2);
-		-webkit-box-shadow: 0 2px 8px 0 rgba(169, 169, 169, 0.4), 0 6px 20px 0 rgba(169, 169, 169, 0.2);
-		box-shadow: 0 2px 8px 0 rgba(169, 169, 169, 0.4), 0 6px 20px 0 rgba(169, 169, 169, 0.2);
+		margin-bottom: 5px;
+        border: 2px solid #E8E8E8;
 	}
 	.display_project img {
 		float: left;
@@ -972,7 +968,7 @@ This CSS was written for Collaborate 2017-2018
 	.project_container {
 		margin-top: 30px;
 		padding: 10px;
-		border: 1px solid #f1f1f1;
+		border: 1px solid #E8E8E8;
 		height: auto;
 		width: 80%;
 		margin-left: auto;
@@ -1070,9 +1066,9 @@ This CSS was written for Collaborate 2017-2018
 		color:#282828;
 		border-radius: 6px;
 		background-color: #ffffff;
-		-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+		-moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.1);
 	}
 	#profile2 h1{
 		margin-left: 5px;
@@ -1815,20 +1811,14 @@ form input, textarea, select{
 }
 #newUser input[type="submit"] {
 	width: 80px;
-	height: 30px;
+	height: 40px;
 	margin: 10px;
-}
-#newUser input[type="text"]:hover, [type="submit"]:hover, [type="date"]:hover,[type="file"]:hover{
-	border: 1px solid #E8E8E8;
 }
 #newUser textarea{
 	width: 100%;
 	height: 50px;
 	border: 1px solid #C0C0C0;
-}
-#newUser textarea:hover{
-	border: 1px solid #282828;
-
+	resize: none;
 }
 #footer {
     margin-top: 92%;
