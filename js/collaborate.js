@@ -134,7 +134,7 @@ function sendPost(id)
 function RestoreMsg(id)
 {
 	var newHTTP = new XMLHttpRequest();
-	document.getElementById(id).style.display = "none";
+	document.getElementById("draft" + id).style.display = "none";
 	var url = "restore_msg.php?id=" + id;
 	newHTTP.open("GET", url, true);
     newHTTP.onreadystatechange = function()
@@ -151,7 +151,7 @@ function RestoreMsg(id)
 function DeleteMsg(id)
 {
 	var newHTTP = new XMLHttpRequest();
-	document.getElementById(id).style.display = "none";
+	document.getElementById("draft" + id).style.display = "none";
 	var url = "del_msg.php?id=" + id;
 	newHTTP.open("GET", url, true);
     newHTTP.onreadystatechange = function()
@@ -278,28 +278,34 @@ function DropDown()
 function DropDown2()
 {
 	var btn = document.getElementById("dropdown-content2");
+	var btn0 = document.getElementById("messageHead");
 	var btn1 = document.getElementById("search_bar2");
 	var btn2 = document.getElementById("message-nav");
 	var btn3 = document.getElementById("form");
 	var btn4 = document.getElementById("msg");
 	var btn5 = document.getElementById("minProject");
+	
 
 	if (btn.style.display == "block")
 	{
 		btn.style.display = "none";
+		btn0.style.display = "block";
 		btn1.style.display = "block";
 		btn2.style.display = "block";
 		btn4.style.display = "block";
 		btn5.style.display = "block";
+		
 	}
 	else
 	{
 		btn.style.display = "block";
+		btn0.style.display = "none";
 		btn1.style.display = "none";
 		btn2.style.display = "none";
 		btn3.style.display = "none";
 		btn4.style.display = "none";
 		btn5.style.display = "none";
+		
 	}
 }
 function SearchBar()
