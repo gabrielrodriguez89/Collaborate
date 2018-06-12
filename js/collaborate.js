@@ -97,6 +97,16 @@ function EditAbout()
 	document.getElementById("about").style.display = "none";
 	document.getElementById("changeAbout").style.display = "block";
 }
+function Update()
+{
+	document.getElementById('opt').style.display = "none";
+	document.getElementById('opt-2').style.display = "block";
+}
+function CloseAccount()
+{
+	document.getElementById('opt').style.display = "none";
+	document.getElementById('opt-3').style.display = "block";
+}
 function Go_To_Profile()
 {
 	var xHTTP = new XMLHttpRequest();
@@ -259,7 +269,7 @@ function ShowProject()
         pro4.style.marginBottom = "0px";
 		pro5.style.display = "block";
 		pro6.src = "./../img/project2.png";
-		pro7.src = './../img/no-photo.png'
+		pro7.src = './../img/no-photo.png';
     }
 }
 function DropDown()
