@@ -133,7 +133,7 @@ area
 									{
 										$username = $userN;
                                         $_SESSION['username'] = $username;
-										header("Location: ./inc/new_user_form.php");
+										header("Location: ./inc/user_form.php");
 									}
 								}
 							}
