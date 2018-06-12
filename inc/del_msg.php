@@ -36,7 +36,7 @@ messages displayed in deleted box
 	}
 	catch (\Exception $e)
 	{
-		//TODO create log for exceptions
+		print("OOPS.... An error occured.");
 	}
 	finally
 	{

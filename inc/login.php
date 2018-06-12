@@ -29,11 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	if (empty($_POST["password_login"]))
 	{
   	$emailErr = "Password is required";
-  }
-  else
-  {
-  	$password_login = test_input($_POST["password_login"]);
-  }
+}
+else
+{
+$password_login = test_input($_POST["password_login"]);
+}
 	$md5password_login = md5($password_login);
 
 	try
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 	catch (Exception $e)
 	{
-		//empty catch statement will store errors in log TODO
+		 print("OOPS.... An error occured.");
 	}
 }
 

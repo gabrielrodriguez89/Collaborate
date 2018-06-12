@@ -44,11 +44,15 @@ This script is called by AJAX and submits comments to database
 			{
 				die(mysqli_error());
 			}
-
 		}
 	}
 	catch (\Exception $e)
 	{
-
+		print("OOPS.... An error occured.");
+	}
+	finally
+	{
+		//close database connection
+		$con = NULL;
 	}
 ?>

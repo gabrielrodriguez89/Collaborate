@@ -515,7 +515,7 @@ function ShowBody($k)
 			print ('<div id="form">');
 			print ('<form action="home.php" method="get" id="search">');
 			print ('<input type="text" name="mysqli_query" placeholder="Search">');
-			print ('<input type="image" src="./../img/search2.png" alt="Submit" name="submit">');
+			print ('<input type="image" id="search_img2" src="./../img/search2.png" alt="Submit" name="submit">');
 			print ('</form>');
 			print ("</div>");
 			print ('</div>');
@@ -525,7 +525,7 @@ function ShowBody($k)
 			print ("<div class='menuItem'>");
 			print ("<div id='hideMenu'>");
 	        print ("<a href='home.php' class='a' ><img id='home3' src='./../img/home.png' alt='Home' />Home</a>");
-			print ("<a href='inbox.php' class='a'><img id='inbox_icon3' src='./../img/inbox.png' alt='Inbox' />Inbox</a>");
+			print ("<a href='inbox.php' class='a'><img id='inbox_icon3' src='./../img/inbox_icon2.png' alt='Inbox' />Inbox</a>");
 			print ("<a href='profile.php?u=$username' class='a'><img id='pic3' src='$pic' alt='$username'/>Profile</a>");
 			print ("</div>");
 			print ("<div class='dropdown2'>");
@@ -533,7 +533,7 @@ function ShowBody($k)
 			print ('<div id="dropdown-content">');
 			print ("<a href='otherusers.php'><img id='signout2' src='./../img/no-photo3.png' alt='Other Users'/><span id='txt'>People</span></a>");
 			print ("<hr id='hr'/>");
-			print ("<a href='manage_account.php'><img id='signout2' src='./../img/settings.png' alt='Logout'/><span id='txt'>Settings</span></a>");
+			print ("<a href='user_form.php?u=$username'><img id='signout2' src='./../img/settings.png' alt='Logout'/><span id='txt'>Settings</span></a>");
 			print ("<hr id='hr'/>");
 			print ("<a href='logout.php'><img id='signout2' src='./../img/signout.png' alt='Logout'/><span id='txt'>Logout</span></a>");
 			print ('</div>');
@@ -550,7 +550,7 @@ function ShowBody($k)
 			print ("<hr id='hr'/>");
 			print ("<a href='otherusers.php'><img id='people2' src='./../img/no-photo3.png' alt='Other Users'/><span id='txt'>People</span></a>");
 			print ("<hr id='hr'/>");
-			print ("<a href='manage_account.php'><img id='manage2' src='./../img/settings.png' alt='Settings' /><span id='txt'>Settings</span></a>");
+			print ("<a href='user_form.php?u=$username'><img id='manage2' src='./../img/settings.png' alt='Settings' /><span id='txt'>Settings</span></a>");
 			print ("<hr id='hr'/>");
 			print ("<a href='logout.php'><img id='signout2' src='./../img/signout.png' alt='Logout'/><span id='txt'>Logout</span></a>");
 			print ("</div>");

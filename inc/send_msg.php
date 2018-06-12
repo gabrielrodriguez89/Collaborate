@@ -43,14 +43,16 @@ TODO-
 					}
 				}
 			}
-			//close database connection
-			$con = NULL;
 		}
 		catch (\Exception $e)
 		{
-            print ("There was an issue connecting to the server. If this error continues please contact support.");
+			print("OOPS.... An error occured.");
 		}
-
+		finally
+		{
+			//close database connection
+			$con = NULL;
+		}
 	}
 	if (isset($_GET['id']))
 	{
@@ -72,12 +74,15 @@ TODO-
 					$body = $get['message'];
 				}
 			}
-			//close database connection
-			$con = NULL;
 		}
 		catch (\Exception $e)
 		{
-            print ("There was an issue connecting to the server. If this error continues please contact support.");
+			print("OOPS.... An error occured.");
+		}
+		finally
+		{
+			//close database connection
+			$con = NULL;
 		}
 	}
 	print ("<br/>");
@@ -130,13 +135,11 @@ TODO-
 				if(mysqli_query($con, $send_msg))
 				{
 					header("Location: profile.php?u=$user");
-					$con = NULL;
 				}
 				else
 				{
 					print ("There was an issue sending the message.");
 				}
-				$con = NULL;
 		    }
 			if(isset($_POST["draft"]))
 			{
@@ -159,18 +162,21 @@ TODO-
 				if(mysqli_query($con, $send_msg))
 				{
 					header("Location: profile.php?u=$user");
-					$con = NULL;
 				}
 				else
 				{
 					print ("There was an issue sending the message.");
 				}
-				$con = NULL;
 		    }
 		}
 		catch (\Exception $e)
 		{
-            print ("There was an issue connecting to the server. If this error continues please contact support.");
+			print("OOPS.... An error occured.");
+		}
+		finally
+		{
+			//close database connection
+			$con = NULL;
 		}
 	}
 

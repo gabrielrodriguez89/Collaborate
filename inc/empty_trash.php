@@ -28,7 +28,7 @@ Mark message with ENUM set to 1 in order to hide it from users
 		}
 		catch (\Exception $e)
 		{
-			//TODO create log for exceptions
+			print("OOPS.... An error occured.");
 		}
 		finally
 		{

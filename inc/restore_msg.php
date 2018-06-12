@@ -30,15 +30,15 @@ intendend to mark ENUM value back to 0 to display message to user again
 		else
 		{
 			$restore_msg = mysqli_query ($con, "UPDATE `collaborate`.`pvt_messages` SET `recipientDelete` = '0' WHERE `to_user` = '$username' AND `id`='$id'");
-		}
-       
+		} 
 	}
 	catch (\Exception $e)
 	{
-
+		print("OOPS.... An error occured.");
 	}
 	finally
 	{
+		//close database connection
 		$con = NULL;
 	}
 

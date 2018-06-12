@@ -34,15 +34,16 @@ options are displayed
 				while($row = mysqli_fetch_assoc($mysqli_query))
 				{
 					$user_id = $row["id"];
-					$user_fname = $row['first_name'];
-					$user_lname = $row['last_name'];
+					$first_name = $row['first_name'];
+					$last_name = $row['last_name'];
 					$user_state_ = $row["state"];
 					$user_city_ = $row["city"];
-					$user_age = $row['age'];
-					$user_hobbies = $row['hobbies'];
-					$user_interest = $row['interest'];
-					$user_bio = $row['bio'];
+					$age = $row['age'];
+					$uhobbies = $row['hobbies'];
+					$interest = $row['interest'];
+					$bio = $row['bio'];
 					$get_user_pic = $row['profile_pic'];
+					$email = $row['email'];
 					
 					if($get_user_pic == "")
 					{
@@ -61,6 +62,7 @@ options are displayed
 					$_SESSION['user_hobbies'] = $hobbies;
 					$_SESSION['user_interest'] = $interest;
 					$_SESSION['user_bio'] = $bio;
+				    $_SESSION['email'] = $email;
 				}
 			}
 			$con = NULL;

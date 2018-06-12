@@ -103,19 +103,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
     try
     {
-    //open connection
-
+        //open connection
+        $con = Connect();
         $collaborate = mysqli_query($con, "INSERT INTO `collaborate`.`projects` (`username`, `project_name`, `description`, `type_of_project`, `state`, `city`, `date`) VALUES ('$username','$project','$description','$type','$user_state_','$user_city_','$date' )");
 	}
 	catch (\Exception $e)
 	{
-	//TODO add log for exceptions
+		print("OOPS.... An error occured.");
 	}
 	finally
 	{
-        //close connection
-        $con = NULL;
-    }
+		//close database connection
+		$con = NULL;
+	}
 	if(getimagesize($_FILES["projectAttach"]["tmp_name"]))
 	{
 		$query = "UPDATE `collaborate`.`projects` set `attachment`='$url' WHERE `username`='$username' AND `project_name`='$project'";
