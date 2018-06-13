@@ -349,11 +349,19 @@ function SearchBar()
 }
 function HomeOver()
 {
-	document.getElementById('home').src = './../img/home_hover.png';
+	document.getElementById('home3').src = './../img/home.png';
 }
 function HomeOut()
 {
-	document.getElementById('home').src = './../img/home.png';
+	document.getElementById('home3').src = './../img/home_2.png';
+}
+function ProOver()
+{
+	document.getElementById('pic3').style.opacity = '1';
+}
+function ProOut()
+{
+	document.getElementById('pic3').style.opacity = '.8';
 }
 function HamOver()
 {
@@ -373,11 +381,11 @@ function SearchOut()
 }
 function InboxOver()
 {
-	document.getElementById('inbox').src = './../img/inbox_over.png';
+	document.getElementById('inbox_icon3').src = './../img/inbox_icon2.png';
 }
 function InboxOut()
 {
-	document.getElementById('inbox').src = './../img/inbox.png';
+	document.getElementById('inbox_icon3').src = './../img/inbox2.png';
 }
 //TODO optional feature to change color layout
 function Chameleon(color)
