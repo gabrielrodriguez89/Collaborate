@@ -310,6 +310,11 @@ This CSS was written for Collaborate 2017-2018
 		-moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.1);
 		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.1);
 	}
+	#profile2:hover {
+		-webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3), 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3), 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3), 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+	}
 	.profileLeftContent2 {
 		height: auto;
 		width: 100%;
@@ -333,6 +338,7 @@ This CSS was written for Collaborate 2017-2018
 		float: left;
 		height: 150px;
 		width: 150px;
+
 	}
 	#proPic4 img{
 		height: 150px;
@@ -794,19 +800,28 @@ This CSS was written for Collaborate 2017-2018
 	}
 	#hideMenu {
 		position: absolute;
-		left: 35%;
+		left: 30%;
 	    font-size: 10pt;
-		font-weight: bold;
+		font-weight: regular;
 		margin-left: auto;
 		display: flex;
 	}
-
+	#hideMenu h3{
+	    font-size: 10pt;
+		font-weight: regular;
+		text-align: center;
+	}
 	#hideMenu a {
 		margin-left: 10%;
-		padding:0 50px;
+		padding:0 70px;
+		color: #aaa;		
+		transition-timing-function: ease-in-out;
+        -webkit-transition-duration: .0s;
+        transition-duration: .0s;
 	}
-	.menuItem a:hover {
-		color: #D8D8D8;
+	#hideMenu a:hover {
+		opacity: 1;
+		color: #ffffff;
 	}
 	.dropdown {
 		display: none;
@@ -1062,12 +1077,19 @@ This CSS was written for Collaborate 2017-2018
 		-moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.1);
 		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.1);
 	}
+	#profile2:hover {
+		-webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3), 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3), 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3), 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+	}
 	#profile2 h1{
 		margin-left: 5px;
 	}
 	#proPic3 img{
 		height: 150px;
 		width: 100%;
+		border-top-right-radius: 6px;
+		border-top-left-radius: 6px;
 	}
 	#proPic4 img{
 		height: 150px;
@@ -1337,10 +1359,11 @@ This CSS was written for Collaborate 2017-2018
 	border-radius: 50%;
 }
 #pic3 {
-	margin-left: 10%;
-	margin-top: 5px;
-	width: 24px;
-	height: 24px;
+	margin-left: 12%;
+	margin-top: 4px;
+	width: 26px;
+	height: 26px;
+	opacity: .8;
 }
 #pic:hover {
 	opacity: .5;
@@ -1508,9 +1531,9 @@ This CSS was written for Collaborate 2017-2018
 }
 #inbox_icon3, #home3, #manage3, #signout3 {
 	margin-left: 10%;
-	margin-top: 5px;
-	width: 25px;
-	height: 23px;
+	margin-top: 3px;
+	width: 28px;
+	height: 25px;
 }
 #msg {
 	height: 100%;
