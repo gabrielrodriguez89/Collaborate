@@ -228,7 +228,6 @@ area
 				{
 					$get_user_pic = "";
 				}
-				$con = NULL;
 				return $username;
 			}
 		}
@@ -242,6 +241,10 @@ area
 		return false;
  		//TODO add log for catch statement
  	}
+	finally
+	{
+		$con = NULL;
+	}
  }
  /*
  END SESSION DATA
