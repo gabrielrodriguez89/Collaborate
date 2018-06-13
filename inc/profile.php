@@ -42,7 +42,6 @@ profile it will be displayed without editing options.
 				{
 				  //set user
 				  $user = $get['username'];
-				  $user_pic = $get['profile_pic'];
 				}
 				$con = NULL;
 			}
@@ -53,12 +52,7 @@ profile it will be displayed without editing options.
 		}
 		//compare user to the current session
 		if($username == $user)
-		{
-			$date1 = new DateTime($user_age);
-			$date2 = new DateTime("now");
-			$date3 = $date1->diff($date2);
-			$age = $date3->y;
-			
+		{	
 			print ("<div id='profileButtons'>");
 			print ("<div id='minProfile' onclick='ShowProfile()'>");
 			print ("<img src='./../img/no-photo2.png' alt='profile' id='pro-ico'/><h1>Profile</h1>");
@@ -70,7 +64,7 @@ profile it will be displayed without editing options.
 			print ("</div>");
 			print ('<div id="profile">');
 			//get the users profile picture
-			if($user_pic == "")
+			if($get_user_pic == "")
 			{
 				print ("<div id='proPic'>");
 				print ("<span onclick='UploadPic()'><img src='./../img/no-photo.png' alt='Placeholder for user to upload image' ></span>");
@@ -80,7 +74,7 @@ profile it will be displayed without editing options.
 			else
 			{
 				print ("<div id='proPic'>");
-				print ("<img src='$user_pic' alt='Profile Picture for $username' onclick='UploadPic()'>");
+				print ("<img src='$get_user_pic' alt='Profile Picture for $username' onclick='UploadPic()'>");
 				print ("</div>");
 			}
 			print ("<div id='proPic2'>");
@@ -101,12 +95,12 @@ profile it will be displayed without editing options.
 			print ("</div></a>");
 			print ("<div class='profileLeft'>");
 			print ("<div id='me'>");
-			print ("<h1>$user_fname&nbsp$user_lname</h1><br/><br/>");
+			print ("<h1>$first_name&nbsp$last_name</h1><br/><br/>");
 			print ("<h3>Age:&nbsp$age</h3><br/>");
 			print ("<h3>Location:&nbsp$user_city_,&nbsp$user_state_</h3><br/>");
-			print ("<h3>Hobbies:&nbsp$user_hobbies</h3><br/>");
-			print ("<h3>Interest:&nbsp$user_interest</h3><br/>");
-			print ("<h3>More:&nbsp$user_bio</h3>");
+			print ("<h3>Hobbies:&nbsp$hobbies</h3><br/>");
+			print ("<h3>Interest:&nbsp$interest</h3><br/>");
+			print ("<h3>More:&nbsp$bio</h3>");
 			print ("</div>");
 			print ("</div> <!--close profileleftcontent-->");
 			print ("<br/>");

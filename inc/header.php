@@ -38,13 +38,17 @@ options are displayed
 					$last_name = $row['last_name'];
 					$user_state_ = $row["state"];
 					$user_city_ = $row["city"];
-					$age = $row['age'];
-					$uhobbies = $row['hobbies'];
+					$date = $row['age'];
+					$hobbies = $row['hobbies'];
 					$interest = $row['interest'];
 					$bio = $row['bio'];
 					$get_user_pic = $row['profile_pic'];
 					$email = $row['email'];
 					
+					$date1 = new DateTime($date);
+					$date2 = new DateTime("now");
+					$date3 = $date1->diff($date2);
+					$age = $date3->y;
 					if($get_user_pic == "")
 					{
 						$_SESSION['get_user_pic'] = "./../img/no-photo.png";
@@ -65,11 +69,14 @@ options are displayed
 				    $_SESSION['email'] = $email;
 				}
 			}
-			$con = NULL;
 		}
 		catch (Exception $e)
 		{
 			//TODO add log for catch statement
+		}
+		finally
+		{
+			$con = NULL;
 		}
 	}
 	print ("<!doctype html>");

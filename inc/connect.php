@@ -180,16 +180,18 @@ function GetProject($project, $i)
 	}
 	catch (Exception $e)
 	{
-		//TODO catch statement log
+		print("An unexpected error occured.");
 	}
-	//close connection
-	$con = NULL;
+	finally 
+	{
+		//close connection
+		$con = NULL;
+	}
 }
 
 //photo uploads
 function UploadNewImage($username)
 {
-
 	try
 	{
 		//open database connection
@@ -262,12 +264,14 @@ function UploadNewImage($username)
 				echo "Sorry, there was an error uploading your file.";
 			}
 		}
-		//close connection
-		$con = NULL;
 	}
 	catch (Exception $e)
 	{
-		//TODO add log for exceptions
+		print("An unexpected error occured.");
+	}
+	finally
+	{
+		$con = NULL;
 	}
 }
 
@@ -381,14 +385,16 @@ function GetMessages($messages, $x)
 		}
 		else
 		{
-			print ("Sorry, an error occured while trying to connect with the database.");
+			print ("Sorry, an error occured while trying to connect.");
 		}
-	    //close connection
-		$con = NULL;
 	}
 	catch (Exception $e)
 	{
-		  //TODO add log for catch statement
+		  print("An unexpected error occured.");
+	}
+	finally 
+	{
+		$con = NULL;
 	}
 }
 //options for search bar and filters
@@ -462,12 +468,9 @@ function UpdateUser()
 		$hobbies = test_input($_POST["hobbies"]);
 		$bio = test_input($_POST["description"]);
 		//update the users profile
-		$description = mysqli_query ($con, "UPDATE `collaborate`.`users` SET `first_name`='$fname',`last_name`='$lname',`bio`='$bio',`interest`='$interests',`hobbies`='$hobbies',`age`='$age',`city`='$city',`state`='$state' WHERE `username`='$username'");
-		if($description)
-		{
-			//re-establish session data so information is correct
-			$sql = mysqli_query ($con, "SELECT * FROM `collaborate`.`users` WHERE `username`='$username' LIMIT 1");
-			
+		$desc = "UPDATE `collaborate`.`users` SET `first_name`='$fname',`last_name`='$lname',`bio`='$bio',`interest`='$interests',`hobbies`='$hobbies',`age`='$age',`city`='$city',`state`='$state' WHERE `username`='$username'";
+		if($description = mysqli_query($con, $desc))
+		{	
 			//redirect user to their profile
 			header("Location: profile.php?u=$username");
 		}
@@ -478,7 +481,11 @@ function UpdateUser()
 	}
 	catch (Exception $e)
 	{
-
+        print("An unexpected error occured.");
+	}
+	finally
+	{
+		$con = NULL;
 	}
 }
 //display body depending on session and log in
@@ -524,9 +531,9 @@ function ShowBody($k)
 			print ('</div>');
 			print ("<div class='menuItem'>");
 			print ("<div id='hideMenu'>");
-	        print ("<a href='home.php' class='a' ><img id='home3' src='./../img/home.png' alt='Home' />Home</a>");
-			print ("<a href='inbox.php' class='a'><img id='inbox_icon3' src='./../img/inbox_icon2.png' alt='Inbox' />Inbox</a>");
-			print ("<a href='profile.php?u=$username' class='a'><img id='pic3' src='$pic' alt='$username'/>Profile</a>");
+	        print ("<a href='home.php' onmouseover='HomeOver()' onmouseout='HomeOut()' ><img id='home3' src='./../img/home_2.png' alt='Home' /><h3>Home</h3></a>");
+			print ("<a href='inbox.php' onmouseover='InboxOver()' onmouseout='InboxOut()'><img id='inbox_icon3' src='./../img/inbox2.png' alt='Inbox' /><h3>Inbox</h3></a>");
+			print ("<a href='profile.php?u=$username' onmouseover='ProOver()' onmouseout='ProOut()'><img id='pic3' src='$pic' alt='$username'/><h3>Profile</h3></a>");
 			print ("</div>");
 			print ("<div class='dropdown2'>");
 			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn" onclick="DropDown()">');
@@ -607,11 +614,14 @@ function GetProfilePic($user)
 			//print ("<img src='img/no_photo.png' alt='No photo to show'  >");
 			print ("<img src='./../img/no-photo.png' alt='No photo to show'  >");
 		}
-		$con = NULL;
 	}
 	catch (\Exception $e)
 	{
-
+        print("An unexpected error occured.");
+	}
+	finally
+	{
+		$con = NULL;
 	}
 }
 //get posts count
@@ -632,7 +642,7 @@ function CountPosts()
 	}
 	catch (\Exception $e)
 	{
-
+        print("An unexpected error occured.");
 	}
 	finally
 	{
@@ -663,7 +673,7 @@ function CountDeleted()
 	}
 	catch (\Exception $e)
 	{
-        print("There was an error connecting to the database, please try again.");
+        print("An unexpected error occured.");
 	}
 	finally
 	{
@@ -717,10 +727,13 @@ function GetBio($bio)
 	}
 	catch (\Exception $e)
 	{
-
+        print("An unexpected error occured.");
 	}
-	//close connection
-	$con = NULL;
+	finally
+	{
+		//close connection
+		$con = NULL;
+	}
 }
 //get comments to show users
 function GetPosts($posts)
@@ -729,7 +742,7 @@ function GetPosts($posts)
 	{
 		//open connection to datbase
 		$con = Connect();
-    //mysqli_query database
+        //mysqli_query database
 		$getPost = mysqli_query($con, $posts);
 		//loop through columns to set user information
 		while($row = mysqli_fetch_assoc($getPost))
@@ -762,25 +775,28 @@ function GetPosts($posts)
 				print ("</div>");
 			}
 
-				$total = CountPosts();
-				print ("</div><!--profilePosts close-->");
-				print ("</div><!--userPosts close-->");
-				print ("<div class='chat2'>");
-				print ("<div class='chatDiv'>");
-				print ("<input type='text' id='post' name='post' placeholder='Comment..'>");
-				print ("</div>");
-				print ("<div id='subChat'>");
-				print ("<button id='buttons' type='submit' onclick='sendPost()' >Post</button>");
-				print ("</div>");
-				print ("</div>");
-				print ("</div><!--user_Content2 close-->");
+			$total = CountPosts();
+			print ("</div><!--profilePosts close-->");
+			print ("</div><!--userPosts close-->");
+			print ("<div class='chat2'>");
+			print ("<div class='chatDiv'>");
+			print ("<input type='text' id='post' name='post' placeholder='Comment..'>");
+			print ("</div>");
+			print ("<div id='subChat'>");
+			print ("<button id='buttons' type='submit' onclick='sendPost()' >Post</button>");
+			print ("</div>");
+			print ("</div>");
+			print ("</div><!--user_Content2 close-->");
 		}
 	}
 	catch (Exception $e)
 	{
-
+        print("An unexpected error occured.");
 	}
-
+    finally
+	{
+		$con = NULL;
+	}
 }
 function OtherUsers($query)
 {
@@ -832,7 +848,11 @@ function OtherUsers($query)
 	}
 	catch (Exception $e)
 	{
-
+        print("An unexpected error occured.");
+	}
+	finally 
+	{
+		$con = NULL;
 	}
 }
 ?>
