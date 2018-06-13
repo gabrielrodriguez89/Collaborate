@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2018 at 03:00 AM
+-- Generation Time: Jun 14, 2018 at 01:47 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.35
 
@@ -21,30 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `collaborate`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `photos`
---
-
-CREATE TABLE `photos` (
-  `id` int(11) NOT NULL,
-  `uid` varchar(32) DEFAULT NULL,
-  `username` varchar(32) NOT NULL,
-  `date_posted` date NOT NULL,
-  `description` text,
-  `image_url` text NOT NULL,
-  `img_id` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `photos`
---
-
-INSERT INTO `photos` (`id`, `uid`, `username`, `date_posted`, `description`, `image_url`, `img_id`) VALUES
-(17, NULL, 'grod', '2018-01-03', NULL, 'uploads/userdata/user_photos/nXKuW0H7fkoABIY/inauguration.jpg', 'a26b78e8ea11ed75217b9f8a7103eca3'),
-(18, NULL, 'buster', '2018-01-10', NULL, 'uploads/userdata/user_photos/nHmAy5PUKs1o2Qt/trump2.jpg', 'd0f12109795c86085ccaace2eebd0457');
+CREATE DATABASE IF NOT EXISTS `collaborate` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `collaborate`;
 
 -- --------------------------------------------------------
 
@@ -52,22 +30,30 @@ INSERT INTO `photos` (`id`, `uid`, `username`, `date_posted`, `description`, `im
 -- Table structure for table `posts`
 --
 
-CREATE TABLE `posts` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `posts`;
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `body` text NOT NULL,
   `date_added` date NOT NULL,
   `added_by` varchar(255) NOT NULL,
-  `user_posted_to` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `user_posted_to` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `posts`
+--
+
+TRUNCATE TABLE `posts`;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `projects`
 --
 
-CREATE TABLE `projects` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `projects`;
+CREATE TABLE IF NOT EXISTS `projects` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `project_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
@@ -75,9 +61,15 @@ CREATE TABLE `projects` (
   `state` text COLLATE utf8_unicode_ci NOT NULL,
   `city` text COLLATE utf8_unicode_ci NOT NULL,
   `date` date NOT NULL,
-  `attachment` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `attachment` blob NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Truncate table before insert `projects`
+--
+
+TRUNCATE TABLE `projects`;
 --
 -- Dumping data for table `projects`
 --
@@ -92,8 +84,9 @@ INSERT INTO `projects` (`id`, `username`, `project_name`, `description`, `type_o
 -- Table structure for table `pvt_messages`
 --
 
-CREATE TABLE `pvt_messages` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `pvt_messages`;
+CREATE TABLE IF NOT EXISTS `pvt_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `to_user` varchar(50) NOT NULL,
   `from_user` varchar(50) NOT NULL,
   `date` date NOT NULL,
@@ -101,18 +94,25 @@ CREATE TABLE `pvt_messages` (
   `message` text NOT NULL,
   `draft` enum('0','1') NOT NULL,
   `opened` enum('0','1') NOT NULL,
-  `recipientDelete` enum('0','1') NOT NULL,
-  `senderDelete` enum('0','1') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `recipientDelete` enum('0','1','2') NOT NULL,
+  `senderDelete` enum('0','1','2') NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `pvt_messages`
+--
+
+TRUNCATE TABLE `pvt_messages`;
 --
 -- Dumping data for table `pvt_messages`
 --
 
 INSERT INTO `pvt_messages` (`id`, `to_user`, `from_user`, `date`, `subject`, `message`, `draft`, `opened`, `recipientDelete`, `senderDelete`) VALUES
-(11, 'buster', 'grod', '2018-06-06', '', 'hi', '0', '0', '1', '1'),
-(12, 'buster', 'grod', '2018-06-06', '', 'bro it worked', '1', '0', '0', '1'),
-(13, 'buster', 'grod', '2018-06-07', '', 'bro it worked', '1', '0', '0', '0');
+(12, 'buster', 'grod', '2018-06-06', '', 'bro it worked', '1', '0', '0', '2'),
+(13, 'buster', 'grod', '2018-06-07', '', 'bro it worked', '1', '0', '0', '2'),
+(14, 'buster', 'grod', '2018-06-07', '', 'yo', '0', '0', '0', '2'),
+(15, 'buster', 'grod', '2018-06-08', '', 'hello kitty', '0', '0', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -120,8 +120,9 @@ INSERT INTO `pvt_messages` (`id`, `to_user`, `from_user`, `date`, `subject`, `me
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(25) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
@@ -136,9 +137,15 @@ CREATE TABLE `users` (
   `age` date NOT NULL,
   `city` varchar(25) NOT NULL,
   `state` varchar(25) NOT NULL,
-  `background` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `background` blob NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `users`
+--
+
+TRUNCATE TABLE `users`;
 --
 -- Dumping data for table `users`
 --
@@ -147,62 +154,6 @@ INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `email`, `pass
 (6, 'grod', 'Gabriel', 'Rodriguez', 'gabrielrodriguez89@outlook.com', '5f4dcc3b5aa765d61d8327deb882cf99', '2017-12-23', '0', 'do it', 'coding', 'sex', 0x2e2f2e2e2f75706c6f6164732f75736572646174612f757365725f70686f746f732f49676558304a5456685a484d5145362f416e6e69655f31362e6a7067, '1989-05-20', 'Denver', 'Colorado', ''),
 (7, 'buster', 'dave', 'buster', 'bust@me.com', '5f4dcc3b5aa765d61d8327deb882cf99', '2018-01-10', '0', 'hfgshs', 'sghsgh', 'sghsgh', '', '0000-00-00', 'Denver', 'Colorado', ''),
 (8, 'adams', 'John', 'Adams', 'johnadams@yahoo.com', '5f4dcc3b5aa765d61d8327deb882cf99', '2018-01-25', '0', 'i like to move it move it', 'something', 'i like to move it', '', '0000-00-00', 'denver', 'colorado', '');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `posts`
---
-ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `projects`
---
-ALTER TABLE `projects`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `pvt_messages`
---
-ALTER TABLE `pvt_messages`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `posts`
---
-ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
-
---
--- AUTO_INCREMENT for table `projects`
---
-ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `pvt_messages`
---
-ALTER TABLE `pvt_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
