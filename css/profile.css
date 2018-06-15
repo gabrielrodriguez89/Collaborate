@@ -12,8 +12,7 @@
 
 }
 #proPic2 {
-	position: relative;
-	top: 0;
+
 	width: 100%;
 	height: 150px;	
 	margin-left: auto;
@@ -33,13 +32,8 @@
 #proPic2 input[type="submit"]{
 	width: 40%;
 	font-size: 8pt;
-	position: absolute;
-	left: 0;
 }
 #proPic2 small {
-	position:absolute;
-	right: 20px;
-	top: 80%;
 	color: #282828;
 }
 #proPic2 small:hover {
@@ -178,15 +172,16 @@ fileLeftContent {
 	overflow: auto;
 }
 #me {
-    margin-left: 20px;
-	width: 80%;
+    margin-left: 0;
+	width: 250px;
 	text-align: justify;
-	overflow: auto;
+	overflow: none;
 	margin-bottom: 20px;
+	word-wrap: normal;
 }
 #me h1{
     margin-top: 10px;
-	width: 80%;
+	width: 100%;
 	text-align: center;
 	overflow: auto;
 }
