@@ -23,6 +23,8 @@ about the user in order to set up a profile.
     //strip and check user input
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
+		UploadNewImage($username);
+		
 		if (empty($_POST["age"]))
 		{
 			$ageErr = "Age is required";
@@ -76,7 +78,7 @@ about the user in order to set up a profile.
 		{
 			$con = Connect();
 
-			$description = mysqli_query ($con, "UPDATE `collaborate`.`users` SET `bio`='$bio',`interest`='$interests',`hobbies`='$hobbies',`age`='$age',`city`='$city',`state`='$state',`profile_pic`='NULL' WHERE username='$username'");
+			$description = mysqli_query ($con, "UPDATE `collaborate`.`users` SET `bio`='$bio',`interest`='$interests',`hobbies`='$hobbies',`age`='$age',`city`='$city',`state`='$state' WHERE `username`='$username'");
 			if($description)
 			{
 				header("Location: ./home.php");
@@ -86,7 +88,7 @@ about the user in order to set up a profile.
 		}
 		catch (\Exception $e)
 		{
-			print("OOPS.... An error occured.");
+			print("OOPS.... It looks like an error has occured.");
 		}
 		finally
 		{

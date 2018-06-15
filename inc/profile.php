@@ -73,16 +73,17 @@ profile it will be displayed without editing options.
 			}
 			else
 			{
+				
 				print ("<div id='proPic'>");
-				print ("<img src='$get_user_pic' alt='Profile Picture for $username' onclick='UploadPic()'>");
+				print ("<img src='$get_user_pic' alt='Profile Picture for $username' onclick='UploadPic()'><span class='tooltip'>Change Photo</span>");
 				print ("</div>");
 			}
 			print ("<div id='proPic2'>");
-			print ("<br>");
+			print ("<br/>");
 			print ("<form action='#' method='post' enctype='multipart/form-data'>");
 			print ("<input type='file' name='fileToUpload' id='fileToUpload'><br/><br/>");
 			print ("<input id='btn' type='submit' name='upload' value='Save'>");
-			print ("<small onclick='NoUpload()'>Cancel</small>");
+			print ("<br/><br/><small onclick='NoUpload()'>Cancel</small>");
 			print ("</form>");
 			print ("</div> ");
 			//upload profile picture if non exist
@@ -96,11 +97,11 @@ profile it will be displayed without editing options.
 			print ("<div class='profileLeft'>");
 			print ("<div id='me'>");
 			print ("<h1>$first_name&nbsp$last_name</h1><br/><br/>");
-			print ("<h3>Age:&nbsp$age</h3><br/>");
-			print ("<h3>Location:&nbsp$user_city_,&nbsp$user_state_</h3><br/>");
-			print ("<h3>Hobbies:&nbsp$hobbies</h3><br/>");
-			print ("<h3>Interest:&nbsp$interest</h3><br/>");
-			print ("<h3>More:&nbsp$bio</h3>");
+			print ("<h3><pre><b>Age</b>:&#09;$age</pre></h3><br/>");
+			print ("<h3><pre><b>Location</b>:&#09;$user_city_,&nbsp$user_state_</pre></h3><br/>");
+			print ("<h3><b>Hobbies</b>:&nbsp&nbsp&nbsp$hobbies</h3><br/>");
+			print ("<h3><b>Interest</b>:&nbsp&nbsp&nbsp$interest</h3><br/>");
+			print ("<h3><b>About Me</b>:&nbsp&nbsp&nbsp$bio</h3>");
 			print ("</div>");
 			print ("</div> <!--close profileleftcontent-->");
 			print ("<br/>");

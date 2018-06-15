@@ -711,12 +711,12 @@ function GetBio($bio)
 		$age = $date3->y;
 		
 		print ("<div id='me'>");
-		print ("<h1>$fname&nbsp$lname</h3><br/><br/>");
-		print ("<h3>Age:&nbsp$age</h3><br/>");
-		print ("<h3>Location:&nbsp$city,&nbsp$state</h3><br/>");
-		print ("<h3>Hobbies:&nbsp$hobbies</h3><br/>");
-		print ("<h3>Interest:&nbsp$interest</h3><br/>");
-		print ("<h3>More:&nbsp$user_bio</h3>");
+		print ("<h1>$first_name&nbsp$last_name</h1><br/><br/>");
+		print ("<h3><pre><b>Age</b>:&#09;$age</pre></h3><br/>");
+		print ("<h3><pre><b>Location</b>:&#09;$user_city_,&nbsp$user_state_</pre></h3><br/>");
+		print ("<h3><b>Hobbies</b>:&nbsp&nbsp&nbsp$hobbies blah blah blah blah blah</h3><br/>");
+		print ("<h3><b>Interest</b>:&nbsp&nbsp&nbsp$interest</h3><br/>");
+		print ("<h3><b>About Me</b>:&nbsp&nbsp&nbsp$bio</h3>");
 		print ("</div>");
 		print ("</div><!--profileLeftContent close-->");
 		print ("<br/>");
@@ -800,9 +800,10 @@ function GetPosts($posts)
 }
 function OtherUsers($query)
 {
-	$con = Connect();
 	try
 	{
+		$con = Connect();
+		
 		if($getBio = mysqli_query($con, $query))
 	    {
 			while($row = mysqli_fetch_assoc($getBio))
@@ -854,5 +855,31 @@ function OtherUsers($query)
 	{
 		$con = NULL;
 	}
+}
+function resize_image($file, $w, $h, $crop=FALSE) {
+    list($width, $height) = getimagesize($file);
+    $r = $width / $height;
+    if ($crop) {
+        if ($width > $height) {
+            $width = ceil($width-($width*abs($r-$w/$h)));
+        } else {
+            $height = ceil($height-($height*abs($r-$w/$h)));
+        }
+        $newwidth = $w;
+        $newheight = $h;
+    } else {
+        if ($w/$h > $r) {
+            $newwidth = $h*$r;
+            $newheight = $h;
+        } else {
+            $newheight = $w/$r;
+            $newwidth = $w;
+        }
+    }
+    $src = imagecreatefromjpeg($file);
+    $dst = imagecreatetruecolor($newwidth, $newheight);
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+    return $dst;
 }
 ?>
