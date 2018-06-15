@@ -128,7 +128,7 @@ area
 									//encrypt password and password 2 using md5 before sending to database
 									$password = md5($password);
 
-									$mysqli_query = "INSERT INTO users (username, first_name, last_name, email, password, sign_up_date) VALUES ('$userN', '$firstN', '$lastN', '$email', '$password', '$date')";
+									$mysqli_query = "INSERT INTO `collaborate`.`users` (`username`, `first_name`, `last_name`, `email`, `password`, `sign_up_date`) VALUES ('$userN', '$firstN', '$lastN', '$email', '$password', '$date')";
 									if(mysqli_query ($con, $mysqli_query))
 									{
 										$username = $userN;
@@ -140,12 +140,12 @@ area
 						}
 						else
 						{
-							$passErr = "Your passwords don&apos;t match!";
+							$passErr = "Your passwords do not match.";
 						}
 					}
 					else
 					{
-						$emaiErr = "Sorry, that Email address is already in use.";
+						$emaiErr = "An account exists with that email address.";
 					}
 				}
 				else
@@ -155,14 +155,14 @@ area
 			}
 			else
 			{
-				$email2Err = "Your E-mails don&apos;t match.";
+				$email2Err = "Your E-mails do not match.";
 			}
 		}
 		else
 		{
 			if (empty($_POST["user_login"]))
 			{
-		        $userLogErr = "Username is required";
+		        $userLogErr = "Username is required.";
 			}
 			else
 			{
@@ -170,7 +170,7 @@ area
 			}
 			if (empty($_POST["password_login"]))
 			{
-		  	    $passLogErr = "Password is required";
+		  	    $passLogErr = "Password is a required.";
 		    }
 		    else
 		    {
@@ -192,7 +192,7 @@ area
 			}
 			else
 			{
-				$userLogErr = "There was no user found using the information provided.";	
+				$userLogErr = "OOPS... It looks like the email or password you've provided doesn't match a user in our system. Please verify your information and try again.";	
 				
 			}
         }
@@ -253,25 +253,25 @@ area
   <!--
   Registration start located on the right of screen
   -->
-	<div id="join">
+	<div id="join" onload="">
 	<span class="err"><?php echo $userLogErr;?></span>
 		<table >
 			<tr> 
 				<td >
 					<h2 id="h2sign">Sign Up Below or<span id="in" onclick="SignIn()">Sign In</span></h2>
 					<form id="signIn" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-						<input type="text" name="user_login" size="50" placeholder="Username" /><br /><br />
+						<input type="text" name="user_login" size="50" placeholder="Username" autocomplete="on"/><br /><br />
 						<input type="password" name="password_login" size="50" placeholder="Password" /><br /><br />
 						<input type="submit" name="log" value="Login" />
 					</form>
-					<form id="signUp" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+					<form id="signUp" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" autocomplete="off">
 						<input type="text" name="fname" placeholder="First Name" /><span class="err"><?php echo $fnameErr;?></span><br /><br />
 						<input type="text" name="lname" placeholder="Last Name" /><span class="err"><?php echo $lnameErr;?></span><br /><br />
 						<input type="text" name="uname" placeholder="Username" /><span class="err"><?php echo $userErr;?></span><br /><br />
 						<input type="text" name="email" placeholder="Email Address" /><span class="err"><?php echo $emailErr;?></span><br /><br />
-						<input type="text" name="email2" placeholder="Re-Enter Email" /><span class="err"><?php echo $email2Err;?></span><br /><br />
+						<input type="text" name="email2" placeholder="Re-Enter Email" autocomplete="off"/><span class="err"><?php echo $email2Err;?></span><br /><br />
 						<input type="password" name="password" placeholder="Password" /><span class="err"><?php echo $passErr;?></span><br /><br />
-						<input type="password" name="password2" placeholder="Password Verification" /><span class="err"><?php echo $pass2Err;?></span><br /><br />
+						<input type="password" name="password2" placeholder="Password Verification" autocomplete="off"/><span class="err"><?php echo $pass2Err;?></span><br /><br />
 						<input type="submit" name="reg" value="Sign Up!" />
 					</form>
 				</td>
