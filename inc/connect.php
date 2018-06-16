@@ -461,14 +461,13 @@ function UpdateUser()
         $username = $_SESSION["username"];
 		$fname = test_input($_POST["fname"]);
 		$lname = test_input($_POST["lname"]);
-		$age = test_input($_POST["age"]);
 		$city = test_input($_POST["city"]);
 		$state = test_input($_POST["state"]);
 		$interests = test_input($_POST["interests"]);
 		$hobbies = test_input($_POST["hobbies"]);
 		$bio = test_input($_POST["description"]);
 		//update the users profile
-		$desc = "UPDATE `collaborate`.`users` SET `first_name`='$fname',`last_name`='$lname',`bio`='$bio',`interest`='$interests',`hobbies`='$hobbies',`age`='$age',`city`='$city',`state`='$state' WHERE `username`='$username'";
+		$desc = "UPDATE `collaborate`.`users` SET `first_name`='$fname',`last_name`='$lname',`bio`='$bio',`interest`='$interests',`hobbies`='$hobbies',`city`='$city',`state`='$state' WHERE `username`='$username'";
 		if($description = mysqli_query($con, $desc))
 		{	
 			//redirect user to their profile
@@ -603,11 +602,14 @@ function GetProfilePic($user)
 		//open database connection
 		$con = Connect();
 		//mysqli_query database for image
-		$check_pic = "SELECT user_picture FROM profile_pictures WHERE user='$user'";
+		$check_pic = "SELECT * FROM `collaborate`.`users` WHERE `username`='$user'";
 		if($get_pic = mysqli_query($con, $check_pic))
 		{
 			$get_pic_row = mysqli_fetch_assoc($get_pic);
-			$profile_pic_db = $get_pic_row['user_picture'];
+			$profile_pic_db = $get_pic_row['profile_pic'];
+			print ("<div id='proPic'>");
+			print ("<img src='$profile_pic_db' alt='Profile Picture for $user'>");
+			print ("</div>");
         }
 		else
 		{
@@ -685,7 +687,7 @@ function CountDeleted()
 //get users bio and information to display
 function GetBio($bio)
 {
-	$user = $fname = $lname = $age = $city = $state = $hobbies = $interest = $user_bio = $date = "";
+	$user = $first_name = $last_name = $age = $city = $state = $hobbies = $interest = $user_bio = $date = "";
 	try
 	{
 		//open connection
@@ -696,14 +698,14 @@ function GetBio($bio)
 		while($row = mysqli_fetch_assoc($getBio))
 		{
 			$user = $row['username'];
-			$fname = $row['first_name'];
-			$lname = $row['last_name'];
+			$first_name = $row['first_name'];
+			$last_name = $row['last_name'];
 			$date = $row['age'];
-			$city = $row['city'];
-			$state = $row['state'];
+			$user_city_ = $row['city'];
+			$user_state_ = $row['state'];
 			$hobbies = $row['hobbies'];
 			$interest = $row['interest'];
-			$user_bio = $row['bio'];
+			$bio = $row['bio'];
 		}
 		$date1 = new DateTime($date);
 		$date2 = new DateTime("now");
@@ -719,9 +721,9 @@ function GetBio($bio)
 		print ("<h3><b>About Me</b>:&nbsp&nbsp&nbsp$bio</h3>");
 		print ("</div>");
 		print ("</div><!--profileLeftContent close-->");
-		print ("<br/>");
+		print ("<br/><br/><br/>");
 		print ("<form action='send_msg.php?u=$user' method='post'>");
-		print ("<button  name='sendmsg'>Contact</button>");
+		print ("<button name='sendmsg'>Contact</button>");
 		print ("</form>");
 		print ("</div><!--Profile close-->");
 	}

@@ -69,11 +69,9 @@ profile it will be displayed without editing options.
 				print ("<div id='proPic'>");
 				print ("<span onclick='UploadPic()'><img src='./../img/no-photo.png' alt='Placeholder for user to upload image' ></span>");
 				print ("</div>");
-			
 			}
 			else
 			{
-				
 				print ("<div id='proPic'>");
 				print ("<img src='$get_user_pic' alt='Profile Picture for $username' onclick='UploadPic()'><span class='tooltip'>Change Photo</span>");
 				print ("</div>");
@@ -164,6 +162,7 @@ profile it will be displayed without editing options.
 		{
 			$_SESSION['user'] = $user;
 			$user_name = $_SESSION['user'];
+			
 			print ("<div id='profileButtons'>");
 			print ("<div id='minProfile' onclick='ShowProfile()'>");
 			print ("<img src='./../img/no-photo2.png' alt='profile' id='pro-ico'/><h1>Profile</h1>");

@@ -78,7 +78,7 @@ about the user in order to set up a profile.
 		{
 			$con = Connect();
 
-			$description = mysqli_query ($con, "UPDATE `collaborate`.`users` SET `bio`='$bio',`interest`='$interests',`hobbies`='$hobbies',`age`='$age',`city`='$city',`state`='$state' WHERE `username`='$username'");
+			$description = mysqli_query ($con, "UPDATE `collaborate`.`users` SET `bio`='$bio',`interest`='$interests',`hobbies`='$hobbies',`age`='$age',`city`='$city',`state`='$state', `activated`='0' WHERE `username`='$username'");
 			if($description)
 			{
 				header("Location: ./home.php");
