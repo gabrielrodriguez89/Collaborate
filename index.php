@@ -128,7 +128,7 @@ area
 									//encrypt password and password 2 using md5 before sending to database
 									$password = md5($password);
 
-									$mysqli_query = "INSERT INTO `collaborate`.`users` (`username`, `first_name`, `last_name`, `email`, `password`, `sign_up_date`) VALUES ('$userN', '$firstN', '$lastN', '$email', '$password', '$date')";
+									$mysqli_query = "INSERT INTO `collaborate`.`users` (`username`, `first_name`, `last_name`, `email`, `password`, `sign_up_date`, `activated`) VALUES ('$userN', '$firstN', '$lastN', '$email', '$password', '$date', '1')";
 									if(mysqli_query ($con, $mysqli_query))
 									{
 										$username = $userN;
@@ -178,82 +178,116 @@ area
 		    }
 			$md5password_login = md5($password_login);
 
-			//Check username
-			$sql = ("SELECT `username` FROM `collaborate`.`users` WHERE `username`='$user_login' AND `password`='$md5password_login' AND `activated`='0' LIMIT 1");
-          
-			 
+			//query database for user
+			$sql = "SELECT `username` FROM `collaborate`.`users` WHERE `username`='$user_login' AND `password`='$md5password_login' AND `activated`='0'";
+            $query = "SELECT `username` FROM `collaborate`.`users` WHERE `username`='$user_login' AND `password`='$md5password_login' AND `activated`='1'";
+			
+			//return username if account is active and exists
 			$user = SetUser($sql);
-			if($user)
+			
+			if($user)//if user is activated and credentials match login
 			{
 				$_SESSION['username'] = $user;
-				
-				header("Location: ./inc/home.php");
-				
+				header("Location: ./inc/home.php");		
 			}
-			else
-			{
-				$userLogErr = "OOPS... It looks like the email or password you've provided doesn't match a user in our system. Please verify your information and try again.";	
-				
-			}
-        }
-    }
- /*
- START SESSION DATA
- */
- function SetUser($sql)
- {
-	 $username = "";
- 	try
- 	{
- 		//open database connection
- 		$con = Connect();
- 		//mysqli_query database
- 		if($mysqli_query = mysqli_query ($con, $sql))
-        {
-			while($row = mysqli_fetch_assoc($mysqli_query))
-			{
-				$username = $row["username"];
-			}
-			if($username != "")
-			{
-				//get users profile_pictures
-				$check_pic = mysqli_query ($con, "SELECT `user_picture` FROM `collaborate`.`profile_pictures` WHERE `user`='$username'");
-				$get_pic_row = mysqli_fetch_assoc($check_pic);
-				$profile_pic_db = $get_pic_row['user_picture'];
-				if($profile_pic_db != "")
-				{
-					$get_user_pic = $profile_pic_db;
-				}
+			else//check user to see if the account is de-activated and return username, direct them to register
+				if($check_Active = Activated($query))
+			    {
+					$_SESSION['username'] = $check_Active;
+					header("Location: ./inc/user_form.php");
+			    }
 				else
 				{
-					$get_user_pic = "";
+					$userLogErr = "OOPS... It looks like the email or password you've provided doesn't match a user in our system. Please verify your information and try again.";	
+				}
+        }
+    }
+	//see if the user has an account that was started and not activated
+	function Activated($query)
+	{
+		try
+		{
+			$con = Connect();
+			if($mysqli_query = mysqli_query ($con, $query))
+			{
+				while($row = mysqli_fetch_assoc($mysqli_query))
+				{
+					$username = $row["username"];
 				}
 				return $username;
 			}
+			else
+			{
+				return false;
+			}
 		}
-		else
+		catch (Exception $e)
 		{
 			return false;
+			//TODO add log for catch statement
 		}
- 	}
- 	catch (Exception $e)
- 	{
-		return false;
- 		//TODO add log for catch statement
- 	}
-	finally
-	{
-		$con = NULL;
+		finally
+		{
+			$con = NULL;
+		}
 	}
- }
- /*
- END SESSION DATA
- */
+	 /*
+	 START login DATA
+	 */
+	 function SetUser($sql)
+	 {
+		$username = "";
+		try
+		{
+			//open database connection
+			$con = Connect();
+			//mysqli_query database
+			if($mysqli_query = mysqli_query ($con, $sql))
+			{
+				while($row = mysqli_fetch_assoc($mysqli_query))
+				{
+					$username = $row["username"];
+				}
+				if($username != "")
+				{
+					//get users profile_pictures
+					$check_pic = mysqli_query ($con, "SELECT `user_picture` FROM `collaborate`.`profile_pictures` WHERE `user`='$username'");
+					$get_pic_row = mysqli_fetch_assoc($check_pic);
+					$profile_pic_db = $get_pic_row['user_picture'];
+					if($profile_pic_db != "")
+					{
+						$get_user_pic = $profile_pic_db;
+					}
+					else
+					{
+						$get_user_pic = "";
+					}
+					return $username;
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+		catch (Exception $e)
+		{
+			return false;
+			//TODO add log for catch statement
+		}
+		finally
+		{
+			$con = NULL;
+		}
+	 }
+	 /*
+	 END login DATA
+	 */
 ?>
   <!--
   Registration start located on the right of screen
   -->
-	<div id="join" onload="">
+	<div id="join">
 	<span class="err"><?php echo $userLogErr;?></span>
 		<table >
 			<tr> 
@@ -264,7 +298,7 @@ area
 						<input type="password" name="password_login" size="50" placeholder="Password" /><br /><br />
 						<input type="submit" name="log" value="Login" />
 					</form>
-					<form id="signUp" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" autocomplete="off">
+					<form id="signUp" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" autocomplete="on">
 						<input type="text" name="fname" placeholder="First Name" /><span class="err"><?php echo $fnameErr;?></span><br /><br />
 						<input type="text" name="lname" placeholder="Last Name" /><span class="err"><?php echo $lnameErr;?></span><br /><br />
 						<input type="text" name="uname" placeholder="Username" /><span class="err"><?php echo $userErr;?></span><br /><br />
