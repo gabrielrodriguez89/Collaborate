@@ -174,6 +174,10 @@ function DeleteMsg(id)
     }
     newHTTP.send();
 }
+function ClearForm()
+{
+	document.getElementById("signUp").reset(); 
+}
 //toggles message views to open and close messages
 function toggle(id)
 {
