@@ -866,11 +866,10 @@ This CSS was written for Collaborate 2017-2018
 	}
 	#proPic img{
 		width: 100%;
-		height: 100%;	
+		height: auto;	
 		cursor: pointer;
 		border-radius: 10px;
 		overflow: hidden;
-
 	}
 	#proPic:hover .tooltip {
 		width: 100px;
@@ -1048,6 +1047,7 @@ This CSS was written for Collaborate 2017-2018
 		background-color: #f2f2f2;
         display: block;
 	}
+
 	#profile2 {
 		width: 150px;
 		margin-left: 10%;
@@ -1072,9 +1072,16 @@ This CSS was written for Collaborate 2017-2018
 	#profile2 h1{
 		margin-left: 5px;
 	}
-	#proPic3 img{
-		height: 120px;
+	#proPic3 {
 		width: 100%;
+		height: 130px;
+		overflow: hidden;
+	}
+	#proPic3 img{
+		width: 100%;
+		height: auto;	
+		cursor: pointer;
+		overflow: hidden;
 		border-top-right-radius: 6px;
 		border-top-left-radius: 6px;
 	}
@@ -1082,6 +1089,9 @@ This CSS was written for Collaborate 2017-2018
 		height: 120px;
 		width: 120px;
 		padding: 10px;
+		width: 100%;	
+		cursor: pointer;
+		overflow: hidden;
 	}
 	.profileLeftContent2 {
 		padding: 0;
