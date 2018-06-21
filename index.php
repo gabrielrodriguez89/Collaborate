@@ -100,9 +100,9 @@ area
 			if ($email == $email2)
 			{
 				// Check if user already exists
-				$user_check = mysqli_query($con, "SELECT username FROM users WHERE username='$userN'");
+				$user_check = mysqli_query($con, "SELECT `username` FROM `collaborate`.`users` WHERE `username`='$userN'");
 				//Check whether Email already exists in the database
-				$email_check = mysqli_query($con, "SELECT email FROM users WHERE email='$email'");
+				$email_check = mysqli_query($con, "SELECT `email` FROM `collaborate`.`users` WHERE `email`='$email'");
 
 				if (!$user_check2 = mysqli_fetch_assoc($user_check))
 				{
@@ -114,14 +114,14 @@ area
 							// check the maximum length of username/first name/last name does not exceed 25 characters
 							if (strlen($userN) > 25 || strlen($firstN) > 25 || strlen($lastN) > 25)
 							{
-							   echo "The maximum amount of characters has been exceeded";
+							   $userLogErr = "The maximum amount of characters has been exceeded";
 							}
 							else
 							{
 								// check the maximum length of password does not exceed 25 characters and is not less than 5 characters
 								if (strlen($password) > 30 || strlen($password2) < 5)
 								{
-									echo "Your password must be between 5 and 30 characters long!";
+									$userLogErr = "Your password must be between 5 and 30 characters long!";
 								}
 								else
 								{
@@ -131,6 +131,7 @@ area
 									$mysqli_query = "INSERT INTO `collaborate`.`users` (`username`, `first_name`, `last_name`, `email`, `password`, `sign_up_date`, `activated`) VALUES ('$userN', '$firstN', '$lastN', '$email', '$password', '$date', '1')";
 									if(mysqli_query ($con, $mysqli_query))
 									{
+	                                    SESSION_START();
 										$username = $userN;
                                         $_SESSION['username'] = $username;
 										header("Location: ./inc/user_form.php");
@@ -145,7 +146,7 @@ area
 					}
 					else
 					{
-						$emaiErr = "An account exists with that email address.";
+						$emailErr = "An account exists with that email address.";
 					}
 				}
 				else
@@ -294,19 +295,20 @@ area
 				<td >
 					<h2 id="h2sign">Sign Up Below or<span id="in" onclick="SignIn()">Sign In</span></h2>
 					<form id="signIn" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-						<input type="text" name="user_login" size="50" placeholder="Username" autocomplete="on"/><br /><br />
-						<input type="password" name="password_login" size="50" placeholder="Password" /><br /><br />
-						<input type="submit" name="log" value="Login" />
+						<input type="text" name="user_login" size="50" placeholder="Username" autocomplete="on"><br /><br />
+						<input type="password" name="password_login" size="50" placeholder="Password" ><br /><br />
+						<input type="submit" name="log" value="Login" >
 					</form>
-					<form id="signUp" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" autocomplete="on">
-						<input type="text" name="fname" placeholder="First Name" /><span class="err"><?php echo $fnameErr;?></span><br /><br />
-						<input type="text" name="lname" placeholder="Last Name" /><span class="err"><?php echo $lnameErr;?></span><br /><br />
-						<input type="text" name="uname" placeholder="Username" /><span class="err"><?php echo $userErr;?></span><br /><br />
-						<input type="text" name="email" placeholder="Email Address" /><span class="err"><?php echo $emailErr;?></span><br /><br />
-						<input type="text" name="email2" placeholder="Re-Enter Email" autocomplete="off"/><span class="err"><?php echo $email2Err;?></span><br /><br />
-						<input type="password" name="password" placeholder="Password" /><span class="err"><?php echo $passErr;?></span><br /><br />
-						<input type="password" name="password2" placeholder="Password Verification" autocomplete="off"/><span class="err"><?php echo $pass2Err;?></span><br /><br />
-						<input type="submit" name="reg" value="Sign Up!" />
+					<form id="signUp" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" >
+						<input type="text" name="fname" placeholder="First Name" autocomplete="on"><span class="err"><?php echo $fnameErr;?></span><br /><br />
+						<input type="text" name="lname" placeholder="Last Name" autocomplete="on"><span class="err"><?php echo $lnameErr;?></span><br /><br />
+						<input type="text" name="uname" placeholder="Username" autocomplete="on"><span class="err"><?php echo $userErr;?></span><br /><br />
+						<input type="text" name="email" placeholder="Email Address" autocomplete="on"><span class="err"><?php echo $emailErr;?></span><br /><br />
+						<input type="text" name="email2" placeholder="Re-Enter Email" autocomplete="off"><span class="err"><?php echo $email2Err;?></span><br /><br />
+						<input type="password" name="password" placeholder="Password" autocomplete="on"><span class="err"><?php echo $passErr;?></span><br /><br />
+						<input type="password" name="password2" placeholder="Password Verification" autocomplete="off"><span class="err"><?php echo $pass2Err;?></span><br /><br />
+						<input type="submit" name="reg" value="Sign Up!" >
+						<input type="reset">
 					</form>
 				</td>
 			</tr>
