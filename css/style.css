@@ -334,11 +334,18 @@ This CSS was written for Collaborate 2017-2018
 		font-size: 7pt;
 		font-weight: bold;
 	}
+	#proPic3 {
+		width: 100%;
+		height: 130px;
+		overflow: hidden;
+		border-bottom-left-radius: 6px;
+		border-top-left-radius: 6px;
+	}
 	#proPic3 img{
-		float: left;
-		height: 150px;
-		width: 150px;
-
+		width: 100%;
+		height: auto;	
+		cursor: pointer;
+		overflow: hidden;
 	}
 	#proPic4 img{
 		height: 150px;
@@ -362,7 +369,7 @@ This CSS was written for Collaborate 2017-2018
 	#dropdown-content2 {
 		color: #ffffff;
 		position: fixed;
-		top: 50px;
+		top: 0;
 		left: 0;
 		width: 80%;
 		display: none;
@@ -395,6 +402,7 @@ This CSS was written for Collaborate 2017-2018
 		width: 100%;
 		font-weight: bold;
 	    background-color: #585858;
+		display: flex;
 	}
 	#message-nav-buttons {
 		width: 100%;
@@ -530,15 +538,41 @@ This CSS was written for Collaborate 2017-2018
 	#minProject h1 {
 		padding: 10px;
 	}
-	#proPic img{
-		width: 250px;
-		height: 250px;	
+	#drp-menu{
+		height: 100px;
+		width: 100%;
+		overflow: hidden;
+		background-color: rgba(40,40,40,.5 );
+		border-bottom: 1px solid #E8E8E8;
+	}
+	#drp-menu img {
+		position: absolute;
+		left: 40%;
+		top: 17px;
+		width: 65px;
+		height: 65px;
+		border-radius: 50%;
+		opacity: 1;
+		border: 2px solid #E8E8E8;
+		overflow: hidden;
+	}
+	#proPic {
+		width: 100%;
+		height: 250px;
+		overflow: hidden;
 		border-radius: 10px;
 		-moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.5), 0 5px 15px 0 rgba(0, 0, 0, 0.3);
 		-webkit-box-shadow: 0 6px 7px 0 rgba(0, 0, 0, 0.5), 0 5px 15px 0 rgba(0, 0, 0, 0.3);
 		box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.5), 0 5px 15px 0 rgba(0, 0, 0, 0.3);
 	}
-
+	#proPic img{
+		width: 100%;
+		width: 100%;
+		height: auto;	
+		cursor: pointer;
+		border-radius: 10px;
+		overflow: hidden;
+	}
 	#profileButtons {
 		position: -webkit-sticky;
 		position: sticky;
@@ -635,6 +669,70 @@ This CSS was written for Collaborate 2017-2018
 	}
 	#del:hover {
 		opacity: .7;
+	}
+	#opt {
+		height: auto;
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0;
+		display: flex-wrap;
+	}
+	#opt img{
+		float: left;
+		height: auto;
+		width: 20px;
+		margin-left: 20%;
+		margin-top: 4px;
+	}
+	#opt #secure {
+		margin-top: 6px;
+	}
+	#opt h3{
+		color: #ffffff;
+		font-size: 16pt;
+		font-weight: bold;
+		font-family: roboto, arial, helvetica, sans-serif;
+		margin-left: auto;
+		margin-right: 10%;
+	}
+	#opt #opt-3, button{
+		text-align: center;
+		width: 100%;
+		height: 60px;
+		color: #ffffff;
+		font-size: 16pt;
+		font-weight: bold;
+		font-family: roboto, arial, helvetica, sans-serif;
+		border: none;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		border-radius: 5px;
+		background-color: rgba(88, 88, 88, 1);
+		transition-timing-function: ease-in-out;
+		-webkit-transition-duration: .5s;
+		transition-duration: .5s;
+	}
+	#opt #opt-3, button:hover {
+		background-color: rgba(88, 88, 88, .9);
+		-moz-box-shadow: 0 8px 10px 0 rgba(169, 169, 169, 0.7), 0 10px 12px 0 rgba(169, 169, 169, 0.2);
+		-webkit-box-shadow: 0 8px 10px 0 rgba(169, 169, 169, 0.7), 0 10px 12px 0 rgba(169, 169, 169, 0.2);
+		box-shadow: 0 8px 10px 0 rgba(169, 169, 169, 0.7), 0 10px 12px 0 rgba(169, 169, 169, 0.2);
+	}
+	#opt-3 h1 {
+		padding: 10px;
+		margin-bottom: 15px;
+		text-align: center;
+		font-size: 16pt;
+		font-weight: bold;
+		font-family: roboto, arial, helvetica, sans-serif;
+	}
+	#opt-3 button {
+		margin-top: 25px;
+	}
+	#opt-2, #opt-3 {
+		display: none;
 	}
 }
 
@@ -810,7 +908,7 @@ This CSS was written for Collaborate 2017-2018
 	}
 	#hideMenu {
 		position: absolute;
-		left: 30%;
+		left: 28%;
 	    font-size: 10pt;
 		font-weight: regular;
 		margin-left: auto;
@@ -1338,6 +1436,88 @@ This CSS was written for Collaborate 2017-2018
 	#del:hover {
 		opacity: .7;
 	}
+	#opt {
+		height: auto;
+		width: 100%;
+		padding: 0;
+		display: flex;
+	}
+	#opt img{
+		float: left;
+		height: auto;
+		width: 20px;
+		margin-left: 20%;
+		margin-top: 4px;
+	}
+	#opt #secure {
+		margin-top: 6px;
+	}
+	#opt h3{
+
+		color: #ffffff;
+		font-size: 16pt;
+		font-weight: bold;
+		font-family: roboto, arial, helvetica, sans-serif;
+		margin-left: auto;
+		margin-right: 10%;
+	}
+	#opt #opt-3, button{
+		text-align: center;
+		width: 40%;
+		height: 60px;
+		color: #ffffff;
+		font-size: 16pt;
+		font-weight: bold;
+		font-family: roboto, arial, helvetica, sans-serif;
+		border: none;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		padding: ;
+		border-radius: 5px;
+		background-color: rgba(88, 88, 88, 1);
+		transition-timing-function: ease-in-out;
+		-webkit-transition-duration: .5s;
+		transition-duration: .5s;
+	}
+	#opt #opt-3, button:hover {
+		background-color: rgba(88, 88, 88, .9);
+		-moz-box-shadow: 0 8px 10px 0 rgba(169, 169, 169, 0.7), 0 10px 12px 0 rgba(169, 169, 169, 0.2);
+		-webkit-box-shadow: 0 8px 10px 0 rgba(169, 169, 169, 0.7), 0 10px 12px 0 rgba(169, 169, 169, 0.2);
+		box-shadow: 0 8px 10px 0 rgba(169, 169, 169, 0.7), 0 10px 12px 0 rgba(169, 169, 169, 0.2);
+	}
+	#opt-3 h1 {
+		padding: 10px;
+		margin-bottom: 15px;
+		text-align: center;
+		font-size: 16pt;
+		font-weight: bold;
+		font-family: roboto, arial, helvetica, sans-serif;
+	}
+	#opt-3 button {
+		margin-top: 25px;
+	}
+	#opt-2, #opt-3 {
+		display: none;
+	}
+}
+@media screen and (min-width: 1400px) {
+	#hideMenu {
+		position: absolute;
+		left: 30%;
+	    font-size: 10pt;
+		font-weight: regular;
+		margin-left: 0;
+		display: flex;
+	}	
+    #hideMenu a {
+		padding:0 70px;
+		margin-left: 10%;
+		color: #aaa;		
+		transition-timing-function: ease-in-out;
+        -webkit-transition-duration: .0s;
+        transition-duration: .0s;
+	}
 }
 * {
 	margin: 0px;
@@ -1354,17 +1534,23 @@ This CSS was written for Collaborate 2017-2018
 #a {
 	color: #ffffff;
 }
-#pic, #pic2, #pic3 {
+#pic, #pic3 {
 	border-radius: 50%;
 }
+
 #pic3 {
 	margin-left: 16%;
-	margin-top: 4px;
-	width: 25px;
-	height: 25px;
-	opacity: .8;
+	margin-top: 2px;
+	margin-bottom: 0;
+	width: 40px;
+	height: 40px;
+	opacity: 1;
+	border: 2px solid #E8E8E8;
+	transition-timing-function: ease-in-out;
+    -webkit-transition-duration: .5s;
+    transition-duration: .5s;
 }
-#pic:hover {
+#pic:hover, #pic3:hover{
 	opacity: .5;
 }
 #dropbtn, #dropbtn2 {
@@ -1453,7 +1639,8 @@ This CSS was written for Collaborate 2017-2018
 	opacity: .5;
 	margin-right: ;
 }
-#dropdown-content2 img {
+
+#dropdown-content2 #icon {
 	position: absolute;
 	left: 30%;
 	height: 20px;
@@ -1524,7 +1711,7 @@ This CSS was written for Collaborate 2017-2018
 	width: 35px;
 	height: 35px;
 }
-#inbox_icon2, #home2, #pic2, #manage2, #signout2, #people2{
+#icon {
 	margin-right: 0;
 	margin-top:0 ;
 }
@@ -1560,13 +1747,6 @@ a:hover {
 }
 a:visited {
 	color: #585858;
-}
-input[type="submit"]:hover {
-	background-color: #585858;
-	color: #ffffff;
-	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #hr-small{
 	width: 50%;
@@ -1619,7 +1799,6 @@ form input[type="submit"] {
 	font-weight: bold;
 	background-color: #282828;
 	color: #ffffff;
-	border: 2px solid #D8D8D8;
 	font-size: 16px;
 	padding:8px;
 	width: 100%;
@@ -1631,6 +1810,17 @@ form input, textarea, select{
 	font-size: 12px;
 	padding: 10px;
 	width: 100%;
+	resize: none;
+}
+form input:hover, textarea:hover {
+	border: 3px solid #D8D8D8;
+}
+input[type="submit"]:hover {
+	background-color: #585858;
+	color: #ffffff;
+	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #showProject {
 	font-weight: bold;
@@ -1811,70 +2001,6 @@ form input, textarea, select{
 	float: right;
 	padding:10px;
 }
-#opt {
-	height: auto;
-	width: 100%;
-	padding: 0;
-	display: flex;
-}
-#opt img{
-	float: left;
-	height: auto;
-	width: 20px;
-	margin-left: 20%;
-	margin-top: 4px;
-}
-#opt #secure {
-	margin-top: 6px;
-}
-#opt h3{
-
-	color: #ffffff;
-	font-size: 16pt;
-	font-weight: bold;
-	font-family: roboto, arial, helvetica, sans-serif;
-	margin-left: auto;
-	margin-right: 10%;
-}
-#opt #opt-3, button{
-	text-align: center;
-	width: 40%;
-	height: 60px;
-	color: #ffffff;
-	font-size: 16pt;
-	font-weight: bold;
-	font-family: roboto, arial, helvetica, sans-serif;
-	border: none;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	padding: ;
-	border-radius: 5px;
-	background-color: rgba(88, 88, 88, 1);
-	transition-timing-function: ease-in-out;
-	-webkit-transition-duration: .5s;
-	transition-duration: .5s;
-}
-#opt #opt-3, button:hover {
-	background-color: rgba(88, 88, 88, .9);
-	-moz-box-shadow: 0 8px 10px 0 rgba(169, 169, 169, 0.7), 0 10px 12px 0 rgba(169, 169, 169, 0.2);
-	-webkit-box-shadow: 0 8px 10px 0 rgba(169, 169, 169, 0.7), 0 10px 12px 0 rgba(169, 169, 169, 0.2);
-	box-shadow: 0 8px 10px 0 rgba(169, 169, 169, 0.7), 0 10px 12px 0 rgba(169, 169, 169, 0.2);
-}
-#opt-3 h1 {
-	padding: 10px;
-	margin-bottom: 15px;
-	text-align: center;
-	font-size: 16pt;
-	font-weight: bold;
-	font-family: roboto, arial, helvetica, sans-serif;
-}
-#opt-3 button {
-	margin-top: 25px;
-}
-#opt-2, #opt-3 {
-	display: none;
-}
 #newUser {
 	margin: 0;
 	height: 90%;
@@ -1895,11 +2021,7 @@ form input, textarea, select{
 	margin: 0;
 	float: Left;
 }
-#newUser input[type="submit"] {
-	width: 80px;
-	height: 40px;
-	margin-left: 90%;
-}
+
 #newUser textarea{
 	width: 100%;
 	height: 50px;
@@ -2013,38 +2135,7 @@ form input, textarea, select{
 	color: #585858;
 	font-weight: bold;
 }
-#addProject input[type="text"], input[type="file"] {
-	width: 100%;
-	border: 1px solid #D8D8D8;
-	color: #585858;
-	
-}
-#addProject select {
-	color: #585858;
-	width: 100%;
-	border: 1px solid #D8D8D8;
-}
-#addProject textarea {
-	width: 100%;
-	padding: 12px 20px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    resize: none;
-	border: 1px solid #D8D8D8;
-}
-#addProject button {
-	width: 40%;
-	height: 40px;
-	padding: 5px;
-	background-color: #282828;
-	color: #ffffff;
-}
-#addProject button:hover {
-	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	opacity: .7;
-}
+
 #desc {
 	width: 100%;
 	height: 100px;
