@@ -8,10 +8,23 @@ Date: 3/6/2018
 Connect.php was created to maintain all of the functions used in the Collaborate website 2017-2018
 
 */
-session_start();
 
+// start user session
+SESSION_START();
 
-
+// start user creation, regenrate session id after 30 minutes
+if (!isset($_SESSION['CREATED'])) 
+	{
+		$_SESSION['CREATED'] = time();// start creation time
+	} 
+	else 
+		if (time() - $_SESSION['CREATED'] > 1800) 
+		{
+			// session started more than 30 minutes ago
+			session_regenerate_id(true);    // change session ID for the current session and invalidate old session ID
+			$_SESSION['CREATED'] = time();  // update creation time
+		}
+		
 //database connection information
 function Connect()
 {
@@ -42,7 +55,6 @@ function test_input($data)
 	$data = htmlspecialchars($data);
 	return $data;
 }
-
 /*
 open connection and get projects from all users based on mysqli_query
 int sent to print the proper output while maitaining re-usability
@@ -90,7 +102,7 @@ function GetProject($project, $i)
 							}
 						}
 
-						//if there is no image for the project print this, else print this
+						//if there is no image for the project print this
 						if($attachment == "")
 						{
 							print ("<br/>");
@@ -397,6 +409,7 @@ function GetMessages($messages, $x)
 		$con = NULL;
 	}
 }
+
 //options for search bar and filters
 function ShowFilter()
 {
@@ -452,6 +465,7 @@ function ShowFilter()
     print ('</div><br/>');
     
 }
+
 //update users information POST from form in change_bio.php
 function UpdateUser()
 {
@@ -487,6 +501,7 @@ function UpdateUser()
 		$con = NULL;
 	}
 }
+
 //display body depending on session and log in
 function ShowBody($k)
 {
@@ -514,17 +529,20 @@ function ShowBody($k)
 			print ("<div id='logo'>");
 			print ("Collaborate");
 			print ("</div>");
-			print ('<div id="search_bar2">');
-			print ("<div id='img'>");
-			print ('<input type="image" id="search_img" src="./../img/search.png" onclick="SearchBar()"><span class="tooltip">Search</span>');
-			print ("</div>");
-			print ('<div id="form">');
-			print ('<form action="home.php" method="get" id="search">');
-			print ('<input type="text" name="mysqli_query" placeholder="Search">');
-			print ('<input type="image" id="search_img2" src="./../img/search2.png" alt="Submit" name="submit">');
-			print ('</form>');
-			print ("</div>");
-			print ('</div>');
+			if(basename($_SERVER["PHP_SELF"]) == "home.php" || basename($_SERVER["PHP_SELF"]) == "otherusers.php")
+			{
+				print ('<div id="search_bar2">');
+				print ("<div id='img'>");
+				print ('<input type="image" id="search_img" src="./../img/search.png" onclick="SearchBar()"><span class="tooltip">Search</span>');
+				print ("</div>");
+				print ('<div id="form">');
+				print ('<form action="#" method="get" id="search">');
+				print ('<input type="text" name="mysqli_query" placeholder="Search">');
+				print ('<input type="image" id="search_img2" src="./../img/search2.png" alt="Submit" name="submit">');
+				print ('</form>');
+				print ("</div>");
+			    print ('</div>');
+			}
 			print ("<div id='img8'>");
 			print ('<input type="image" id="" src="./../img/back.png" onclick="SearchBar()">');
 			print ('</div>');
@@ -532,40 +550,41 @@ function ShowBody($k)
 			print ("<div id='hideMenu'>");
 	        print ("<a href='home.php' onmouseover='HomeOver()' onmouseout='HomeOut()' ><img id='home3' src='./../img/home_2.png' alt='Home' /><h3>Home</h3></a>");
 			print ("<a href='inbox.php' onmouseover='InboxOver()' onmouseout='InboxOut()'><img id='inbox_icon3' src='./../img/inbox2.png' alt='Inbox' /><h3>Inbox</h3></a>");
-			print ("<a href='profile.php?u=$username' onmouseover='ProOver()' onmouseout='ProOut()'><img id='pic3' src='$pic' alt='$username'/><h3>Profile</h3></a>");
+			print ("<a href='profile.php?u=$username' ><img id='pic3' src='$pic' alt='$username'/></a>");
 			print ("</div>");
 			print ("<div class='dropdown2'>");
 			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn" onclick="DropDown()">');
 			print ('<div id="dropdown-content">');
-			print ("<a href='otherusers.php'><img id='signout2' src='./../img/no-photo3.png' alt='Other Users'/><span id='txt'>People</span></a>");
+			print ("<a href='otherusers.php'><img id='icon' src='./../img/no-photo3.png' alt='Other Users'/><span id='txt'>People</span></a>");
 			print ("<hr id='hr'/>");
-			print ("<a href='user_form.php?u=$username'><img id='signout2' src='./../img/settings.png' alt='Logout'/><span id='txt'>Settings</span></a>");
+			print ("<a href='user_form.php?u=$username'><img id='icon' src='./../img/settings.png' alt='Logout'/><span id='txt'>Settings</span></a>");
 			print ("<hr id='hr'/>");
-			print ("<a href='logout.php'><img id='signout2' src='./../img/signout.png' alt='Logout'/><span id='txt'>Logout</span></a>");
+			print ("<a href='logout.php'><img id='icon' src='./../img/signout.png' alt='Logout'/><span id='txt'>Logout</span></a>");
 			print ('</div>');
 			print ("</div>");
 			print ("</div>");
 			print ("<div class='dropdown'>");
 			print ('<input type="image" src="./../img/hamburger.png" id="dropbtn2" onclick="DropDown2()">');
 			print ('<div id="dropdown-content2">');
-			print ("<a href='home.php'><img id='home2' src='./../img/home.png' alt='Home' /><span id='txt'>Home</span></a>");
+			print ("<div id='drp-menu'>");
+			print ("<a href='profile.php?u=$username' ><img src='$pic' alt='$username'/></a>");
+			print ('</div>');
+			print ("<a href='home.php'><img id='icon' src='./../img/home.png' alt='Home' /><span id='txt'>Home</span></a>");
 			print ("<hr id='hr'/>");
-			print ("<a href='inbox.php'><img id='inbox_icon2' src='./../img/inbox.png' alt='Inbox' /><span id='txt'>Inbox</span></a>");
+			print ("<a href='inbox.php'><img id='icon' src='./../img/inbox.png' alt='Inbox' /><span id='txt'>Inbox</span></a>");
 			print ("<hr id='hr'/>");
-			print ("<a href='profile.php?u=$username'><img id='pic2' src='$pic' alt='$username'/><span id='txt'>Profile</span></a>");
+			print ("<a href='otherusers.php'><img id='icon' src='./../img/no-photo3.png' alt='Other Users'/><span id='txt'>People</span></a>");
 			print ("<hr id='hr'/>");
-			print ("<a href='otherusers.php'><img id='people2' src='./../img/no-photo3.png' alt='Other Users'/><span id='txt'>People</span></a>");
+			print ("<a href='user_form.php?u=$username'><img id='icon' src='./../img/settings.png' alt='Settings' /><span id='txt'>Settings</span></a>");
 			print ("<hr id='hr'/>");
-			print ("<a href='user_form.php?u=$username'><img id='manage2' src='./../img/settings.png' alt='Settings' /><span id='txt'>Settings</span></a>");
-			print ("<hr id='hr'/>");
-			print ("<a href='logout.php'><img id='signout2' src='./../img/signout.png' alt='Logout'/><span id='txt'>Logout</span></a>");
+			print ("<a href='logout.php'><img id='icon' src='./../img/signout.png' alt='Logout'/><span id='txt'>Logout</span></a>");
 			print ("</div>");
 			print ("</div>");
 			print ("</div>");
 			print ('</div>');
 		  break;
 		default:
-		    print ("<body onload='read()'>");
+		    print ("<body >");
 			print ("<div id='headerMenu'>");
 		    print ("<div id='menu'>");
 		    print ("<div id='logo'>");
@@ -577,6 +596,7 @@ function ShowBody($k)
 		  break;
 	}
 }
+
 //footer section
 function _html_end()
 {
@@ -584,9 +604,11 @@ function _html_end()
 	print ("<div id='footer'>");
 	print ("<small>&copy 2017 - Collaborate</small>");
 	print ("</div");
+	print ("</div");
 	print ("</body>");
 	print ("</html>");
 }
+
 //Log out user and destroy session data
 function LogOut()
 {
@@ -594,6 +616,7 @@ function LogOut()
 	session_destroy();
 	header("Location: ./../index.php");
 }
+
 //get users profile picture
 function GetProfilePic($user)
 {
@@ -613,7 +636,6 @@ function GetProfilePic($user)
         }
 		else
 		{
-			//print ("<img src='img/no_photo.png' alt='No photo to show'  >");
 			print ("<img src='./../img/no-photo.png' alt='No photo to show'  >");
 		}
 	}
@@ -626,6 +648,7 @@ function GetProfilePic($user)
 		$con = NULL;
 	}
 }
+
 //get posts count
 function CountPosts()
 {
@@ -637,6 +660,7 @@ function CountPosts()
 	{
 		//open database connection
 		$con = Connect();
+		
 		//get count of posts to projects
 		$getPost = mysqli_query($con, "SELECT COUNT(*) As `total` FROM `collaborate`.`posts` WHERE `user_posted_to`='$username'");
 		$row = mysqli_fetch_assoc($getPost);
@@ -650,9 +674,12 @@ function CountPosts()
 	{
 		//close connection
 		$con = NULL;
+		
 	    return $total;
 	}
 }
+
+//check to see if messages have been deleted from inbox, sent and drafts
 function CountDeleted()
 {
 	$total = 0;
@@ -665,7 +692,8 @@ function CountDeleted()
 	{
 		//open database connection
 		$con = Connect();
-		//get count of posts to projects
+		
+		//get count of messages
 		$get = "SELECT COUNT(*) As `total` FROM `collaborate`.`pvt_messages` WHERE `from_user`= '$username' AND `senderDelete`='1' OR `to_user` = '$username' AND `recipientDelete`='1'";
 		if($getRow = mysqli_query($con, $get))
 		{
@@ -684,6 +712,7 @@ function CountDeleted()
 	    return $total;
 	}
 }
+
 //get users bio and information to display
 function GetBio($bio)
 {
@@ -737,6 +766,7 @@ function GetBio($bio)
 		$con = NULL;
 	}
 }
+
 //get comments to show users
 function GetPosts($posts)
 {
@@ -744,6 +774,7 @@ function GetPosts($posts)
 	{
 		//open connection to datbase
 		$con = Connect();
+		
         //mysqli_query database
 		$getPost = mysqli_query($con, $posts);
 		//loop through columns to set user information
@@ -800,10 +831,13 @@ function GetPosts($posts)
 		$con = NULL;
 	}
 }
+
+//get all user profiles for display 
 function OtherUsers($query)
 {
 	try
 	{
+		//open database connection
 		$con = Connect();
 		
 		if($getBio = mysqli_query($con, $query))
@@ -858,7 +892,10 @@ function OtherUsers($query)
 		$con = NULL;
 	}
 }
-function resize_image($file, $w, $h, $crop=FALSE) {
+
+//image resize 
+function resize_image($file, $w, $h, $crop=FALSE) 
+{
     list($width, $height) = getimagesize($file);
     $r = $width / $height;
     if ($crop) {

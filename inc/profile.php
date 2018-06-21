@@ -221,6 +221,6 @@ profile it will be displayed without editing options.
 			print ("<br/>");
 		}
 	}
-
+    
     _html_end();
 ?>

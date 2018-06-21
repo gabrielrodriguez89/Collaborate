@@ -26,7 +26,7 @@ about the user in order to set up a profile.
 	$time = new DateTime('now');
     $newtime = $time->modify('-13 year')->format('Y-m-d');
 
-	echo "<!--Form to gather user information for profile-->";
+	print ("<!--Form to gather user information for profile-->");
 	if(!isset($_GET['u']))
 	{
 		print("<br/>");

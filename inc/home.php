@@ -18,7 +18,7 @@ the project for others.
 	{
 		Header("Location: ./../index.php");
 	}
-//get user from url and retrieve data from database
+    //get user from url and retrieve data from database
 	if(isset($_GET['query']))
 	{
 		$query =  mysqli_real_escape_string($con, $_GET['query']);
@@ -28,14 +28,14 @@ the project for others.
             GetProject($getProject, 0);
 		}
 	}
-//search user query
+    //search user query
 	if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		$getProject = "";
 		$state = $_POST['state-choice'];
 		$category = $_POST['Choices'];
 
-//check to see if the filter is by state or category or both and set query accordingly
+        //check to see if the filter is by state or category or both and set query accordingly
 		if($category != "None")
 		{
 			if($state != "none")
@@ -57,7 +57,7 @@ the project for others.
 			$getProject = ("SELECT * FROM `collaborate`.`projects` WHERE `city`='" .$_SESSION['user_city_']. "' OR `state`=' " . $_SESSION['user_state_'] . "'");
 	    }
 
-    //check to make sure query isn't blank
+        //check to make sure query isn't blank
 		if($getProject != "")
 		{
             GetProject($getProject, 0);

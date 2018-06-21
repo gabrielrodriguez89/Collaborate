@@ -12,6 +12,11 @@ by setting the ENUM value to 1.
 Collaborate 2017-2018
 */
     include "header.php";
+	
+	if(!isset($_SESSION['username']))
+	{
+		Header("Location: ./../index.php");
+	}
 ?>
 <div id="message-nav">
     <div id="message-nav-buttons">

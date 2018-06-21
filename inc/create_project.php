@@ -25,20 +25,20 @@ Collaborate 2017-2018
 					<h1>Lets Collaborate</h1><br/><br/>
 					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
 						<label for="pro_name">Name of Project</label>
-						<input type="text" name="pro_name" size="" placeholder="Name" ><br /><br />
+						<input type="text" name="pro_name" placeholder="Name" ><br /><br />
 						<div id="select">
-						<label for="Choices">Select a Category</label><br/>
-						<select name="Choices">
-							<option value="None">None</option>
-							<option value="Music">Music</option>
-							<option value="Art">Art</option>
-							<option value="Apps">Applications</option>
-							<option value="Web">Web</option>
-							<option value="Writing">Writing</option>
-							<option value="Building">Building</option>
-							<option value="Growing">Growing</option>
-							<option value="Other">Other</option>
-						</select>
+							<label for="Choices">Select a Category</label><br/>
+							<select name="Choices">
+								<option value="None">None</option>
+								<option value="Music">Music</option>
+								<option value="Art">Art</option>
+								<option value="Apps">Applications</option>
+								<option value="Web">Web</option>
+								<option value="Writing">Writing</option>
+								<option value="Building">Building</option>
+								<option value="Growing">Growing</option>
+								<option value="Other">Other</option>
+							</select>
 						</div>
 						<div id="select2">
 						    <label for="Choices">Enter Category (i.e. Application, Art)</label><br/>
@@ -61,7 +61,7 @@ Collaborate 2017-2018
 						<br/><br/>
 						<label for="description">Description</label>
 						<textarea id="desc" type="text" maxlength="255" name="description" placeholder="Tell us about your project" ></textarea><br /><br />
-						<button class="btn" type="submit" name="project">Collaborate</button>
+						<input class="btn" type="submit" name="project" value="Collaborate">
 					    <a href="./profile.php?u=<?php print($username); ?>"><h4>Cancel</h4></a>
 					</form>
 				</td>
